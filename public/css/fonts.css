@@ -5,3 +5,43 @@ h1, .font_title {
 *{
     font-family: 'Quicksand', sans-serif;
 }
+
+
+/* Navbar  */
+
+
+.nav-link{
+    color: black;
+    font-weight: bold;
+}
+
+
+
+/* Style view job  */
+
+
+
+.card_container{
+    display: flex;
+}
+
+
+.card-header{
+    width: auto;
+    height: max-content;
+    padding: 3vh ;
+    margin-top: 5vh;
+}
+
+.card-body{
+    text-align: left;
+    padding: 0;
+}
+
+.text_head{
+    font-size: 15px;
+}
+
+.head{
+    margin: 5vh 0vh;
+}
