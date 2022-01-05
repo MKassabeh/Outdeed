@@ -6,6 +6,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Job;
 
 #[Route('/job')]
 class JobController extends AbstractController
@@ -18,11 +19,13 @@ class JobController extends AbstractController
     }
 
     // liste des jobs
-    #[Route('/', name: 'job_list')]
+    #[Route('/list', name: 'job_list')]
     public function list(): Response
     {
+        $repository = $this->registryManager->getManager()->getRepository(Job::class);
+        $jobs = $repository->findAll();
         return $this->render('job/list.html.twig', [
-            'controller_name' => 'JobController',
+            'jobs' => $jobs,
         ]);
     }
 
