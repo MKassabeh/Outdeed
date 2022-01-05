@@ -1,20 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello JobController!{% endblock %}
+{% block title %}Ajouter un job{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {# affiche tous les messages flash #}
+    {% for level, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ level }}">
+                {{ message|raw }} {# le raw ici, permet de ne pas échapper le html et de l'afficher tel quel #}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/php/outdeed/src/Controller/JobController.php'|file_link(0) }}">src/Controller/JobController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/php/outdeed/templates/job/index.html.twig'|file_link(0) }}">templates/job/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <form method="post" id="addArticle">
+        <div class="mb-3">
+            <label for="title">Titre</label>
+            <input type="text" name="title" id="title" class="form-control">
+        </div>
+        
+        <div class="mb-3">
+            <label for="category">Catégorie</label>
+
+            <select name="category" id="category" class="form-select">
+                <option value="0" selected disabled>-- Choisir --</option>
+                {% for key, value in categories_availables %}
+                    <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="description_company">Company description</label>
+            <textarea name="description_company" id="description_company" rows="6" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="description_job">Job description</label>
+            <textarea name="description_job" id="description_job" rows="6" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="description_applicant">Applicant description</label>
+            <textarea name="description_applicant" id="description_applicant" rows="6" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="city">City</label>
+            <input type="text" name="city" id="city" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="wages">Wages</label>
+            <input type="text" name="wages" id="wages" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="contract">Contract type</label>
+            <input type="text" name="contract" id="contract" class="form-control">
+        </div>        
+        <div class="mb-3">
+            <label for="benefit">Benefits</label>
+            <textarea name="benefit" id="benefit" rows="6" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="schedule">Schedule</label>
+            <input type="text" name="schedule" id="schedule" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="comment">Comment</label>
+            <textarea name="comment" id="comment" rows="6" class="form-control"></textarea>
+        </div>
+
+        <button data-action='submit'>Envoyer</button>
+        
+    </form>
 {% endblock %}
+
