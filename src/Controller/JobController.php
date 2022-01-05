@@ -24,7 +24,7 @@ class JobController extends AbstractController
     }
 
     // liste des jobs
-    #[Route('/list', name: 'job_list')]
+    #[Route('/', name: 'job_list')]
     public function list(): Response
     {
         $repository = $this->registryManager->getManager()->getRepository(Job::class);
