@@ -18,3 +18,12 @@ https://lucid.app/lucidchart/2b7a22aa-5acc-4dde-b3ef-163c88634671/edit?invitatio
 
 ### Liste des tâches (Trello) : 
 https://trello.com/b/kb28pP74/projetgroupe
+
+-----
+
+# Installer le projet :
+
+    - Pull le repository
+    - Dans le dossier du projet, run : 'composer install'
+    - créer le fichier .env.local avec la ligne 'DATABASE_URL = ...'
+    - commenter la ligne 'DATABASE_URL' dans .env
