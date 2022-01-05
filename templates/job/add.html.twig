@@ -4,15 +4,6 @@
 
 {% block body %}
 
-{# affiche tous les messages flash #}
-{% for level, messages in app.flashes %}
-{% for message in messages %}
-<div class="alert alert-{{ level }}">
-    {{ message|raw }} {# le raw ici, permet de ne pas échapper le html et de l'afficher tel quel #}
-</div>
-{% endfor %}
-{% endfor %}
-
 <div class="container mt-3">
     <h1 class="text-center font_title">Publier une offre d'emploi</h1>
 </div>

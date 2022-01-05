@@ -12,8 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/job')]
 class JobController extends AbstractController
 {
-
-
     private $registryManager;
 
     public $contractType = [
@@ -84,8 +82,7 @@ class JobController extends AbstractController
     #[Route('/add', name: 'job_add')]
     public function add(): Response
     {
-        $errors = [];
-        $formIsValid = null;
+        $errors = [];       
 
         if(!empty($_POST)){
             $safe = array_map('trim', array_map('strip_tags', $_POST));
@@ -182,6 +179,7 @@ class JobController extends AbstractController
     
             ]);
     }
+
     // Suppression job
     #[Route('/delete/{id}', name: 'job_delete')]
     public function delete(int $id): Response
@@ -206,13 +204,98 @@ class JobController extends AbstractController
         ]);
     }
 
-
     // Edition job
     #[Route('/edit/{id}', name: 'job_edit')]
     public function edit(int $id): Response
     {
+        // on récupère l'élément à modifier
+        $em = $this->registryManager->getManager();
+        $job = $em->getRepository(Job::class)->find($id);
+
+        $errors = [];        
+
+        if(!empty($_POST)){
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
+
+                // Vérif titre
+                if(strlen($safe['title']) < 5 || strlen($safe['title']) > 100){
+                    $errors[] = 'Votre titre doit comporter entre 5 et 100 caractères';
+                }
+
+                // Vérif catégorie
+                if(!isset($safe['category'])){
+                    $errors[] = 'Veuillez sélectionner une catégorie';
+                }
+                elseif(!in_array($safe['category'], $this->categories)){
+                    $errors[] = 'Votre catégorie sélectionnée n\'existe pas';
+                }
+
+                // Vérif description entreprise
+                if(strlen($safe['description_company']) < 1){
+                    $errors[] = 'Veuillez entrer la description de l\'entreprise';
+                }
+                // Vérif description emploi
+                if(strlen($safe['description_job']) < 1){
+                    $errors[] = 'Veuillez entrer la description de l\'emploi';
+                }
+                // Vérif description recherche
+                if(strlen($safe['description_applicant']) < 1){
+                    $errors[] = 'Veuillez entrer la description du profil recherché';
+                }
+                // Vérif city
+                if(strlen($safe['city']) < 1 || strlen($safe['city']) > 100){
+                    $errors[] = 'Votre salaire doit comporter entre 1 et 100 caractères';
+                }
+
+                // Vérif salaires
+                if(strlen($safe['wages']) < 1 || strlen($safe['wages']) > 50){
+                    $errors[] = 'Votre salaire doit comporter entre 1 et 50 caractères';
+                }
+                
+                // Vérif type contrat
+                if(!isset($safe['contract'])){
+                    $errors[] = 'Veuillez sélectionner un type de contrat';
+                }
+                elseif(!in_array($safe['contract'], $this->contractType)){
+                    $errors[] = 'Votre type de contrat n\'existe pas';
+                }
+                // Vérif horaires
+                if(strlen($safe['schedule']) > 255){
+                    $errors[] = 'Vos indications concernant les horaires ne doivent pas dépasser 255 caractères.';
+                }
+                // Vérif commentaire
+                if(strlen($safe['comment']) > 500){
+                    $errors[] = 'Votre commentaire doit comporter moins de 500 caractères';
+                }
+
+                if (count($errors) == 0) {
+                    // On assigne les nouvelles valeurs
+                    $job->setTitle($safe['title'])
+                        ->setCategory($safe['category'])
+                        ->setDescriptionCompany($safe['description_company'])
+                        ->setDescriptionApplicant($safe['description_applicant'])
+                        ->setDescriptionJob($safe['description_job'])
+                        ->setWages($safe['wages'])
+                        ->setCity($safe['city'])
+                        ->setContractType($safe['contract'])
+                        ->setPublishedAt(new \DateTime('now'))
+                        ->setSchedule($safe['schedule'])
+                        ->setCompanyComment($safe['comment']);
+
+                    $em->persist($job);
+                    $em->flush();
+
+                    $this->addFlash('success', 'Votre offre d\'emploi a bien été modifiée');
+                    return $this->redirectToRoute('job_list');
+                        
+                } else {
+                    $this->addFlash('danger', implode('<br>', $errors));
+                }
+        }
         return $this->render('job/edit.html.twig', [
-            'controller_name' => 'JobController',
+            'job'                   => $job,
+            'categories_availables' => $this->categories,
+            'contract_type'         => $this->contractType
         ]);
     }
 }
