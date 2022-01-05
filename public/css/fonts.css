@@ -29,11 +29,9 @@ h1, .font_title {
 .card-header{
     width: auto;
     height: max-content;
-    padding: 3vh ;
-    margin-top: 5vh;
 }
 
-.card-body{
+.card_body{
     text-align: left;
     padding: 0;
 }
