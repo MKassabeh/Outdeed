@@ -33,7 +33,7 @@
                         <th class="row">1</th>
                         <td>{{ job.title }}</td>           
                         <td>{{ job.city }}</td>      
-                        <td>{{ job.descriptionJob }}</td>      
+                        <td>{{ job.descriptionJob| slice(0,60) }} <a href="{{ path('job_view', {'id':job.id})}}">Lire la suite</a></td>      
                         <td>{{ job.wages }}</td> 
                         <td>{{ job.publishedAt|date('d-m-Y') }}</td> 
                     </tr>
