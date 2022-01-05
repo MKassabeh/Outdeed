@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Job;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +13,10 @@ class JobController extends AbstractController
 {
 
     private $registryManager;
+
+    public $categories = [
+        '' => '',
+    ]; 
 
     public function __construct(ManagerRegistry $registryManager) {
         $this->registryManager = $registryManager;
@@ -30,8 +35,12 @@ class JobController extends AbstractController
     #[Route('/view/{id}', name: 'job_view')]
     public function view(int $id): Response
     {
+        $em = $this->registryManager->getManager();
+        $job = $em->getRepository(Job::class)->find($id);
+
         return $this->render('job/view.html.twig', [
-            'controller_name' => 'JobController',
+            'job'        => $job,
+            'categories' => $this->categories,
         ]);
     }
 
