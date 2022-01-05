@@ -1,7 +1,7 @@
-h1 {
+h1, .font_title {
     font-family: 'Roboto Slab', serif !important;
 }
 
-* {
+*{
     font-family: 'Quicksand', sans-serif;
 }
