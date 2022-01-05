@@ -13,29 +13,29 @@
     
         
     <h1 class="text-center">Liste d'emplois</h1><br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="col">ID</th>
-                <th class="col">Titre</th>
-                <th class="col">Ville</th>
-                <th class="col">Description du poste</th>
-                <th class="col">Salaire</th>
-                <th class="col">Date de publication</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for job in jobs %}
+        <table class="table">
+            <thead>
                 <tr>
-                    <th class="row">1</th>
-                    <td>{{ job.title }}</td>           
-                    <td>{{ job.city }}</td>      
-                    <td>{{ job.descriptionJob }}</td>      
-                    <td>{{ job.wages }}</td> 
-                    <td>{{ job.publishedAt|date('d-m-Y') }}</td> 
+                    <th class="col">ID</th>
+                    <th class="col">Titre</th>
+                    <th class="col">Ville</th>
+                    <th class="col">Description du poste</th>
+                    <th class="col">Salaire</th>
+                    <th class="col">Date de publication</th>
                 </tr>
-            {% endfor %}
-        </tbody> 
-    </table>       
+            </thead>
+
+            <tbody>
+                {% for job in jobs %}
+                    <tr>
+                        <th class="row">1</th>
+                        <td>{{ job.title }}</td>           
+                        <td>{{ job.city }}</td>      
+                        <td>{{ job.descriptionJob }}</td>      
+                        <td>{{ job.wages }}</td> 
+                        <td>{{ job.publishedAt|date('d-m-Y') }}</td> 
+                    </tr>
+                {% endfor %}
+            </tbody> 
+        </table>          
 {% endblock %}
