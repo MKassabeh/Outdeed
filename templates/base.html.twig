@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto+Slab&display=swap" rel="stylesheet">
     {# CSS PERSO #}
     <link rel="stylesheet" href="{{asset('css/fonts.css')}}">
-    
+
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
@@ -29,6 +29,14 @@
 {% include 'header.html.twig' %}
 
 <body>
+    {# affiche tous les messages flash #}
+    {% for level, messages in app.flashes %}
+    {% for message in messages %}
+    <div class="container my-3 alert alert-{{ level }}">
+        {{ message|raw }} {# le raw ici, permet de ne pas échapper le html et de l'afficher tel quel #}
+    </div>
+    {% endfor %}
+    {% endfor %}
     {% block body %}{% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
