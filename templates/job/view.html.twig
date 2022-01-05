@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Outdeed - Job : Détails{% endblock %}
+
+{% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+        <div class="container alert alert-{{label}}">
+            {{ message|raw }}
+        </div>
+        {% endfor %}
+    {% endfor %}
+{# Titre #}
+<div class="my-5 container">
+    <h1 class="font_title">
+        {{ job.title }}
+    </h1>
+</div>
+
+{# Infos annonce #}
+<div class="container">
+      <p>{{ job.city }}</p> 
+      <p>{{ job.wages }}</p>
+      <p>{{ job.contractType }}</p>
+      <p>{{ job.publishedAt|date('d-m-Y') }}</p>
+      <p>{{ job.category }}</p>
+</div>
+
+{# Description #}
+<div class="container">
+    <p>{{ job.descriptionCompany }}</p>
+    <p>{{ job.descriptionJob }}</p>
+    <p>{{ job.descriptionApplicant }}</p>
+    <p>{{ job.benefits }}</p>
+    <p>{{ job.schedule }}</p>
+    <p>{{ job.companyComment }}</p>
+</div>
+
+
+{% endblock %}
