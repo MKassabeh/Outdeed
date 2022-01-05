@@ -48,10 +48,26 @@ class JobController extends AbstractController
     #[Route('/delete/{id}', name: 'job_delete')]
     public function delete(int $id): Response
     {
+        $em = $this->registryManager->getManager();
+        $job = $em->getRepository(Job::class)->find($id);
+
+        if(isset($_POST['submit'])){
+            
+            $em->remove($job);
+            $em->flush();
+
+            //Envoi d'un message flash de supréssion d'une offre d'emploi
+            $this->addFlash('succes', 'Job offer deleted');
+
+            //Redirection vers la liste d'offres d'emploi après la supression d'un élément 
+            return $this->redirectToRoute('job_list');
+        }
+
         return $this->render('job/delete.html.twig', [
-            'controller_name' => 'JobController',
+            'job' => $job,
         ]);
     }
+
 
     // Edition job
     #[Route('/edit/{id}', name: 'job_edit')]
