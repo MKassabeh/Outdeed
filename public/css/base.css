@@ -2,3 +2,9 @@ p.card_date {
     right : 5% !important;
     bottom : 0;
 }
+
+a.nav-link:hover {
+    
+    color : rgb(0, 119, 255) !important;
+
+}

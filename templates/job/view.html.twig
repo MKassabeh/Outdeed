@@ -3,45 +3,37 @@
 {% block title %}Outdeed - Job : Détails{% endblock %}
 
 {% block body %}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-        <div class="container alert alert-{{label}}">
-            {{ message|raw }}
-        </div>
-        {% endfor %}
-    {% endfor %}
-
 <div class="my-5 container">
-    <button class="btn btn-primary">Posutler ➡ </button>
-    <div class="card_container text-center">
+    <div class="card_container justify-content-around text-center">
         <div class="card_body">
             <div class="head">
                 <h1 class="font_title">
                     {{ job.title }}
                 </h1>
-                <p class="text_head">Localité : {{ job.city }}</p> 
+                <p class="text_head">Localité : {{ job.city }}</p>
                 <p class="text_head">Offre publié le : {{ job.publishedAt ? job.publishedAt|date('d/m/Y') : '' }}</p>
                 <p class="text_head">{{ job.category }}</p>
             </div>
             <p>{{ job.descriptionApplicant }}</p>
             <p>{{ job.descriptionCompany }}</p>
-            
-            <h3>Profil Recherché : </h3>
+
+            <h3 class="font_title ">Profil Recherché : </h3>
             <p>{{ job.descriptionJob }}</p>
             <h3>Avantage : </h3>
             <p>{{ job.benefits }}</p>
-            
+
             <p>{{ job.companyComment }}</p>
-            
+
         </div>
         <div class="p-3 mt-5 card-header">
             <p class="text_head">{{ job.schedule }}</p>
-            
             <p class="text_head">{{ job.wages }}</p>
             <p class="text_head">{{ job.contractType }}</p>
-            
+            <button class="btn btn-primary">Posutler <i class="fas fa-arrow-right"></i></button>
         </div>
-        
+
+
+
     </div>
 </div>
 
