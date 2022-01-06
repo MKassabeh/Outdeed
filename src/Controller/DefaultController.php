@@ -7,10 +7,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
+use App\Entity\Job;
 
 class DefaultController extends AbstractController
 {
+    private $registryManager;
+
+    public function __construct(ManagerRegistry $registryManager) {
+        $this->registryManager = $registryManager;
+    }
+
     #[Route('/', name: 'home')]
+    // la function home() réagis comme une function list() pour obtenir une liste des entreprises qui ont publié des annonces sur le site
     public function home(): Response
     {
         if ($this->getUser() !== null) {             
@@ -20,5 +28,12 @@ class DefaultController extends AbstractController
             }
         }
         return $this->render('default/home.html.twig', []);
+        $repository = $this->registryManager->getManager()->getRepository(Job::class);
+         $jobs = $repository->findAll();
+         return $this->render('default/home.html.twig', [
+             'jobs' => $jobs,
+         ]);
     }
+
+   
 }

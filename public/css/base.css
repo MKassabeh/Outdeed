@@ -19,3 +19,25 @@ div#div_home {
   left: 50%;
   transform: translateX(-50%);
 }
+
+
+
+/* CARDS */
+
+
+.card-short{
+  height: 250px !important;
+  width: 500px !important;
+  border-radius: 12px;
+}
+
+
+.card .card-body .row .profile-img img{
+  height: 125px;
+  width: 125px;
+  border-radius: 50%;
+}
+
+.btn-card{
+  border-radius: 20px;
+}

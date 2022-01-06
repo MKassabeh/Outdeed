@@ -1,35 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}home{% endblock %}
+{% block title %}home
+{% endblock %}
 
 {% block body %}
 
-<div style="max-height : 500px !important;" class="overflow-hidden container-fluid px-0 position-relative">
-    <div id="div_home" class="position-absolute">
-        <h1 id="titre_home" class="mb-0 font_title text-center text-white"> Bienvenue chez Outdeed ! </h1>
-        <h3 class="font_text text-white mb-5">L'emploi ne vient pas à vous ? Venez vers l'emploi !</h3>
-        <div class="text-center">
-            <a class="btn btn-outline-light me-3" href="#">Poster une offre</a>
-            <a class="btn btn-outline-light" href="{{ path('job_list') }}">Trouver un emploi</a>
+	<div style="max-height : 500px !important;" class="overflow-hidden container-fluid px-0 position-relative">
+		<div id="div_home" class="position-absolute">
+			<h1 id="titre_home" class="mb-0 font_title text-center text-white">
+				Bienvenue chez Outdeed !
+			</h1>
+			<h3 class="font_text text-white mb-5">L'emploi ne vient pas à vous ? Venez vers l'emploi !</h3>
+			<div class="text-center">
+				<a class="btn btn-outline-light me-3" href="#">Poster une offre</a>
+				<a class="btn btn-outline-light" href="{{ path('job_list') }}">Trouver un emploi</a>
+			</div>
+		</div>
+
+		<img class="" src="{{ asset('img/home/desk.jpg') }}" alt="recrutement">
+	</div>
+
+	
+    
+<div class="container d-flex flex-wrap justify-content-around">
+    {% for job in jobs %}
+    <div style="width:40% !important;">
+            <div class="card card-short  m-5">
+                <div class="card-body">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col-5 profile-img">
+                            <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}" alt="recrutement"></a>
+                        </div>
+                        <div class="col-7 profile-content">
+                            <p>{{job.title}}</p>
+                            <p>{{job.category}}</p>
+                            <p>{{job.city}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col-8">
+                            <p>Publiée le : {{ job.publishedAt|date('d-m-Y') }}</p>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{ path('job_view', {id: job.id}) }}" class="btn btn-outline-primary btn-card">Voir plus ...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <img class="" src="{{ asset('img/home/desk.jpg') }}" alt="recrutement">
+    
+        {% endfor %}
 </div>
 
-<div class="container d-flex my-5 justify-content-around">
-
-    <div class="me-3">
-        <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}"
-                alt="recrutement"></a>
-    </div>
-    <div class="me-3">
-        <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}"
-                alt="recrutement"></a>
-    </div>
-    <div>
-        <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}"
-                alt="recrutement"></a>
-    </div>
-</div>
 {% endblock %}
