@@ -81,7 +81,8 @@ class JobController extends AbstractController
     // Ajout job
     #[Route('/add', name: 'job_add')]
     public function add(): Response
-    {
+    {       
+
         $errors = [];       
 
         if(!empty($_POST)){
@@ -134,16 +135,14 @@ class JobController extends AbstractController
                     $errors[] = 'Vos indications concernant les horaires ne doivent pas dépasser 255 caractères.';
                 }
                 // Vérif commentaire
-                if(strlen($safe['comment']) > 500){
-                    $errors[] = 'Votre commentaire doit comporter moins de 500 caractères';
+                if(strlen($safe['comment']) > 2500){
+                    $errors[] = 'Votre commentaire doit comporter moins de 2500 caractères';
                 }
 
                 if(count($errors) === 0){
                     // ici, je n'ai pas d'erreur, j'enregistre en base de données
     
                     $em = $this->registryManager->getManager(); // Connexion à la bdd (équivalent new PDO()) sans oublier le paramètre de la fonction ManagerRegistry $doctrine et le "use"
-    
-    
     
                     // Equivalent de notre INSERT INTO et bindValue()
                     $job = new Job(); // Appelle de l'entity job 
@@ -158,7 +157,9 @@ class JobController extends AbstractController
                     $job->setContractType($safe['contract']);
                     $job->setPublishedAt(new \DateTime('now'));
                     $job->setSchedule($safe['schedule']);
+                    $job->setPublishedBy($this->getUser());
                     $job->setCompanyComment($safe['comment']);
+
     
                     // Equivalent à notre execute()
                     $em->persist($job);

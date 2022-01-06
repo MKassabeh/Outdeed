@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -35,6 +37,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'published_by', targetEntity: Job::class)]
+    private $job_offers;
+
+    public function __construct()
+    {
+        $this->job_offers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -126,6 +136,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Job[]
+     */
+    public function getJobOffers(): Collection
+    {
+        return $this->job_offers;
+    }
+
+    public function addJobOffer(Job $jobOffer): self
+    {
+        if (!$this->job_offers->contains($jobOffer)) {
+            $this->job_offers[] = $jobOffer;
+            $jobOffer->setPublishedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobOffer(Job $jobOffer): self
+    {
+        if ($this->job_offers->removeElement($jobOffer)) {
+            // set the owning side to null (unless already changed)
+            if ($jobOffer->getPublishedBy() === $this) {
+                $jobOffer->setPublishedBy(null);
+            }
+        }
 
         return $this;
     }

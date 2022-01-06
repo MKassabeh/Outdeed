@@ -49,6 +49,10 @@ class Job
     #[ORM\Column(type: 'string', length: 50)]
     private $category;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'job_offers')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $published_by;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -194,6 +198,18 @@ class Job
     public function setCategory(string $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getPublishedBy(): ?User
+    {
+        return $this->published_by;
+    }
+
+    public function setPublishedBy(?User $published_by): self
+    {
+        $this->published_by = $published_by;
 
         return $this;
     }

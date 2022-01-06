@@ -5,36 +5,47 @@
 {% block body %}
 <div class="my-5 container">
     <div class="card_container justify-content-around text-center">
-        <div class="card_body">
+        <div style="max-width: 800px !important;" class="card_body">
             <div class="head">
-                <h1 class="font_title">
+                <h1 class="mb-2 font_title">
                     {{ job.title }}
                 </h1>
-                <p class="text_head">Localité : {{ job.city }}</p>
-                <p class="text_head">Offre publié le : {{ job.publishedAt ? job.publishedAt|date('d/m/Y') : '' }}</p>
-                <p class="text_head">{{ job.category }}</p>
+                <span style="font-size: 16px !important;" class="mb-4 badge bg-info text-dark">{{job.category}}</span>
+                <p class="text_head"><strong>Localisation</strong> <i class="fas fa-map-marker-alt"></i> : {{ job.city
+                    }}</p>
+                <p class="text_head"><strong>Offre publiée le : </strong>{{ job.publishedAt ?
+                    job.publishedAt|date('d/m/Y') : '' }}</p>
+
             </div>
-            <p>{{ job.descriptionApplicant }}</p>
-            <p>{{ job.descriptionCompany }}</p>
+            <h3 class="font_title mt-4"> Description de l'entreprise : </h3>
+            <p>{{ job.descriptionCompany|nl2br }}</p>
+            <h3 class="font_title mt-4"> Description de l'offre : </h3>
+            <p>{{ job.descriptionJob|nl2br }}</p>
 
-            <h3 class="font_title ">Profil Recherché : </h3>
-            <p>{{ job.descriptionJob }}</p>
-            <h3>Avantage : </h3>
+            <h3 class="font_title mt-4"> Profil Recherché : </h3>
+            <p>{{ job.descriptionApplicant|nl2br }}</p>
+            {% if job.benefits %}
+            <h5 class="font_title">Avantages : </h5>
             <p>{{ job.benefits }}</p>
-
-            <p>{{ job.companyComment }}</p>
+            {% endif %}
 
         </div>
-        <div class="p-3 mt-5 card-header">
-            <p class="text_head">{{ job.schedule }}</p>
-            <p class="text_head">{{ job.wages }}</p>
-            <p class="text_head">{{ job.contractType }}</p>
-            <button class="btn btn-primary">Posutler <i class="fas fa-arrow-right"></i></button>
+        <div style="max-width: 300px !important;">
+            <div class="p-3 mt-5 border card-header">
+                <p class="text_head">{{ job.schedule }}</p>
+                <p class="text_head">{{ job.wages }} par mois</p>
+                <p class="text_head">{{ job.contractType }}</p>
+                <button class="btn btn-primary">Postuler <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <hr class="text-center mt-3 mb-3 mx-auto" width="200">
+            <div class="container my-3">
+                <h5 class="text-center font_title">Commentaire de l'entreprise : </h5>
+                <p>{{ job.companyComment|nl2br }}</p>
+            </div>
         </div>
-
-
-
     </div>
+
+
 </div>
 
 {% endblock %}
