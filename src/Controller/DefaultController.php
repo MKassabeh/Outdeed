@@ -27,7 +27,7 @@ class DefaultController extends AbstractController
                 return $this->redirectToRoute('candidate_fill');
             }
         }
-        return $this->render('default/home.html.twig', []);
+        
         $repository = $this->registryManager->getManager()->getRepository(Job::class);
          $jobs = $repository->findAll();
          return $this->render('default/home.html.twig', [
