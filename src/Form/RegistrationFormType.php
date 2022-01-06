@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -32,6 +33,16 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => 'Username',
                     'class' => 'form-control mb-3'
                 ],         
+            ])
+            ->add('userType', ChoiceType::class, [
+                'label' => 'Pourquoi suis-je ici ?',
+                'attr' => [
+                    'class' => 'form-control mb-3'
+                ],
+                'choices'  => [
+                    'Je cherche un emploi' => 'candidate',
+                    'Je veux poster des offres d\'emploi' => 'company',                    
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'Accepter les conditions d\'utilisation :',                

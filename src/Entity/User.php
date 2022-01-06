@@ -41,6 +41,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'published_by', targetEntity: Job::class)]
     private $job_offers;
 
+    #[ORM\Column(type: 'boolean')]
+    private $completed;
+
+    #[ORM\Column(type: 'string', length: 20)]
+    private $userType;   
+
     public function __construct()
     {
         $this->job_offers = new ArrayCollection();
@@ -166,7 +172,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $jobOffer->setPublishedBy(null);
             }
         }
+        return $this;
+    }
+
+    public function getCompleted(): ?bool
+    {
+        return $this->completed;
+    }
+
+    public function setCompleted(bool $completed): self
+    {
+        $this->completed = $completed;
 
         return $this;
     }
+
+    public function getUserType(): ?string
+    {
+        return $this->userType;
+    }
+
+    public function setUserType(string $userType): self
+    {
+        $this->userType = $userType;
+
+        return $this;
+    }    
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,8 +11,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    public function index(AuthenticationUtils $authenticationUtils): Response
-    {
+    public function index(AuthenticationUtils $authenticationUtils, ManagerRegistry $registryManager): Response
+    {       
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
