@@ -2,8 +2,8 @@
 <div class="container-fluid px-0">
   <!-- Footer -->
   <footer
-          class="text-center text-lg-start text-white"
-          style="background-color: rgb(33, 37, 41)"
+          class="text-center text-lg-start text-black"
+          
           >
     <!-- Grid container -->
     <div class="container-fluid p-4 pb-0">
@@ -17,9 +17,7 @@
               <img src="{{ asset('LOGO OUTDEED.png') }}" alt="logo_outdeed" width="100" height="56">
             </a>
             <p>
-              Here you can use rows and columns to organize your footer
-              content. Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit.
+              Le meilleur site pour trouver le job de vos rêves rapidement. Contact direct avec les entreprises en moins de 48h.
             </p>
           </div>
           <!-- Grid column -->
@@ -28,18 +26,21 @@
 
           <!-- Grid column -->
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+            <h6 class="text-uppercase mb-4 font-weight-bold">Services</h6>
             <p>
-              <a class="text-white">MDBootstrap</a>
+              <a class="footer-link" href="{{ path('job_list')}}" >Trouver un job</a>
             </p>
             <p>
-              <a class="text-white">MDWordPress</a>
+              <a class="footer-link" href="{{ path('job_list') }}">Voir les entreprises</a>
             </p>
             <p>
-              <a class="text-white">BrandFlow</a>
+              <a class="footer-link">Espace candidat</a>
             </p>
             <p>
-              <a class="text-white">Bootstrap Angular</a>
+              <a class="footer-link">Espace entreprises</a>
+            </p>
+            <p>
+              <a class="footer-link">A propos</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -52,16 +53,16 @@
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
             <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-            <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-            <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-            <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-            <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+            <p><i class="fas fa-home mr-3"></i> Toulouse,31000, FR</p>
+            <p><i class="fas fa-envelope mr-3"></i> info.outdeed@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> + 33 734 547 18</p>
+            <p><i class="fas fa-print mr-3"></i> + 33 734 547 18</p>
           </div>
           <!-- Grid column -->
 
           <!-- Grid column -->
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+            <h6 class="text-uppercase mb-4 font-weight-bold">Suivez-nous sur</h6>
 
             <!-- Facebook -->
             <a
@@ -129,7 +130,7 @@
          style="background-color: rgba(0, 0, 0, 0.2)"
          >
       © 2022 Copyright:
-      <a class="text-white" href="#"
+      <a class="" href="#"
          >Outdeed.com</a
         >
     </div>
