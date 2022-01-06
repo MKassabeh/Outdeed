@@ -7,6 +7,7 @@ h1, .font_title {
 }
 
 
+
 /* Navbar  */
 
 
@@ -43,3 +44,13 @@ h1, .font_title {
 .head{
     margin: 5vh 0vh;
 }
+
+/* FOOTER */
+
+/* icons */
+
+.btn-primary{
+    border-radius: 50%  !important;
+    border-color: rgb(33, 37, 41);
+}
+

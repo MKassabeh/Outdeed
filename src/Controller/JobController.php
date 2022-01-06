@@ -135,6 +135,7 @@ class JobController extends AbstractController
                     $errors[] = 'Vos indications concernant les horaires ne doivent pas dépasser 255 caractères.';
                 }
                 // Vérif commentaire
+
                 if(strlen($safe['comment']) > 2500){
                     $errors[] = 'Votre commentaire doit comporter moins de 2500 caractères';
                 }
