@@ -5,20 +5,31 @@
 {% block body %}
 
 <div style="max-height : 500px !important;" class="overflow-hidden container-fluid px-0 position-relative">
-    <h1 class="font_title text-center text-white position-absolute"> Bienvenu chez Outdeed ! </h1>
+    <div id="div_home" class="position-absolute">
+        <h1 id="titre_home" class="mb-0 font_title text-center text-white"> Bienvenue chez Outdeed ! </h1>
+        <h3 class="font_text text-white mb-5">L'emploi ne vient pas à vous ? Venez vers l'emploi !</h3>
+        <div class="text-center">
+            <a class="btn btn-outline-light me-3" href="#">Poster une offre</a>
+            <a class="btn btn-outline-light" href="{{ path('job_list') }}">Trouver un emploi</a>
+        </div>
+    </div>
+
     <img class="" src="{{ asset('img/home/desk.jpg') }}" alt="recrutement">
 </div>
 
 <div class="container d-flex my-5 justify-content-around">
 
     <div class="me-3">
-        <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}" alt="recrutement"></a>
+        <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}"
+                alt="recrutement"></a>
     </div>
     <div class="me-3">
-        <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}" alt="recrutement"></a>
+        <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}"
+                alt="recrutement"></a>
     </div>
     <div>
-        <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}" alt="recrutement"></a>
+        <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}"
+                alt="recrutement"></a>
     </div>
 </div>
 {% endblock %}
