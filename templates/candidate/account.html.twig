@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un job{% endblock %}
+
+{% block body %}
+
+<div class="container mt-3">
+    <h1 class="text-center font_title">Mon compte</h1>
+</div>
+
+<div class="container my-5">
+    <h2 class="mb-2">Informations personnelles</h2> 
+    <span>Nom complet : {{candidate.firstName}} {{candidate.lastName}}</span><br>
+    <span>Numéro de téléphone portable : {{candidate.phoneNumber}}</span><br>
+    <span>Ville de résidence : {{candidate.city}}</span><br>
+</div>
+
+{% endblock %}
