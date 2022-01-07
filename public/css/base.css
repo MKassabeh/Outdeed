@@ -40,3 +40,17 @@ div#div_home {
 .btn-card{
   border-radius: 20px;
 }
+
+
+
+/* AJOUTER UNE OFFRE */
+
+body{
+  background-color:#f3f2f1;
+}
+
+.blanc{
+  background-color: #fff !important;
+  border-radius: 16px !important;
+
+}

@@ -3,46 +3,53 @@
 {% block title %}Liste des emplois{% endblock %}
 
 {% block body %}
-{# # affiche tous les messages flash #}
-{% for level, messages in app.flashes %}
-{% for message in messages %}
-<div class="alert alert-{{ level }}">{{ message|raw}}
-</div>
-{% endfor %}
-{% endfor %}
-
-<div class="container mt-3">
-    <h1 class="text-center">Liste des offres d'emploi</h1>
-</div>
-<div class="container my-5">
-    {% for job in jobs %}
-    <div class="card mb-3">
-        <div class="card-header p-4">
-            <h5 class="font_title"> {{ job.title }}</h5>
-        </div>
-        <div class="card-body d-flex justify-content-between">
-            <div class="d-flex">
-                <div class="me-4">
-                    <img width="142" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
-                        alt="{{ job.category }}">
-                </div>
-                <div>
-                    <p class="card-title">{{ job.city }}</p>
-                    <p class="card-title">{{ job.wages }} par mois | {{ job.contractType }}</p>
-                    <p class="card-text">{{ job.descriptionJob|slice(0, 50) }}...</p>
-                    <a href="{{ path('job_view', {id: job.id}) }}" class="btn btn-outline-primary">Voir plus ...</a>
-                </div>
-            </div>
-
-            <div class="border rounded position-relative py-2 px-2 ">
-                <p class="card-title"><strong>Salaire : </strong>{{ job.wages }} par mois </p>
-                <p class="card-title"><strong>Horaires : </strong>{{ job.schedule }}</p>
-                <p class="card_date text-muted position-absolute "><strong>Publiée le : </strong>{{
-                    job.publishedAt|date('d-m-Y') }}</p>
-            </div>
-
-        </div>
+    {# # affiche tous les messages flash #}
+    {% for level, messages in app.flashes %}
+    {% for message in messages %}
+    <div class="alert alert-{{ level }}">{{ message|raw}}
     </div>
     {% endfor %}
-</div>
+    {% endfor %}
+
+    <div class="container mt-3 py-3">
+        <div class="row justify-content-center ">
+            <div class="col-12 col-md-10 col-lg-8 blanc">
+                <h1 class="text-center">Liste des offres d'emploi</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3 py-3">
+        <div class="row justify-content-center">
+            {% for job in jobs %}
+                <div class="col-md-10 col-lg-8 blanc m-3">
+                    <div class="card m-3">
+                            <div class="card-header p-4">
+                                <h5 class="font_title"> {{ job.title }}</h5>
+                            </div>
+                        <div class="card-body d-flex justify-content-between">
+                            <div class="d-flex">
+                                <div class="me-4">
+                                    <img width="142" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
+                                            alt="{{ job.category }}">
+                                </div>
+                                <div>
+                                    <p class="card-title">{{ job.city }}</p>
+                                    <p class="card-title">{{ job.wages }} par mois | {{ job.contractType }}</p>
+                                    <p class="card-text">{{ job.descriptionJob|slice(0, 50) }}...</p>
+                                    <a href="{{ path('job_view', {id: job.id}) }}" class="btn btn-outline-primary">Voir plus ...</a>
+                                </div>
+                                <div class="border rounded position-relative py-2 px-2 ">
+                                    <p class="card-title"><strong>Salaire : </strong>{{ job.wages }} par mois </p>
+                                    <p class="card-title"><strong>Horaires : </strong>{{ job.schedule }}</p>
+                                    <p class="card_date text-muted position-absolute "><strong>Publiée le : </strong>{{
+                                        job.publishedAt|date('d-m-Y') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
