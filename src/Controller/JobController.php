@@ -15,6 +15,8 @@ class JobController extends AbstractController
 {
     private $registryManager;
 
+    private $sort = ['base', 'nameASC', 'nameDESC', 'dateASC', 'dateDESC'];
+
     public $contractType = [
         'CDI - Temps plein',
         'CDI - Temps partiel',
@@ -83,13 +85,41 @@ class JobController extends AbstractController
     // liste des jobs
     #[Route('/', name: 'job_list')]
     public function list(): Response
-    {
+    {     
+        
         $repository = $this->registryManager->getManager()->getRepository(Job::class);
-        $jobs = $repository->findAll();
+        $jobs = $repository->findAll();   
+
+        if (!empty($_GET['sort'])) {
+
+            if (in_array($_GET['sort'], $this->sort)) {
+
+                switch ($_GET['sort']) {
+                    case '0':
+                        $jobs = $repository->findAll();                        
+                        break;                    
+                    case 'nameASC':
+                        $jobs = $repository->findBy([], ['title'=>'ASC']);
+                        break;
+                    case 'nameDESC':
+                        $jobs = $repository->findBy([], ['title'=>'DESC']);
+                        break;
+                    case 'dateASC':
+                        $jobs = $repository->findBy([], ['published_at'=>'ASC']);
+                        break;
+                    case 'dateDESC':
+                        $jobs = $repository->findBy([], ['published_at'=>'DESC']);
+                        break;
+                }
+            }  
+        }
+                
+        
         return $this->render('job/list.html.twig', [
             'jobs' => $jobs,
             'logoCategories' => $this->logoCategories
         ]);
+        
     }
 
     // Vue d'un job
