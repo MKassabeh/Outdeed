@@ -238,6 +238,9 @@ h3.location{
 	text-decoration:none;
 	padding:0;
 	margin:0;
+
+}
+
 /* REGISTER FORM */
 
 .main-form{
@@ -246,8 +249,8 @@ h3.location{
   box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
   border-radius: 20px;
   
-  
 }
+
 .container .row .left-form{
   background-image: linear-gradient(to right top, #1658a1, #5d71ab, #878cb4, #aaa9be, #c9c9c9);
   border-radius: 20px;
