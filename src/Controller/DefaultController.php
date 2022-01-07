@@ -21,8 +21,10 @@ class DefaultController extends AbstractController
     // la function home() réagis comme une function list() pour obtenir une liste des entreprises qui ont publié des annonces sur le site
     public function home(): Response
     {
+        // si l'utilisateur est connecté
         if ($this->getUser() !== null) {             
 
+            // si l'utilisateur n'a pas rempli sa fiche candidat
             if (!$this->getUser()->getCompleted()) {
                 return $this->redirectToRoute('candidate_fill');
             }
