@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Candidate;
+use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+#[IsGranted('ROLE_USER')]
 #[Route('/account')]
 class CandidateController extends AbstractController
 {
@@ -16,6 +19,23 @@ class CandidateController extends AbstractController
 
     public function __construct(ManagerRegistry $registryManager) {
         $this->registryManager = $registryManager;        
+    }
+   
+    #[Route('/', name: 'account')]
+    public function account(): Response {
+
+        if (!$this->getUser()->getCompleted()) {
+            $this->addFlash('info', 'Veuillez entrer vos données personnelles');
+            return $this->redirectToRoute('candidate_fill');
+        }
+
+        $em = $this->registryManager->getManager();
+        $candidate = $em->getRepository(Candidate::class)->findBy(['user' => $this->getUser()]);       
+       
+
+        return $this->render('candidate/account.html.twig', [
+            'candidate' => $candidate[0]
+        ]);
     }
 
     #[Route('/candidate', name: 'candidate_view')]
@@ -87,6 +107,11 @@ class CandidateController extends AbstractController
                     ->setUser($this->getUser());
 
                 $em->persist($candidate);
+                $em->flush();
+
+                $user = $em->getRepository(User::class)->find($this->getUser());
+                $user->setCompleted(true);
+                $em->persist($user);
                 $em->flush();
 
                 $this->addFlash('success', 'Vos informations ont bien été enregistrées.');
