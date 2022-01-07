@@ -28,10 +28,10 @@
             <div class="card card-short  m-5">
                 <div class="card-body">
                     <div class="row d-flex justify-content-around">
-                        <div class="col-5 profile-img">
-                            <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/home/recrutement.jpg') }}" alt="recrutement"></a>
+                        <div class="col-4 profile-img">
+                            <a href="{{ path('job_list') }}"><img class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}" alt="{{ job.category }}"></a>
                         </div>
-                        <div class="col-7 profile-content">
+                        <div class="col-8 profile-content">
                             <p>{{job.title}}</p>
                             <p>{{job.category}}</p>
                             <p>{{job.city}}</p>

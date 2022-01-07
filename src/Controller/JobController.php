@@ -50,6 +50,31 @@ class JobController extends AbstractController
         'Transport-Logistique'
     ]; 
 
+    public $logoCategories = [
+        'Agriculture' => 'agriculture.png',
+        'Alimentation' => 'alimentation.png',
+        'Animaux' => 'animaux.png',
+        'Architecture' => 'architecte.png',
+        'Services publics' => 'servicepublic.png',
+        'Banque' => 'banque.png',
+        'Biologie' => 'biologie.png',
+        'BTP' => 'batiment.png',
+        'Cinema' => 'cinema.png',
+        'Immobilier' => 'immobilier.png',
+        'Communication' => 'communication.png',
+        'Culture' => 'culture.png',
+        'Droit' => 'droit.png',
+        'Electricité' => 'electricien.png',
+        'Hôtellerie-Restauration' => 'restaurant.png',
+        'Informatique' => 'informatique.png',
+        'Mécanique' => 'mecanique.png',
+        'Santé' => 'sante.png',
+        'Sport' => 'sport.png',
+        'Secretariat' => 'secretariat.png',
+        'Transport-Logistique' => 'transportlog.png'
+    ];
+
+
     public function __construct(ManagerRegistry $registryManager) {
         $this->registryManager = $registryManager;
     }
@@ -62,6 +87,7 @@ class JobController extends AbstractController
         $jobs = $repository->findAll();
         return $this->render('job/list.html.twig', [
             'jobs' => $jobs,
+            'logoCategories' => $this->logoCategories
         ]);
     }
 
@@ -75,6 +101,7 @@ class JobController extends AbstractController
         return $this->render('job/view.html.twig', [
             'job'        => $job,
             'categories' => $this->categories,
+            'logoCategories' => $this->logoCategories
         ]);
     }
 

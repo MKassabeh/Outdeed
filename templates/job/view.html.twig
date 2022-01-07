@@ -10,13 +10,24 @@
                 <h1 class="mb-2 font_title">
                     {{ job.title }}
                 </h1>
-                <span style="font-size: 16px !important;" class="mb-4 badge bg-info text-dark">{{job.category}}</span>
-                <p class="text_head"><strong>Localisation</strong> <i class="fas fa-map-marker-alt"></i> : {{ job.city
-                    }}</p>
-                <p class="text_head"><strong>Offre publiée le : </strong>{{ job.publishedAt ?
-                    job.publishedAt|date('d/m/Y') : '' }}</p>
-
             </div>
+            <div class="d-flex">
+                <div class="me-4">
+                    <img width="125" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}" alt="{{ job.category }}">
+                </div>
+                <div>
+                    <span style="font-size: 16px !important;"
+                        class="mb-4 badge bg-info text-dark">{{job.category}}</span>
+                    <p class="text_head"><strong>Localisation</strong> <i class="fas fa-map-marker-alt"></i> : {{
+                        job.city
+                        }}</p>
+                    <p class="text_head"><strong>Offre publiée le : </strong>{{ job.publishedAt ?
+                        job.publishedAt|date('d/m/Y') : '' }}</p>
+                </div>
+                
+            </div>
+
+
             <h3 class="font_title mt-4"> Description de l'entreprise : </h3>
             <p>{{ job.descriptionCompany|nl2br }}</p>
             <h3 class="font_title mt-4"> Description de l'offre : </h3>
@@ -35,7 +46,7 @@
                 <p class="text_head">{{ job.schedule }}</p>
                 <p class="text_head">{{ job.wages }} par mois</p>
                 <p class="text_head">{{ job.contractType }}</p>
-                <button class="btn btn-primary">Postuler <i class="fas fa-arrow-right"></i></button>
+                <button class="btn btn-outline-primary btn-card">Postuler <i class="fas fa-arrow-right"></i></button>
             </div>
             <hr class="text-center mt-3 mb-3 mx-auto" width="200">
             <div class="container my-3">

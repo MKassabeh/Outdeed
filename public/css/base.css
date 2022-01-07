@@ -34,8 +34,7 @@ div#div_home {
 
 .card .card-body .row .profile-img img{
   height: 125px;
-  width: 125px;
-  border-radius: 50%;
+  width: 125px;  
 }
 
 .btn-card{
