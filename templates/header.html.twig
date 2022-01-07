@@ -19,7 +19,9 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ path('job_list')}}">Liste des jobs</a></li>
+                        {% if app.user %}
                         <li><a class="dropdown-item" href="{{ path('job_add')}}">Ajouter un job</a></li>
+                        {% endif %}
                     </ul>
                 </li>
                 <li class="nav-link dropdown">
@@ -29,7 +31,9 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ path('job_list') }}">Liste des entreprises</a></li>
+                        {% if app.user %}
                         <li><a class="dropdown-item" href="{{ path('job_add') }}">Ajouter une entreprise</a></li>
+                        {% endif %}
                     </ul>
                 </li>
                 {% if not app.user %}
