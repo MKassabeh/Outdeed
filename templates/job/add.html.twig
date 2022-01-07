@@ -17,12 +17,12 @@
     <div class="row justify-content-center ">
         <div class="col-12 col-md-10 col-lg-8 blanc">
             <form method="post" id="addArticle">
-                <div class="mb-3">
-                    <label for="title">Titre de l'offre : </label>
+                <div class="mb-3 fw-bold">
+                    <label for="title ">Titre de l'offre : </label>
                     <input type="text" name="title" id="title" class="form-control">
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="category">Catégorie de l'offre : </label>
                     <select name="category" id="category" class="form-select">
                         <option value="0" selected disabled>-- Choisir --</option>
@@ -31,27 +31,27 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="description_company">Description de l'entreprise : </label>
                     <textarea name="description_company" id="description_company" rows="6" class="form-control"></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="description_job">Description de l'offre : </label>
                     <textarea name="description_job" id="description_job" rows="6" class="form-control"></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="description_applicant">Description du profil recherché</label>
                     <textarea name="description_applicant" id="description_applicant" rows="6" class="form-control"></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="city">Ville : </label>
                     <input type="text" name="city" id="city" class="form-control">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="wages">Estimation du salaire : </label>
                     <input type="text" name="wages" id="wages" class="form-control">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="contract">Type de contrat : </label>
                     <select name="contract" id="contract" class="form-select">
                         <option value="0" selected disabled>-- Choisir --</option>
@@ -60,15 +60,15 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="benefit">Avantages : </label>
                     <textarea name="benefit" id="benefit" rows="6" class="form-control"></textarea>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="schedule">Horaires : </label>
                     <input type="text" name="schedule" id="schedule" class="form-control">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 fw-bold">
                     <label for="comment">Commentaire : </label>
                     <textarea name="comment" id="comment" rows="6" class="form-control"></textarea>
                 </div>
