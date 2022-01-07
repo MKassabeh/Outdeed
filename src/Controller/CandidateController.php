@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidate;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,16 +47,19 @@ class CandidateController extends AbstractController
     public function fill(): Response
     {
 
+        if ($this->getUser()->getCompleted()) {
+            return $this->redirectToRoute('home');
+        }
         $errors = [];
 
         if (!empty($_POST)) {
 
             $safe = array_map('trim', array_map('strip_tags', $_POST));
 
-            $pattern = '/^(?:(?:\+|00)33|0)\s*[1-9](?:[-]*\d{2}){4}$/';
+            $pattern = "#^[0][6-7][0-9]{8}$#";
 
             if (!preg_match($pattern, $safe['phone'])) {
-                $errors[] = 'Veuillez entrer un numéro de téléphone correct (06-01-02-03-04 ou +336-01-02-03-04)';
+                $errors[] = 'Veuillez entrer un numéro de téléphone portable correct (format : 0601020304)';
             }
             
             if (strlen($safe['city']) > 255 || strlen($safe['city']) < 0) {
@@ -68,10 +72,29 @@ class CandidateController extends AbstractController
                      
             if (strlen($safe['last_name']) > 50 || strlen($safe['last_name']) < 0) {
                 $errors[] = 'Votre nom de famille ne peut pas dépasser 50 caractères';
-            }           
+            }   
+            
+            if (count($errors) == 0) {
+                
+                $em = $this->registryManager->getManager();
+                $candidate = new Candidate();
 
+                $candidate
+                    ->setCity($safe['city'])
+                    ->setPhoneNumber($safe['phone'])
+                    ->setFirstName($safe['first_name'])
+                    ->setLastName($safe['last_name'])
+                    ->setUser($this->getUser());
 
+                $em->persist($candidate);
+                $em->flush();
 
+                $this->addFlash('success', 'Vos informations ont bien été enregistrées.');
+                return $this->redirectToRoute('home');
+            }
+            else {
+                $this->addFlash('danger', implode('<br>', $errors));
+            }
         }
 
         return $this->render('candidate/fill.html.twig', [

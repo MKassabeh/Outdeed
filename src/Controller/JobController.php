@@ -7,6 +7,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 #[Route('/job')]
@@ -106,9 +107,18 @@ class JobController extends AbstractController
     }
 
     // Ajout job
+    #[IsGranted('ROLE_USER')]
     #[Route('/add', name: 'job_add')]
     public function add(): Response
-    {       
+    {
+
+        // si je suis ni une entreprise, ni un administrateur 
+        if ($this->getUser()->getUserType() !== 'company' && !in_array('ROLE_ADMIN',$this->getUser()->getRoles())) {
+            //-> je ne peux pas ajouter d'offre d'emploi
+            $this->addFlash('warning', 'En tant que chercheur d\'emploi, vous n\'êtes pas autorisé à publier des offres d\'emploi.');
+            return $this->redirectToRoute('job_list');
+        }
+
 
         $errors = [];       
 
