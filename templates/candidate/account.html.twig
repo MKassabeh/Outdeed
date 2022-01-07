@@ -13,6 +13,8 @@
     <span>Nom complet : {{candidate.firstName}} {{candidate.lastName}}</span><br>
     <span>Numéro de téléphone portable : {{candidate.phoneNumber}}</span><br>
     <span>Ville de résidence : {{candidate.city}}</span><br>
+    <span>Adresse : {{candidate.address}}</span><br>    
+    <span>Date de naissance : {{candidate.birthdate|date('d-m-Y') }}</span><br>
 </div>
 
 {% endblock %}
