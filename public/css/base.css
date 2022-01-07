@@ -14,6 +14,23 @@ h1#titre_home {
   font-size: 72px !important;
 }
 
+h1#titre_register {
+  font-family: "pacifico", sans-serif !important;
+  font-weight: 900 !important;
+  font-style: bold !important;
+  font-size: 80px !important;
+  letter-spacing: 5px;
+  color: #fff;
+}
+
+p#slogan_register {
+  
+  font-style: bold !important;
+  font-size: 19px !important;
+  letter-spacing: 3px;
+  color: #fff;
+}
+
 div#div_home {
   top: 15%;  
   left: 50%;
@@ -225,4 +242,54 @@ h3.location{
 
 div#form_sort_job {
     margin-bottom : -40px;
+
+}
+
+/* REGISTER FORM */
+
+.main-form{
+  
+  margin: 30px 0;
+  box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
+  border-radius: 20px;
+  
+}
+
+.container .row .left-form{
+  background-image: linear-gradient(to right top, #1658a1, #5d71ab, #878cb4, #aaa9be, #c9c9c9);
+  border-radius: 20px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+
+/* LOGIN FORM */
+div.main-login{
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.main-login .row{
+  box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
+  height: 300px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+div .row .login-right{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+div .row .login-right img{
+  height: 180px;
+  width: 180px;
 }
