@@ -54,3 +54,9 @@ h1, .font_title {
     border-color: rgb(33, 37, 41);
 }
 
+
+/* Register form */
+
+.container .row .left-form .form-title{
+    font-family:"pacifico", sans-serif !important;
+  }
