@@ -92,7 +92,19 @@ class CandidateController extends AbstractController
                      
             if (strlen($safe['last_name']) > 50 || strlen($safe['last_name']) < 0) {
                 $errors[] = 'Votre nom de famille ne peut pas dépasser 50 caractères';
-            }   
+            } 
+            
+            if (strlen($safe['address']) > 70 || strlen($safe['address']) < 0) {
+                $errors[] = 'Veuillez renseigner votre adresse, maximum 70 caractères.';
+            }
+
+            if (strlen($safe['address']) > 70 || strlen($safe['address']) < 0) {
+                $errors[] = 'Veuillez renseigner votre adresse, maximum 70 caractères.';
+            }
+
+            if(!checkdate($safe['birth_m'], $safe['birth_d'], $safe['birth_y'])) {
+                $errors[] = 'Veuillez renseigner une date de naissance correcte';
+            }
             
             if (count($errors) == 0) {
                 
@@ -104,7 +116,9 @@ class CandidateController extends AbstractController
                     ->setPhoneNumber($safe['phone'])
                     ->setFirstName($safe['first_name'])
                     ->setLastName($safe['last_name'])
-                    ->setUser($this->getUser());
+                    ->setUser($this->getUser())
+                    ->setAddress($safe['address'])
+                    ->setBirthdate(new \DateTime($safe['birth_d'].'-'.$safe['birth_m'].'-'.$safe['birth_y']));
 
                 $em->persist($candidate);
                 $em->flush();

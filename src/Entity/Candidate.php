@@ -36,6 +36,12 @@ class Candidate
     #[ORM\OneToOne(targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $user;
 
+    #[ORM\Column(type: 'string', length: 70, nullable: true)]
+    private $address;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $birthdate;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -163,6 +169,30 @@ class Candidate
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getBirthdate(): ?\DateTimeInterface
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthdate(?\DateTimeInterface $birthdate): self
+    {
+        $this->birthdate = $birthdate;
 
         return $this;
     }
