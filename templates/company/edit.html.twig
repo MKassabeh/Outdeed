@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un company{% endblock %}
+
+{% block body %}
+
+<div class="container mt-3">
+    <h1 class="text-center font_title">Editer une offre d'emploi</h1>
+</div>
+
+<div class="container my-5">
+    <form method="post" id="addArticle">
+        <div class="mb-3">
+            <label for="name">Nom de l'entreprise : </label>
+            <input type="text" name="name" id="name" value="{{ company.name }}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="description">Description de l'entreprise : </label>
+            <textarea name="description" id="description" rows="6" class="form-control"></textarea>
+            <p>Valeur actuelle : {{ company.description }}</p>
+        </div>
+        <div class="mb-3">
+            <label for="category">Secteur d'activité : </label>
+            <select name="category" id="category" class="form-select">
+                <option value="{{ company.category }}" selected>{{ company.category }}</option>
+                {% for value in categories_availables %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="contact_email">Email de contact : </label>
+            <textarea name="contact_email" id="contact_email" rows="6" class="form-control"></textarea>
+            <p>Valeur actuelle : {{ company.contactEmail }}</p>
+        </div>
+        <div class="mb-3">
+            <label for="city">Ville : </label>
+            <textarea name="city" id="city" rows="6" class="form-control"></textarea>
+            <p>Valeur actuelle : {{ company.city }}</p>
+        </div>
+        <div class="mb-3">
+            <label for="phone">Téléphone : </label>
+            <input type="text" name="phone" id="phone" value="{{ company.phone }}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="nb_employees">Nombre d'employé : </label>
+            <input type="text" name="nb_employees" value="{{ company.nbEmployees }}" id="nb_employees" class="form-control">
+        </div>
+
+        <div class="mb-3 text-center">
+            <input type="submit" name="submit" class="btn btn-success" value="Envoyer">
+
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
