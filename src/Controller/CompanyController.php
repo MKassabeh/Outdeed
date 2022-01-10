@@ -101,8 +101,8 @@ class CompanyController extends AbstractController
                     $errors[] = 'Votre catégorie sélectionnée n\'existe pas';
                 }
                 // Vérif contact mail
-                if(strlen($safe['contact_email']) < 5 || strlen($safe['contact_email']) > 3000){
-                    $errors[] = 'Votre description doit comporter entre 5 et 3000 caractères';
+                if(!filter_var($safe['contact_email'],FILTER_VALIDATE_EMAIL)){
+                    $errors[] = 'Votre Email n\'est pas valide';
                 }
 
 
