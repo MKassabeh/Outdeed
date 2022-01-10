@@ -54,7 +54,7 @@ class CompanyController extends AbstractController
 
         $errors =[];
 
-        // dd($created_date);
+     
         if(!empty($_POST)){
             $safe = array_map('trim', array_map('strip_tags', $_POST));
 
@@ -80,7 +80,7 @@ class CompanyController extends AbstractController
             }
             // Vérif city
             if(!is_numeric($safe['nb_employees']) || ($safe['nb_employees']) < 1){
-                $errors[] = 'Veillez entrer le nombre d\'employés dans votre entreprise ';
+                $errors[] = 'Veillez entrer le nombre d\'employés de votre entreprise';
             }
 
             //Verif numéro de téléphone
@@ -114,10 +114,7 @@ class CompanyController extends AbstractController
                 $company ->setNbEmployees($safe['nb_employees']);
                 $company ->setContactEmail($safe['contact_email']);
                 $company ->setCreatedAt(new \DateTime($safe['birth_d'].'-'.$safe['birth_m'].'-'.$safe['birth_y']));
-                $company ->setUser($this->getUser());
-
-                
-
+                $company ->setUser($this->getUser());  
 
                 $em->persist($company);
                 $em->flush();
@@ -243,9 +240,7 @@ class CompanyController extends AbstractController
         ]);
     }
 
-
-
-     // Vue entreprise
+    // Vue entreprise
     #[Route('/view/{id}', name: 'company_view')]
     public function view(int $id): Response
     {
