@@ -68,12 +68,83 @@ class CompanyController extends AbstractController
     }
 
 
-    // Modifier entreprise
-    #[Route('/edit', name: 'company_edit')]
-    public function edit(): Response
+    #[Route('/edit/{id}', name: 'company_edit')]
+    public function edit(int $id): Response
     {
+
+        // on récupère le tableau des catégories
+        $jobController = new JobController($this->registryManager);
+        $categories = $jobController->categories;
+        
+        $em = $this->registryManager->getManager();
+        $company = $em->getRepository(Company::class)->find($id);
+
+        $errors = [];        
+
+        if(!empty($_POST)){
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
+
+                // Vérif titre
+                if(strlen($safe['name']) < 5 || strlen($safe['name']) > 100){
+                    $errors[] = 'Votre titre doit comporter entre 5 et 100 caractères';
+                }
+                // Vérif description
+                if(strlen($safe['description']) < 5 || strlen($safe['description']) > 3000){
+                    $errors[] = 'Votre description doit comporter entre 5 et 3000 caractères';
+                }
+
+                // Vérif catégorie
+                if(!isset($safe['category'])){
+                    $errors[] = 'Veuillez sélectionner une catégorie';
+                }
+                elseif(!in_array($safe['category'], $categories)){
+                    $errors[] = 'Votre catégorie sélectionnée n\'existe pas';
+                }
+                // Vérif contact mail
+                if(strlen($safe['contact_email']) < 5 || strlen($safe['contact_email']) > 3000){
+                    $errors[] = 'Votre description doit comporter entre 5 et 3000 caractères';
+                }
+
+
+                // Vérif city
+                if(strlen($safe['city']) < 5 || strlen($safe['city']) > 100){
+                    $errors[] = 'Veuillez entrer une ville valide';
+                }
+                // Vérif phone
+                if(!is_numeric($safe['phone']) || strlen($safe['phone']) != 10){
+                    $errors[] = 'Veuillez entrer un numéro de téléphone valide';
+                }
+                // Vérif nb_employees
+                if(!is_numeric($safe['nb_employees']) || strlen( $safe['nb_employees']) < 1 || strlen($safe['nb_employees']) > 10){
+                    $errors[] = 'Votre salaire doit comporter entre 1 et 100 caractères';
+                }
+
+
+
+                if (count($errors) == 0) {
+                    // On assigne les nouvelles valeurs
+                    $company->setName($safe['name'])
+                        ->setDescription($safe['description'])
+                        ->setCategory($safe['category'])
+                        ->setContactEmail($safe['contact_email'])
+                        ->setCity($safe['city'])
+                        ->setPhone($safe['phone'])
+                        ->setnbEmployees($safe['nb_employees'])
+                        ->setCreatedAt(new \DateTime('now'));
+
+                    $em->persist($company);
+                    $em->flush();
+
+                    $this->addFlash('success', 'Votre offre d\'emploi a bien été modifiée');
+                    return $this->redirectToRoute('company_list');
+                        
+                } else {
+                    $this->addFlash('danger', implode('<br>', $errors));
+                }
+        }
         return $this->render('company/edit.html.twig', [
-            'controller_name' => 'CompanyController',
+            'company' => $company,
+            'categories_availables' => $categories,
         ]);
     }
 
