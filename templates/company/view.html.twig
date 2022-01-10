@@ -1,8 +1,48 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Outdeed - company : Détails{% endblock %}
+{% block title %}Outdeed - Job : Détails{% endblock %}
 
 {% block body %}
+<div class="my-5 container">
+    <div class="card_container justify-content-around text-center">
+        <div style="max-width: 800px !important;" class="card_body">
+            <div class="head">
+                <h1 class="mb-2 font_title">
+                    {{ company.name }}
+                </h1>
+            </div>
+            <div class="d-flex">
+                <div>
+                    <span style="font-size: 16px !important;"
+                        class="mb-4 badge bg-info text-dark">{{company.category}}</span>
+                    <p class="text_head"><strong>Localisation</strong> <i class="fas fa-map-marker-alt"></i> : {{
+                        company.city
+                        }}</p>
+                    <p class="text_head"><strong>Offre publiée le : </strong>{{ company.createdAt ?
+                        company.createdAt|date('d/m/Y') : '' }}</p>
+                
+                
+                </div>
+            </div>
 
+
+            <h3 class="font_title mt-4"> Description de l'entreprise : </h3>
+            <p>{{ company.description|nl2br }}</p>
+
+            
+
+        </div>
+        <div style="max-width: 300px !important;">
+            <div class="p-3 mt-5 border card-header">
+                <h5>Contactez-nous</h5>
+                <p class="text_head"><strong>Email de contact : </strong> <br>{{ company.contactEmail }}</p>
+                <p class="text_head"><strong>Numéro de téléphone : </strong><br>{{ company.phone }}</p>
+                
+                
+            </div>
+            <hr class="text-center mt-3 mb-3 mx-auto" width="200">
+        </div>
+    </div>
+</div>
 
 {% endblock %}
