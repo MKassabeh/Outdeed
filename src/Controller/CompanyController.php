@@ -17,9 +17,7 @@ class CompanyController extends AbstractController
 
     public function __construct(ManagerRegistry $registryManager) {
         $this->registryManager = $registryManager;
-    }
-    
-
+    }    
 
     // liste entreprises
     #[Route('/list', name: 'company_list')]
@@ -29,8 +27,6 @@ class CompanyController extends AbstractController
             'controller_name' => 'CompanyController',
         ]);
     }
-
-
 
     // Ajouter entreprise
     #[IsGranted('ROLE_USER')]
@@ -49,8 +45,6 @@ class CompanyController extends AbstractController
             'controller_name' => 'CompanyController',
         ]);
     }
-
-
 
     // Suppression entreprise
     #[Route('/delete/{id}', name: 'company_delete')]
