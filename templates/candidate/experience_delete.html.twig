@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{%block body %}
+<div class="container">
+
+    <form method="post">
+        <h2 class="font_title">Êtes-vous sûr de vouloir supprimer cette experience professionnelle ?</h2>
+
+        <p class="font_text">{{experience.jobName}} chez {{ experience.companyName }}</p>
+
+        <input type="submit" name="submit" class="btn btn-danger" value="Confimer la suppression">
+    </form>
+</div>
+
+{% endblock %}

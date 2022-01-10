@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Outdeed - Compétences techniques{% endblock %}
+
+{% block body %}
+
+<div class="container mt-3">
+    <h1 class="text-center font_title">Nouvelle compétence technique</h1>
+</div>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <form method="post" id="addExperience">
+
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10 mb-3">
+                        <label for="skill">Intitulé de la compétence * :</label>
+                        <input type="text" name="skill" id="skill" class="form-control" placeholder="{{ skill.skillName }}">
+                    </div>
+                    <div class="col-1"></div>
+                </div>                
+
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10 mb-3">
+                        <label for="duration">Durée (en années) * :</label>
+                        <input type="number" min="1" max="100" name="duration" id="duration" class="form-control" placeholder="{{ skill.yearsOfExperience }}">
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+
+                <div class="mb-3 text-center">
+                    <span>Toutes les informations doivent être remplies, les donnéees actuelles s'affichent en gris. <br> Si
+                        vous ne souhaitez pas modifier une des informations vous devez quand même la remplir à
+                        nouveau.</span>
+                </div>
+
+                <div class="mb-3 text-center">
+                    <input type="submit" value="Sauvegarder" class="btn btn-success">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
