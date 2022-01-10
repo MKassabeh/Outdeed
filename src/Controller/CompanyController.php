@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Company;
 use App\Entity\User;
+use App\Entity\Job;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,12 +20,18 @@ class CompanyController extends AbstractController
         $this->registryManager = $registryManager;
     }    
 
-    // liste entreprises
-    #[Route('/list', name: 'company_list')]
+      /**
+     * Liste des entreprises 
+     */
+    #[Route('/company/list', name: 'company_list')]
     public function list(): Response
     {
+        $em = $this->registryManager->getManager();
+        
+        $companies = $em->getRepository(Company::class)->findAll();
+
         return $this->render('company/list.html.twig', [
-            'controller_name' => 'CompanyController',
+            'companies' => $companies,
         ]);
     }
 
@@ -39,10 +46,93 @@ class CompanyController extends AbstractController
             //-> je ne peux pas créé d'entreprise
             $this->addFlash('warning', 'En tant que chercheur d\'emploi, vous n\'êtes pas autorisé à créé une entreprise.');
             return $this->redirectToRoute('company_list');
+
+        }
+     
+        $controller = new JobController($this->registryManager);
+        $categories = $controller-> categories;
+
+        $errors =[];
+
+        // dd($created_date);
+        if(!empty($_POST)){
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
+
+             // Vérif titre
+             if(strlen($safe['name']) < 5 || strlen($safe['name']) > 100){
+                $errors[] = 'Votre titre doit comporter entre 5 et 100 caractères';
+            }
+            // Vérif catégorie
+            if(!isset($safe['category'])){
+                $errors[] = 'Veuillez sélectionner une catégorie';
+            }
+            elseif(!in_array($safe['category'], $categories)){
+                $errors[] = 'Votre catégorie sélectionnée n\'existe pas';
+            }
+
+            // Vérif description entreprise
+            if(strlen($safe['description']) < 1 || strlen($safe['description']) > 2000){
+                $errors[] = 'La description de votre entreprise doit comporter entre 1 et 2000 caractères';
+            }
+            // Vérif city
+            if(strlen($safe['city']) < 1 || strlen($safe['city']) > 100){
+                $errors[] = 'Le nom de votre ville doit comporter entre 1 et 100 caractères';
+            }
+            // Vérif city
+            if(!is_numeric($safe['nb_employees']) || ($safe['nb_employees']) < 1){
+                $errors[] = 'Veillez entrer le nombre d\'employés dans votre entreprise ';
+            }
+
+            //Verif numéro de téléphone
+            $pattern = "#^[0][6-7][0-9]{8}$#";
+
+            if (!preg_match($pattern, $safe['phone'])) {
+                $errors[] = 'Veuillez entrer un numéro de téléphone portable correct (format : 0601020304)';
+            }
+
+            //vérif email
+            if (!filter_var($safe['contact_email'], FILTER_VALIDATE_EMAIL)){
+                $errors[] = 'email invalide';
+            }
+
+            //vérif date 
+            if(!checkdate($safe['birth_m'], $safe['birth_d'], $safe['birth_y'])) {
+                $errors[] = 'Veuillez renseigner une date de création correcte';
+            }
+        
+
+            if(count($errors) === 0){
+                $em = $this->registryManager->getManager();
+
+                $company = new Company();
+
+                $company ->setName($safe['name']);
+                $company ->setCategory($safe['category']);
+                $company ->setDescription($safe['description']);
+                $company ->setCity($safe['city']);
+                $company ->setPhone($safe['phone']);
+                $company ->setNbEmployees($safe['nb_employees']);
+                $company ->setContactEmail($safe['contact_email']);
+                $company ->setCreatedAt(new \DateTime($safe['birth_d'].'-'.$safe['birth_m'].'-'.$safe['birth_y']));
+                $company ->setUser($this->getUser());
+
+                
+
+
+                $em->persist($company);
+                $em->flush();
+
+                //Envoi du message flash
+                $this->addFlash('success','Bravo, votre espace entreprice a bien été crée!');
+
+            }else { // Ici j'ai des erreurs et j'affiche celle-ci
+                $this->addFlash('danger', implode('<br>', $errors));
+            }
+
         }
 
         return $this->render('company/add.html.twig', [
-            'controller_name' => 'CompanyController',
+            'categories' => $categories,
         ]);
     }
 

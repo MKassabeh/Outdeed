@@ -1,7 +1,91 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Add{% endblock %}
+{% block title %}Ajoutéz votre entreprise
+{% endblock %}
+
 
 {% block body %}
+
+	<div class="container mt-3 py-3">
+		<div class="row justify-content-center ">
+			<div class="col-12 col-md-10 col-lg-8 blanc">
+				<h1 class="text-center font_title fw-bold">Créez votre espace entreprise</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="container my-5 ">
+		<div class="row justify-content-center ">
+			<div class="col-12 col-md-10 col-lg-8 blanc">
+				<form method="post" id="addArticle">
+					<div class="mb-3 fw-bold">
+						<label for="name">Nom de votre entreprise :
+						</label>
+						<input type="text" name="name" id="name" class="form-control">
+					</div>
+
+					<div class="mb-3 fw-bold">
+						<label for="category">Secteur d'activité :
+						</label>
+						<select name="category" id="category" class="form-select">
+							<option value="0" selected disabled>-- Choisir --</option>
+							{% for value in categories %}
+								<option value="{{ value }}">{{ value }}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="mb-3 fw-bold">
+						<label for="description">Description de votre entreprise :
+						</label>
+						<textarea name="description" id="description" rows="6" class="form-control"></textarea>
+					</div>
+					<div class="mb-3 fw-bold">
+						<label for="nb_employees">Nombre d'employés :
+						</label>
+						<input type="text" name="nb_employees" id="nb_employees" class="form-control">
+					</div>
+					<div class="mb-3 fw-bold">
+						<label for="city">Ville :
+						</label>
+						<input type="text" name="city" id="city" class="form-control">
+					</div>
+					<div class="mb-3 fw-bold">
+						<label for="phone">Numéro de téléphone :
+						</label>
+						<input type="text" name="phone" id="phone" class="form-control">
+					</div>
+					<div class="mb-3 fw-bold">
+						<label for="contact_email">Adresse email :
+						</label>
+						<input type="text" name="contact_email" id="contact_email" class="form-control">
+					</div>
+
+					<div class="row">
+						<div class="col-1"></div>
+						<div class="col-3 mb-3">
+							<label for="birth_d">Jour de création :</label>
+							<input type="number" name="birth_d" id="birth_d" min="1" max="31" class="form-control">
+						</div>
+						<div class="col-3 mb-3">
+							<label for="birth_m">Mois de création :</label>
+							<input type="number" name="birth_m" id="birth_m" min="1" max="12" class="form-control">
+						</div>
+						<div class="col-4 mb-3">
+							<label for="birth_y">Année de création :</label>
+							<input type="number" name="birth_y" min="1900" max="2010" id="birth_y" class="form-control">
+						</div>
+						<div class="col-1"></div>
+					</div>
+
+
+					<div class="mb-3 text-center">
+						<input type="submit" name="submit" class="btn btn-success" value="Envoyer">
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
