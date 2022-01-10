@@ -23,7 +23,7 @@ class CompanyController extends AbstractController
       /**
      * Liste des entreprises 
      */
-    #[Route('/company/list', name: 'company_list')]
+    #[Route('/list', name: 'company_list')]
     public function list(): Response
     {
         $em = $this->registryManager->getManager();
