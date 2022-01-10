@@ -37,7 +37,7 @@ class Company
     #[ORM\Column(type: 'datetime')]
     private $created_at;
 
-    #[ORM\ManyToOne(targetEntity: user::class)]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 

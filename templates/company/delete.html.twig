@@ -1,7 +1,11 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello Delete{% endblock %}
-
 {% block body %}
+{# affiche tous les messages flash #}    
+    <form method="post">
+        <h2 class="font_title">Êtes-vous sûr de vouloir supprimer cette entreprise ?</h2>
+
+        <p class="font_text">{{company.name}}</p>
+        
+        <input type="submit" name="submit" class="btn btn-danger" value="Confimer la suppression">
+    </form>
 
 {% endblock %}
