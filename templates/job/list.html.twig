@@ -49,10 +49,10 @@
         <div class="col-md-10 col-lg-8 blanc m-3">
             <div class="card m-3">
                 <div class="card-header p-4">
-                    <h5 class="font_title"> {{ job.title }}</h5>
+                    <h5 class="font_title"> {{ job.title|capitalize }} | {{job.companyName|capitalize}}</h5>                    
                 </div>
                 <div class="card-body d-flex justify-content-between">
-                    <div class="d-flex">
+                    
                         <div class="me-4">
                             <img width="142" class="img-fluid"
                                 src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
@@ -71,7 +71,7 @@
                             <p class="card_date text-muted position-absolute "><strong>Publiée le : </strong>{{
                                 job.publishedAt|date('d-m-Y') }}</p>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
