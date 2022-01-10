@@ -8,6 +8,8 @@
     <h1 class="text-center font_title">Mon compte</h1>
 </div>
 
+{% if app.user.userType == "candidate" %}
+
 <div class="container my-5 d-flex justify-content-evenly">
     <div id="info">
         <h2 class="mb-2">Informations personnelles</h2>
@@ -62,8 +64,9 @@
 
         </div>
     </div>
-
-
 </div>
+{% else %}
+<p>ESPACE COMPANY</p>
+{% endif %}
 
 {% endblock %}

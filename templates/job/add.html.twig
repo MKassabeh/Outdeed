@@ -20,21 +20,8 @@
                 <div class="mb-3 fw-bold">
                     <label for="title ">Titre de l'offre : </label>
                     <input type="text" name="title" id="title" class="form-control">
-                </div>
-
-                <div class="mb-3 fw-bold">
-                    <label for="category">Catégorie de l'offre : </label>
-                    <select name="category" id="category" class="form-select">
-                        <option value="0" selected disabled>-- Choisir --</option>
-                        {% for value in categories_availables %}
-                        <option value="{{ value }}">{{ value }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="mb-3 fw-bold">
-                    <label for="description_company">Description de l'entreprise : </label>
-                    <textarea name="description_company" id="description_company" rows="6" class="form-control"></textarea>
-                </div>
+                </div>              
+               
                 <div class="mb-3 fw-bold">
                     <label for="description_job">Description de l'offre : </label>
                     <textarea name="description_job" id="description_job" rows="6" class="form-control"></textarea>
@@ -42,11 +29,7 @@
                 <div class="mb-3 fw-bold">
                     <label for="description_applicant">Description du profil recherché</label>
                     <textarea name="description_applicant" id="description_applicant" rows="6" class="form-control"></textarea>
-                </div>
-                <div class="mb-3 fw-bold">
-                    <label for="city">Ville : </label>
-                    <input type="text" name="city" id="city" class="form-control">
-                </div>
+                </div>                
                 <div class="mb-3 fw-bold">
                     <label for="wages">Estimation du salaire : </label>
                     <input type="text" name="wages" id="wages" class="form-control">

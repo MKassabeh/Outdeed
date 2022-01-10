@@ -53,6 +53,9 @@ class Job
     #[ORM\JoinColumn(nullable: false)]
     private $published_by;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $company_name;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -210,6 +213,18 @@ class Job
     public function setPublishedBy(?User $published_by): self
     {
         $this->published_by = $published_by;
+
+        return $this;
+    }
+
+    public function getCompanyName(): ?string
+    {
+        return $this->company_name;
+    }
+
+    public function setCompanyName(string $company_name): self
+    {
+        $this->company_name = $company_name;
 
         return $this;
     }

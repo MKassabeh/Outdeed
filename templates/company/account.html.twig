@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Outdeed - Mon Compte{% endblock %}
+
+{% block body %}
+
+<div class="container mt-3">
+    <h1 class="text-center font_title">Mon compte entreprise</h1>
+</div>
+
+<div class="container my-5 d-flex justify-content-evenly">
+
+    <div id="info">
+        <h2 class="mb-2">Informations de l'entreprise</h2>
+        <span>{{ company.name }}</span> <br>
+        <span>{{ company.category }}</span> <br>
+        <span>{{ company.contactEmail }}</span> <br>
+        
+    </div>
+    <div>
+        JSP QUOI METTRE
+    </div>
+   
+</div>
+
+{% endblock %}

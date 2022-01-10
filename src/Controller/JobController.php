@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Job;
+use App\Entity\Company;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -88,7 +89,8 @@ class JobController extends AbstractController
     {     
         
         $repository = $this->registryManager->getManager()->getRepository(Job::class);
-        $jobs = $repository->findAll();   
+        $jobs = $repository->findAll();        
+        
 
         if (!empty($_GET['sort'])) {
 
@@ -112,12 +114,11 @@ class JobController extends AbstractController
                         break;
                 }
             }  
-        }
-                
+        }               
         
         return $this->render('job/list.html.twig', [
             'jobs' => $jobs,
-            'logoCategories' => $this->logoCategories
+            'logoCategories' => $this->logoCategories,           
         ]);
         
     }
@@ -129,10 +130,13 @@ class JobController extends AbstractController
         $em = $this->registryManager->getManager();
         $job = $em->getRepository(Job::class)->find($id);
 
+        $company_name = $this->registryManager->getManager()->getRepository(Company::class)->findBy(['user' => $this->getUser()])[0]->getName();
+
         return $this->render('job/view.html.twig', [
             'job'        => $job,
             'categories' => $this->categories,
-            'logoCategories' => $this->logoCategories
+            'logoCategories' => $this->logoCategories,
+            'company_name' => $company_name
         ]);
     }
 
@@ -158,20 +162,8 @@ class JobController extends AbstractController
                 // Vérif titre
                 if(strlen($safe['title']) < 5 || strlen($safe['title']) > 100){
                     $errors[] = 'Votre titre doit comporter entre 5 et 100 caractères';
-                }
-
-                // Vérif catégorie
-                if(!isset($safe['category'])){
-                    $errors[] = 'Veuillez sélectionner une catégorie';
-                }
-                elseif(!in_array($safe['category'], $this->categories)){
-                    $errors[] = 'Votre catégorie sélectionnée n\'existe pas';
-                }
-
-                // Vérif description entreprise
-                if(strlen($safe['description_company']) < 1){
-                    $errors[] = 'Veuillez entrer la description de l\'entreprise';
-                }
+                }                
+                
                 // Vérif description emploi
                 if(strlen($safe['description_job']) < 1){
                     $errors[] = 'Veuillez entrer la description de l\'emploi';
@@ -179,11 +171,7 @@ class JobController extends AbstractController
                 // Vérif description recherche
                 if(strlen($safe['description_applicant']) < 1){
                     $errors[] = 'Veuillez entrer la description du profil recherché';
-                }
-                // Vérif city
-                if(strlen($safe['city']) < 1 || strlen($safe['city']) > 100){
-                    $errors[] = 'Votre salaire doit comporter entre 1 et 100 caractères';
-                }
+                }                
 
                 // Vérif salaires
                 if(strlen($safe['wages']) < 1 || strlen($safe['wages']) > 50){
@@ -212,21 +200,25 @@ class JobController extends AbstractController
     
                     $em = $this->registryManager->getManager(); // Connexion à la bdd (équivalent new PDO()) sans oublier le paramètre de la fonction ManagerRegistry $doctrine et le "use"
     
+                    $company = $em->getRepository(Company::class)->findBy(['user' => $this->getUser()]);
+
                     // Equivalent de notre INSERT INTO et bindValue()
                     $job = new Job(); // Appelle de l'entity job 
                     // On enregistre chaque valeur
                     $job->setTitle($safe['title']);
-                    $job->setCategory($safe['category']);
-                    $job->setDescriptionCompany($safe['description_company']);
+                    $job->setCategory($company[0]->getCategory());
+                    $job->setDescriptionCompany($company[0]->getDescription());
+                    $job->setCompanyName($company[0]->getName());
                     $job->setDescriptionApplicant($safe['description_applicant']);
                     $job->setDescriptionJob($safe['description_job']);
                     $job->setWages($safe['wages']);
-                    $job->setCity($safe['city']);
+                    $job->setCity($company[0]->getCity());
                     $job->setContractType($safe['contract']);
                     $job->setPublishedAt(new \DateTime('now'));
                     $job->setSchedule($safe['schedule']);
                     $job->setPublishedBy($this->getUser());
                     $job->setCompanyComment($safe['comment']);
+                    $job->setBenefits($safe['benefit']);
 
     
                     // Equivalent à notre execute()
