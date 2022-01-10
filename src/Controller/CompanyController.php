@@ -76,7 +76,7 @@ class CompanyController extends AbstractController
         ]);
     }
 
-
+    // Modification entreprise
     #[Route('/edit/{id}', name: 'company_edit')]
     public function edit(int $id): Response
     {
