@@ -105,7 +105,9 @@ class CompanyController extends AbstractController
                     $errors[] = 'Votre Email n\'est pas valide';
                 }
 
-
+                if(!checkdate($safe['birth_m'], $safe['birth_d'], $safe['birth_y'])) {
+                    $errors[] = 'Veuillez renseigner une date de naissance correcte';
+                }
                 // Vérif city
                 if(strlen($safe['city']) < 5 || strlen($safe['city']) > 100){
                     $errors[] = 'Veuillez entrer une ville valide';
@@ -130,7 +132,7 @@ class CompanyController extends AbstractController
                         ->setCity($safe['city'])
                         ->setPhone($safe['phone'])
                         ->setnbEmployees($safe['nb_employees'])
-                        ->setCreatedAt(new \DateTime('now'));
+                        ->setCreatedAt(new \DateTime($safe['birth_d'].'-'.$safe['birth_m'].'-'.$safe['birth_y']));
 
                     $em->persist($company);
                     $em->flush();
