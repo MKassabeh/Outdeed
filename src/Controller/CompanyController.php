@@ -20,7 +20,7 @@ class CompanyController extends AbstractController
     }
     
 
-    
+
     // liste entreprises
     #[Route('/list', name: 'company_list')]
     public function list(): Response
@@ -56,9 +56,9 @@ class CompanyController extends AbstractController
             $em->flush();
 
             //Envoi d'un message flash de supréssion d'une entreprise
-            $this->addFlash('succes', 'Company deleted');
+            $this->addFlash('success', 'Votre entreprise a bien été supprimé');
 
-            //Redirection vers la liste d'offres d'emploi après la supression d'un élément 
+            //Redirection vers la liste des entreprises après la supression d'un élément 
             return $this->redirectToRoute('company_list');
         }
 
