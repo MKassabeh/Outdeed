@@ -21,7 +21,6 @@ class DefaultController extends AbstractController
     // la function home() réagis comme une function list() pour obtenir une liste des entreprises qui ont publié des annonces sur le site
     public function home(): Response
     {
-
         // on récupère le tableau des logos
         $jobController = new JobController($this->registryManager);
         $logoCategories = $jobController->logoCategories;
