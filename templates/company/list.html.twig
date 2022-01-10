@@ -51,23 +51,18 @@
                     <h5 class="font_title"> {{ company.name}}</h5>
                 </div>
                 <div class="card-body d-flex justify-content-between">
-                    <div class="d-flex">
-                        <div class="me-4">
-                            <img >
-                        </div>
                         <div>
                             <p class="card-title">{{ company.category }}</p>
                             <p class="card-text">{{ company.description|slice(0, 50) }}...</p>
                             <a href="{{ path('company_view', {id: company.id}) }}" class="btn btn-outline-primary">Voir plus
                                 ...</a>
                         </div>
-                        <div class="border rounded position-relative py-2 px-2 ">
-                            <p class="card-title"><strong>Salaire : </strong>{{ company.contactEmail }} par mois </p>
-                            <p class="card-title"><strong>Horaires : </strong>{{ company.phone }}</p>
+                        <div class="border rounded py-2 px-2 ">
+                            <p class="card-title"><strong>Email : </strong>{{ company.contactEmail }}</p>
+                            <p class="card-title"><strong>Téléphone : </strong>{{ company.phone }}</p>
                             <p class="card-title"><strong>Ville : </strong>{{ company.city }}</p>
                             
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
