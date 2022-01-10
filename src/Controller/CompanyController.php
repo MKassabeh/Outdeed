@@ -33,9 +33,18 @@ class CompanyController extends AbstractController
 
 
     // Ajouter entreprise
+    #[IsGranted('ROLE_USER')]
     #[Route('/add', name: 'company_add')]
     public function add(): Response
     {
+
+        // si je suis ni une entreprise, ni un administrateur 
+        if ($this->getUser()->getUserType() !== 'company' && !in_array('ROLE_ADMIN',$this->getUser()->getRoles())) {
+            //-> je ne peux pas créé d'entreprise
+            $this->addFlash('warning', 'En tant que chercheur d\'emploi, vous n\'êtes pas autorisé à créé une entreprise.');
+            return $this->redirectToRoute('company_list');
+        }
+
         return $this->render('company/add.html.twig', [
             'controller_name' => 'CompanyController',
         ]);
