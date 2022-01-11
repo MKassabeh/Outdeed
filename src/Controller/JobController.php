@@ -136,11 +136,18 @@ class JobController extends AbstractController
     {
         $em = $this->registryManager->getManager();
         $job = $em->getRepository(Job::class)->find($id);
+        $jobs = $em->getRepository(Job::class)->findAll();
+
+        // Suggestions d'annonce
+
+
+        
     
         return $this->render('job/view.html.twig', [
             'job'        => $job,
             'categories' => $this->categories,
-            'logoCategories' => $this->logoCategories       
+            'logoCategories' => $this->logoCategories,
+            'jobs'       => $jobs
         ]);
     }
 
