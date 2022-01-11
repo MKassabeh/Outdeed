@@ -14,7 +14,7 @@
 
 <div class="container mt-3 py-3">
     <div class="row justify-content-center">
-        {% if favourites %}
+        {% if favourites is not empty %}
         {% for favourite in favourites %}
         <div class="col-md-10 col-lg-8 blanc m-3">
             <div class="card m-3">
@@ -51,10 +51,9 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
-        {% include 'empty.html.twig' %}
+        {% endfor %}        
         {% else %}
-        
+            {% include 'empty.html.twig' %}        
         {% endif %}
     </div>
 </div>
