@@ -46,10 +46,11 @@
         </div>
         <div style="max-width: 300px !important;">
             <div class="p-3 mt-5 border card-header">
-                <p class="text_head">{{ job.schedule }}</p>
-                <p class="text_head">{{ job.wages }} par mois</p>
-                <p class="text_head">{{ job.contractType }}</p>
-                <button class="btn btn-outline-primary btn-card">Postuler <i class="fas fa-arrow-right"></i></button>
+                <p class="text_head">{{ job.schedule|capitalize }}</p>
+                <p class="text_head">{{ job.wages|capitalize }} par mois</p>
+                <p class="text_head">{{ job.contractType|upper }}</p>
+                <button class="btn btn-outline-primary">Postuler <i class="fas fa-arrow-right"></i></button>
+                
             </div>
             <hr class="text-center mt-3 mb-3 mx-auto" width="200">
             <div class="container my-3">
@@ -57,6 +58,11 @@
                 <p>{{ job.companyComment|nl2br }}</p>
             </div>
         </div>
+    </div>
+    <div class="text-center">
+        <a href="{{ path('favourite_add', {id: job.id}) }}" class="mt-2 btn btn-outline-warning">
+            <i class="far fa-heart"></i> Ajouter aux favoris 
+        </a>
     </div>
 </div>
 

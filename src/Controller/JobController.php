@@ -86,12 +86,13 @@ class JobController extends AbstractController
     // liste des jobs
     #[Route('/', name: 'job_list')]
     public function list(): Response
-    {     
+    {    
         
         $repository = $this->registryManager->getManager()->getRepository(Job::class);
         $jobs = $repository->findAll();        
         
 
+        // tri algorithme
         if (!empty($_GET['sort'])) {
 
             if (in_array($_GET['sort'], $this->sort)) {
@@ -361,5 +362,5 @@ class JobController extends AbstractController
             'categories_availables' => $this->categories,
             'contract_type'         => $this->contractType
         ]);
-    }
+    }      
 }

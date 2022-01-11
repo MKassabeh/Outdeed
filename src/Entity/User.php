@@ -45,11 +45,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $completed;
 
     #[ORM\Column(type: 'string', length: 20)]
-    private $userType;   
+    private $userType;
+
+    #[ORM\ManyToMany(targetEntity: Job::class)]
+    private $favourite;   
 
     public function __construct()
     {
         $this->job_offers = new ArrayCollection();
+        $this->favourite = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,6 +199,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUserType(string $userType): self
     {
         $this->userType = $userType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Job[]
+     */
+    public function getFavourite(): Collection
+    {
+        return $this->favourite;
+    }
+
+    public function addFavourite(Job $favourite): self
+    {
+        if (!$this->favourite->contains($favourite)) {
+            $this->favourite[] = $favourite;
+        }
+
+        return $this;
+    }
+
+    public function removeFavourite(Job $favourite): self
+    {
+        $this->favourite->removeElement($favourite);
 
         return $this;
     }    
