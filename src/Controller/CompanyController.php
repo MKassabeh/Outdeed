@@ -16,6 +16,8 @@ class CompanyController extends AbstractController
 {
     private $registryManager;
 
+    private $sort = ['base', 'nameASC', 'nameDESC', 'cityASC', 'cityDESC'];
+
     public function __construct(ManagerRegistry $registryManager)
     {
         $this->registryManager = $registryManager;
@@ -27,9 +29,34 @@ class CompanyController extends AbstractController
     #[Route('/list', name: 'company_list')]
     public function list(): Response
     {
-        $em = $this->registryManager->getManager();
+        $repository = $this->registryManager->getManager()->getRepository(Company::class);
 
-        $companies = $em->getRepository(Company::class)->findAll();
+        $companies = $repository->findAll();
+
+
+        if (!empty($_GET['sort'])) {
+
+            if (in_array($_GET['sort'], $this->sort)) {
+
+                switch ($_GET['sort']) {
+                    case '0':
+                        $companies = $repository->findAll();                        
+                        break;                    
+                    case 'nameASC':
+                        $companies = $repository->findBy([], ['name'=>'ASC']);
+                        break;
+                    case 'nameDESC':
+                        $companies = $repository->findBy([], ['name'=>'DESC']);
+                        break;
+                    case 'cityASC':
+                        $companies = $repository->findBy([], ['city'=>'ASC']);
+                        break;
+                    case 'cityDESC':
+                        $companies = $repository->findBy([], ['city'=>'DESC']);
+                        break;
+                }
+            }  
+        }               
 
         return $this->render('company/list.html.twig', [
             'companies' => $companies,

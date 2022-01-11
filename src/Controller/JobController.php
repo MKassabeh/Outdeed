@@ -16,7 +16,7 @@ class JobController extends AbstractController
 {
     private $registryManager;
 
-    private $sort = ['base', 'nameASC', 'nameDESC', 'dateASC', 'dateDESC'];
+    private $sort = ['base', 'nameASC', 'nameDESC', 'dateASC', 'dateDESC','categoryASC', 'categoryDESC'];
 
     public $contractType = [
         'CDI - Temps plein',
@@ -111,6 +111,12 @@ class JobController extends AbstractController
                         break;
                     case 'dateDESC':
                         $jobs = $repository->findBy([], ['published_at'=>'DESC']);
+                        break;
+                    case 'categoryASC':
+                        $jobs = $repository->findBy([], ['category'=>'ASC']);
+                        break;
+                    case 'categoryDESC':
+                        $jobs = $repository->findBy([], ['category'=>'DESC']);
                         break;
                 }
             }  
