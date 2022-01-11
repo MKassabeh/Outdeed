@@ -129,14 +129,11 @@ class JobController extends AbstractController
     {
         $em = $this->registryManager->getManager();
         $job = $em->getRepository(Job::class)->find($id);
-
-        $company_name = $this->registryManager->getManager()->getRepository(Company::class)->findBy(['user' => $this->getUser()])[0]->getName();
-
+    
         return $this->render('job/view.html.twig', [
             'job'        => $job,
             'categories' => $this->categories,
-            'logoCategories' => $this->logoCategories,
-            'company_name' => $company_name
+            'logoCategories' => $this->logoCategories       
         ]);
     }
 
