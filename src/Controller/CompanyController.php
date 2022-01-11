@@ -178,9 +178,14 @@ class CompanyController extends AbstractController
 
             //Envoi d'un message flash de supréssion d'une entreprise
             $this->addFlash('success', 'Votre entreprise a bien été supprimé');
-
+            if(in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
+                return $this->redirectToRoute('admin');
+            }
+            if(in_array('ROLE_USER', $this->getUser()->getRoles())){
+                return $this->redirectToRoute('company_list');
+            }
             //Redirection vers la liste des entreprises après la supression d'un élément 
-            return $this->redirectToRoute('company_list');
+            
         }
 
         return $this->render('company/delete.html.twig', [

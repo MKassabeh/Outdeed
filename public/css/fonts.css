@@ -60,3 +60,17 @@ h1, .font_title {
 .container .row .left-form .form-title{
     font-family:"pacifico", sans-serif !important;
   }
+
+
+
+
+
+
+/* Admin Navbar */
+
+
+
+
+.navbar-test {
+	background-color: red;
+}

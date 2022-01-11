@@ -295,7 +295,6 @@ div .row .login-right img{
   width: 180px;
 }
 
-
 /* COMPANY PROFILE */
 
 
@@ -334,3 +333,20 @@ div .row .login-right img{
 	transition: .3s;
 	color: rgb(0, 119, 255) !important;
 }
+
+
+/* ADMIN PAGE */
+
+/* NAVBAR */	
+.nav-admin{
+	background-color: white;
+	width: 20vh;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	z-index: 1;
+
+}
+
+
