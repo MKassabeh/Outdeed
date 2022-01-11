@@ -4,6 +4,7 @@ p.card_date {
 }
 
 a.nav-link:hover {
+transition: .3s;
   color: rgb(0, 119, 255) !important;
 }
 
@@ -292,4 +293,44 @@ div .row .login-right{
 div .row .login-right img{
   height: 180px;
   width: 180px;
+}
+
+
+/* COMPANY PROFILE */
+
+
+.background-img{
+	height: 250px;
+	background-color: rgb(182, 181, 181);
+}
+
+.background-img .container .banner-body .banner-right .row .col-12 a{
+	font-weight: bold;
+}
+
+.background-img .container .banner-body .banner-right .row .col-12 a:hover{
+	cursor: pointer;
+}
+
+
+.logo-img{
+	height: 200px;
+	width:  200px;
+	background-color: blue;
+}
+
+.socials-container div  h3{
+	letter-spacing: 4px;
+	
+}
+
+
+.socials-container .card .card-body .row .socials-logos p{
+	font-size: 20px;
+}
+
+.socials-container .card .card-body .row .socials-logos p:hover{
+	cursor: pointer;
+	transition: .3s;
+	color: rgb(0, 119, 255) !important;
 }
