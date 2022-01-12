@@ -349,4 +349,34 @@ div .row .login-right img{
 
 }
 
+/* CARROUSEL */
+
+#carouselHero .carousel-item img {  
+	object-fit: cover;
+	object-position: center;
+	overflow: hidden;
+	height:50vh;
+  }
+  
+  #carouselHero .carousel-item:before {
+	content: "";
+	background-image:
+	  linear-gradient(
+		to bottom,
+		transparent, rgba(0,0,0,0.5)
+	  );
+	display: block;
+	position: absolute;
+  }
+  #carouselHero .carousel-item:before {
+	content: "";
+	background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 100vw;
+	height: 50vh;
+  }
+  
+
 
