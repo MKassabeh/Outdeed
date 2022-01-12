@@ -19,6 +19,15 @@ class JobRepository extends ServiceEntityRepository
         parent::__construct($registry, Job::class);
     }
 
+    public function search($value)
+    {
+        return $this->createQueryBuilder('job')
+            ->andWhere('job.title LIKE :val')
+            ->setParameter('val', '%'.$value.'%')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Job[] Returns an array of Job objects
     //  */

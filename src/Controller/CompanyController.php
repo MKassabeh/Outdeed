@@ -189,6 +189,7 @@ class CompanyController extends AbstractController
 
                 //Envoi du message flash
                 $this->addFlash('success', 'Votre fiche entreprise a bien été enregistrée');
+                return $this->redirectToRoute('account_company');
             } else { // Ici j'ai des erreurs et j'affiche celles-ci
                 $this->addFlash('danger', implode('<br>', $errors));
             }

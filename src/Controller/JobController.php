@@ -89,47 +89,84 @@ class JobController extends AbstractController
     {    
         
         $repository = $this->registryManager->getManager()->getRepository(Job::class);
-        $jobs = $repository->findAll();       
+        $jobs = $repository->findAll(); 
         
+        // BARRE DE RECHERCHE        
+        
+        if (!empty($_GET['search']))
+        {
+            $jobs = $repository->search($_GET['search']);
+        }
 
-        // tri algorithme
-        if (!empty($_GET['sort'])) {
+        // Algo de tri
 
-            if (in_array($_GET['sort'], $this->sort)) {
+        // TRI + CATEGORIE FIXE
+        if (!empty($_GET['sort']) && !empty($_GET['category']) && in_array($_GET['category'], $this->categories)) {            
 
-                switch ($_GET['sort']) {
-                    case '0':
-                        $jobs = $repository->findAll();                        
-                        break;                    
-                    case 'nameASC':
-                        $jobs = $repository->findBy([], ['title'=>'ASC']);
-                        break;
-                    case 'nameDESC':
-                        $jobs = $repository->findBy([], ['title'=>'DESC']);
-                        break;
-                    case 'dateASC':
-                        $jobs = $repository->findBy([], ['published_at'=>'ASC']);
-                        break;
-                    case 'dateDESC':
-                        $jobs = $repository->findBy([], ['published_at'=>'DESC']);
-                        break;
-                    case 'categoryASC':
-                        $jobs = $repository->findBy([], ['category'=>'ASC']);
-                        break;
-                    case 'categoryDESC':
-                        $jobs = $repository->findBy([], ['category'=>'DESC']);
-                        break;
-                }
-            }  
-        }  
+            switch ($_GET['sort']) {
+                case '0':
+                    $jobs = $repository->findAll();                        
+                    break;                    
+                case 'nameASC':
+                    $jobs = $repository->findBy(['category' => $_GET['category']], ['title'=>'ASC']);
+                    break;
+                case 'nameDESC':
+                    $jobs = $repository->findBy(['category' => $_GET['category']], ['title'=>'DESC']);
+                    break;
+                case 'dateASC':
+                    $jobs = $repository->findBy(['category' => $_GET['category']], ['published_at'=>'ASC']);
+                    break;
+                case 'dateDESC':
+                    $jobs = $repository->findBy(['category' => $_GET['category']], ['published_at'=>'DESC']);
+                    break;
+                case 'categoryASC':
+                    $jobs = $repository->findBy(['category' => $_GET['category']], ['category'=>'ASC']);
+                    break;
+                case 'categoryDESC':
+                    $jobs = $repository->findBy(['category' => $_GET['category']], ['category'=>'DESC']);
+                    break;
+            }
+
+        // UNIQUEMENT CATEGORIE FIXE
+        } else if(empty($_GET['sort']) && !empty($_GET['category']) && in_array($_GET['category'], $this->categories)){
+            if(!empty($_GET['category']) && in_array($_GET['category'], $this->categories)) {
+                $jobs = $repository->findBy(['category' => $_GET['category']]);
+            }
+
+        // UNIQUEMENT LE TRI
+        } else if (!empty($_GET['sort']) && empty($_GET['category'])) {
+
+            switch ($_GET['sort']) {
+                case '0':
+                    $jobs = $repository->findAll();                        
+                    break;                    
+                case 'nameASC':
+                    $jobs = $repository->findBy([], ['title'=>'ASC']);
+                    break;
+                case 'nameDESC':
+                    $jobs = $repository->findBy([], ['title'=>'DESC']);
+                    break;
+                case 'dateASC':
+                    $jobs = $repository->findBy([], ['published_at'=>'ASC']);
+                    break;
+                case 'dateDESC':
+                    $jobs = $repository->findBy([], ['published_at'=>'DESC']);
+                    break;
+                case 'categoryASC':
+                    $jobs = $repository->findBy([], ['category'=>'ASC']);
+                    break;
+                case 'categoryDESC':
+                    $jobs = $repository->findBy([], ['category'=>'DESC']);
+                    break;
+            }
+
+        }
         
         // tri par catégorie
 
         // Si le formulaire est soumis
         // findBy-> where catégory = $_GET['category'];
-        if(!empty($_GET['category']) && in_array($_GET['category'], $this->categories)) {
-            $jobs = $repository->findBy(['category' => $_GET['category']]);
-        }
+        
         
         return $this->render('job/list.html.twig', [
             'jobs' => $jobs,
