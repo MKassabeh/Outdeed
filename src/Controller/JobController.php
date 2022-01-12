@@ -139,8 +139,6 @@ class JobController extends AbstractController
         $jobs = $em->getRepository(Job::class)->findAll();
 
         // Suggestions d'annonce
-
-
         
     
         return $this->render('job/view.html.twig', [

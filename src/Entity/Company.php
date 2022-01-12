@@ -41,6 +41,9 @@ class Company
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $pdp;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +153,18 @@ class Company
     public function setUser(?user $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPdp(): ?string
+    {
+        return $this->pdp;
+    }
+
+    public function setPdp(string $pdp): self
+    {
+        $this->pdp = $pdp;
 
         return $this;
     }
