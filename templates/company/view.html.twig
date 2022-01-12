@@ -126,7 +126,7 @@
 								<img width="50" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}">
 							</div>
 							<p class="card-text">{{ companies.description|nl2br }}</p>
-							<a href="{{ path('job_view', {id: companies.id}) }}" class="card-link">Voir plus</a>
+							<a href="{{ path('company_view', {id: companies.id}) }}" class="card-link">Voir plus</a>
 						</div>
 					</div>
 				{% endif %}
