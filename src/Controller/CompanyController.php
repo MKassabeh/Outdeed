@@ -172,8 +172,8 @@ class CompanyController extends AbstractController
                 $company->setCategory($safe['category']);
                 $company->setDescription($safe['description']);
                 $company->setCity($safe['city']);
-                $company->setPdp($safe['city']);
-                $company->setPhone($finalFileNamePDP);
+                $company->setPdp($finalFileNamePDP);
+                $company->setPhone($safe['phone']);
                 $company->setNbEmployees($safe['nb_employees']);
                 $company->setContactEmail($safe['contact_email']);
                 $company->setCreatedAt(new \DateTime($safe['birth_d'] . '-' . $safe['birth_m'] . '-' . $safe['birth_y']));

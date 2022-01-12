@@ -32,7 +32,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 100)]
     private $email;
-
     
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
