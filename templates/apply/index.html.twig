@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ApplyController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+<form class="d-flex justify-content-between align-center flex-column" method="post"> 
+  <label for="motivation_letter">Tell us your story:</label>
+
+    <textarea id="motivation_letter" name="motivation_letter"
+            rows="5" cols="33">
+    Rediger une lettre de motivation....
+    </textarea>
+    <input type="submit" name="submit" class="btn btn-success" value="Envoyer">
+</form>
+</div>
+{% endblock %}

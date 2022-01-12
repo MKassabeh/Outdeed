@@ -78,7 +78,7 @@ class CompanyController extends AbstractController
 
         if ($this->getUser()->getCompleted()) {
             //Problème de redirection à revoir 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('account_company');
         }
 
         $controller = new JobController($this->registryManager);

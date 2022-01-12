@@ -33,9 +33,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 100)]
     private $email;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    
+    #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
     #[ORM\OneToMany(mappedBy: 'published_by', targetEntity: Job::class)]
@@ -48,8 +47,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $userType;
 
     #[ORM\ManyToMany(targetEntity: Job::class)]
-    private $favourite;   
-
+    private $favourite;
+ 
     public function __construct()
     {
         $this->job_offers = new ArrayCollection();
@@ -225,5 +224,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->favourite->removeElement($favourite);
 
         return $this;
-    }    
+    }
+   
 }

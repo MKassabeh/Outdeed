@@ -49,7 +49,7 @@
                 <p class="text_head">{{ job.schedule|capitalize }}</p>
                 <p class="text_head">{{ job.wages|capitalize }} par mois</p>
                 <p class="text_head">{{ job.contractType|upper }}</p>
-                <button class="btn btn-outline-primary">Postuler <i class="fas fa-arrow-right"></i></button>
+                <a href="{{ path('apply', {id: job.id}) }}" class="btn btn-outline-primary">Postuler <i class="fas fa-arrow-right"></i></a>
                 
             </div>
             <hr class="text-center mt-3 mb-3 mx-auto" width="200">
