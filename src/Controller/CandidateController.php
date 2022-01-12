@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[IsGranted('ROLE_USER')]
 #[Route('/candidate')]
@@ -22,7 +25,7 @@ class CandidateController extends AbstractController
     public function __construct(ManagerRegistry $registryManager)
     {
         $this->registryManager = $registryManager;
-    }    
+    }
 
     /* #[Route('/candidate', name: 'candidate_view')]
     public function view(): Response
@@ -105,7 +108,7 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/fill', name: 'candidate_fill')]
-    public function fill(): Response
+    public function fill(SluggerInterface $slugger): Response
     {
 
         // si je suis ni une entreprise, ni un administrateur 
@@ -153,12 +156,77 @@ class CandidateController extends AbstractController
 
             if (!checkdate($safe['birth_m'], $safe['birth_d'], $safe['birth_y'])) {
                 $errors[] = 'Veuillez renseigner une date de naissance correcte';
+            }            
+
+            // Je vérifie le fichier uploadé, seulement s'il le champ est présent dans le formulaire            
+            if (!empty($_FILES) && isset($_FILES['cv'])) {
+
+                $cv = $_FILES['cv'];
+                $fileAllowedMimes = ['application/pdf', 'application/x-pdf']; // Les types mimes attendus -> PDF
+                $fileMaxSize = 1024 * 1024 * 10; // Taille maximale de l'image en octet        
+
+                if ($cv['error'] === UPLOAD_ERR_NO_FILE) {
+                    $errors[] = 'Le CV est obligatoire';
+                } elseif ($cv['error'] === UPLOAD_ERR_OK && !in_array($cv['type'], $fileAllowedMimes)) {
+                    $errors[] = 'Le type de fichier n\'est pas autorisé (pdf uniquement)';
+                } elseif ($cv['error'] === UPLOAD_ERR_OK && $cv['size'] > $fileMaxSize) {
+                    $errors[] = 'Le fichier est trop volumineux, taille maximale autorisée : 10 Mo';
+                }
             }
+
+            if (!empty($_FILES) && isset($_FILES['pdp'])) {
+
+                $pdp = $_FILES['pdp'];
+                $fileAllowedMimes = ['image/jpg', 'image/jpeg', 'image/png']; // Les types mimes attendus -> Images
+                $fileMaxSize = 1024 * 1024 * 10; // Taille maximale de l'image en octet        
+
+                if ($pdp['error'] === UPLOAD_ERR_NO_FILE) {
+                    $errors[] = 'La photo de profil est obligatoire';
+                } elseif ($pdp['error'] === UPLOAD_ERR_OK && !in_array($pdp['type'], $fileAllowedMimes)) {
+                    $errors[] = 'Le type de fichier n\'est pas autorisé (images uniquement)';
+                } elseif ($pdp['error'] === UPLOAD_ERR_OK && $pdp['size'] > $fileMaxSize) {
+                    $errors[] = 'Le fichier est trop volumineux, taille maximale autorisée : 10 Mo';
+                }
+            }
+
 
             if (count($errors) == 0) {
 
                 $em = $this->registryManager->getManager();
                 $candidate = new Candidate();
+                $fileDirUploadCV = 'uploads/CV/'; // Chemin de sauvegarde d'image, à partir de là ou je me trouve
+
+                // CV :                          
+
+                // Permet de récupérer automatiquement l'extension du fichier téléchargé
+                $extCV = pathinfo($cv['name'], PATHINFO_EXTENSION);
+
+                // Créer un nom de fichier unique
+                $fileNameCV = uniqid() . '.' . $extCV;  // Donnera quelque de similaire à 4b3403665fea6.pdf
+
+                // Sauvegarde mon image
+                if (move_uploaded_file($cv['tmp_name'], $fileDirUploadCV . $fileNameCV)) { // $fileDirUpload.$fileName = "../../../public/uploads/CV/4b3403665fea6.jpg"
+                    $finalFileNameCV = $fileDirUploadCV . $fileNameCV;
+                } else {
+                    $finalFileNameCV = null;
+                }
+
+                // PDP :
+
+                // Permet de récupérer automatiquement l'extension du fichier téléchargé
+                $extPDP = pathinfo($pdp['name'], PATHINFO_EXTENSION);
+                $fileDirUploadPDP = 'uploads/PDP/'; // Chemin de sauvegarde d'image, à partir de là ou je me trouve
+
+
+                // Créer un nom de fichier unique
+                $fileNamePDP = uniqid() . '.' . $extPDP;  // Donnera quelque de similaire à 4b3403665fea6.pdf
+
+                // Sauvegarde mon image
+                if (move_uploaded_file($pdp['tmp_name'], $fileDirUploadPDP . $fileNamePDP)) { // $fileDirUpload.$fileName = "../../../public/uploads/CV/4b3403665fea6.jpg"
+                    $finalFileNamePDP = $fileDirUploadPDP . $fileNamePDP;
+                } else {
+                    $finalFileNamePDP = null;
+                }
 
                 $candidate
                     ->setCity($safe['city'])
@@ -166,6 +234,8 @@ class CandidateController extends AbstractController
                     ->setFirstName($safe['first_name'])
                     ->setLastName($safe['last_name'])
                     ->setUser($this->getUser())
+                    ->setCV($finalFileNameCV)
+                    ->setPdp($finalFileNamePDP)
                     ->setAddress($safe['address'])
                     ->setBirthdate(new \DateTime($safe['birth_d'] . '-' . $safe['birth_m'] . '-' . $safe['birth_y']));
 

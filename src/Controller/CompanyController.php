@@ -130,17 +130,50 @@ class CompanyController extends AbstractController
                 $errors[] = 'Veuillez renseigner une date de création correcte';
             }
 
+            if (!empty($_FILES) && isset($_FILES['pdp'])) {
+
+                $pdp = $_FILES['pdp'];
+                $fileAllowedMimes = ['image/jpg', 'image/jpeg', 'image/png']; // Les types mimes attendus -> Images
+                $fileMaxSize = 1024 * 1024 * 10; // Taille maximale de l'image en octet        
+
+                if ($pdp['error'] === UPLOAD_ERR_NO_FILE) {
+                    $errors[] = 'La photo de profil est obligatoire';
+                } elseif ($pdp['error'] === UPLOAD_ERR_OK && !in_array($pdp['type'], $fileAllowedMimes)) {
+                    $errors[] = 'Le type de fichier n\'est pas autorisé (images uniquement)';
+                } elseif ($pdp['error'] === UPLOAD_ERR_OK && $pdp['size'] > $fileMaxSize) {
+                    $errors[] = 'Le fichier est trop volumineux, taille maximale autorisée : 10 Mo';
+                }
+            }
+
 
             if (count($errors) === 0) {                
 
                 $em = $this->registryManager->getManager();
                 $company = new Company();
 
+                // PDP :
+
+                // Permet de récupérer automatiquement l'extension du fichier téléchargé
+                $extPDP = pathinfo($pdp['name'], PATHINFO_EXTENSION);
+                $fileDirUploadPDP = 'uploads/PDP/'; // Chemin de sauvegarde d'image, à partir de là ou je me trouve
+
+
+                // Créer un nom de fichier unique
+                $fileNamePDP = uniqid() . '.' . $extPDP;  // Donnera quelque de similaire à 4b3403665fea6.pdf
+
+                // Sauvegarde mon image
+                if (move_uploaded_file($pdp['tmp_name'], $fileDirUploadPDP . $fileNamePDP)) { // $fileDirUpload.$fileName = "../../../public/uploads/CV/4b3403665fea6.jpg"
+                    $finalFileNamePDP = $fileDirUploadPDP . $fileNamePDP;
+                } else {
+                    $finalFileNamePDP = null;
+                }
+
                 $company->setName($safe['name']);
                 $company->setCategory($safe['category']);
                 $company->setDescription($safe['description']);
                 $company->setCity($safe['city']);
-                $company->setPhone($safe['phone']);
+                $company->setPdp($safe['city']);
+                $company->setPhone($finalFileNamePDP);
                 $company->setNbEmployees($safe['nb_employees']);
                 $company->setContactEmail($safe['contact_email']);
                 $company->setCreatedAt(new \DateTime($safe['birth_d'] . '-' . $safe['birth_m'] . '-' . $safe['birth_y']));
@@ -199,7 +232,7 @@ class CompanyController extends AbstractController
     public function edit(int $id): Response
     {
 
-        // on récupère le tableau des catégories
+        // on récupère le tableau des catégories qui sont stockés dans le JobController
         $jobController = new JobController($this->registryManager);
         $categories = $jobController->categories;
 
@@ -279,11 +312,35 @@ class CompanyController extends AbstractController
     #[Route('/view/{id}', name: 'company_view')]
     public function view(int $id): Response
     {
+        //To  access the category and logo tables within the Jobcontroller
+        $controller = new JobController($this->registryManager);
+
+        $categories = $controller->categories;
+        $logoCategories = $controller ->logoCategories;
+
+
         $em = $this->registryManager->getManager();
+
+        //By creating a $company variable and using the Entity manager 
+        // we can access the Company class by using the getRepository() function and the find($id) function
         $company = $em->getRepository(Company::class)->find($id);
 
+        //In order to recover the companies belonging to the same category as the one currently on the view,
+        //we create the $companyCategory variable and we set it equal to the $company varibale previously created
+        //By doing so we are now able to use the getCategory() function on the entity
+        $companyCategory = $company ->getCategory();
+ 
+        //Now we create the $companies variable and use the $em in order to access the Company class, getRepository(Company::class)
+        //this way we are able to find the desired table by using ->findBy(['category'=>$companyCategory]); 
+        $companies = $em->getRepository(Company::class)->findBy(['category'=> $companyCategory]);
+
+        
         return $this->render('company/view.html.twig', [
-            'company' => $company
+            'company'                  =>     $company,
+            'companies'                =>     $companies,
+            'categories'               =>     $categories,
+            'logoCategories'           =>     $logoCategories,
+            
         ]);
     }
 }

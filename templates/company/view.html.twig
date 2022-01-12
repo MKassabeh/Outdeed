@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Outdeed - Entreprise : Détails{% endblock %}
+{% block title %}Outdeed - Fiche entreprise{% endblock %}
 
 {% block body %}
 	<div class="background-img d-flex ">
@@ -70,36 +70,69 @@
 		</div>
 	</div>
 
-    <div class="container my-4">
-        <div class="row">   
-            <div class="col-6">
-                <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12689.328712973129!2d-122.008972!3d37.3346438!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3b0d8391510688f0!2sApple%20Park!5e0!3m2!1sfr!2sfr!4v1641907704501!5m2!1sfr!2sfr" width="500" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="socials-container">
-                        <div class="text-center">
-                            <h3>Réseaux sociaux</h3>
-                        </div>
-                    <div class="card mt-5">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-12 socials-logos d-flex justify-content-around">
-                                    <p class="mb-0"><i class="fab fa-facebook-f"></i></p>
-                                    <p class="mb-0"><i class="fab fa-twitter"></i></p>
-                                    <p class="mb-0"><i class="fab fa-instagram"></i></p>
-                                    <p class="mb-0"><i class="fab fa-youtube"></i></p>
-                                    <p class="mb-0"><i class="fab fa-linkedin"></i></p> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
+    
+
+	
+	<div class="container my-4">
+		<div class="row">
+			<div class="col-6">
+				<div class="map-container">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12689.328712973129!2d-122.008972!3d37.3346438!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3b0d8391510688f0!2sApple%20Park!5e0!3m2!1sfr!2sfr!4v1641907704501!5m2!1sfr!2sfr" width="500" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="socials-container">
+					<div class="text-center">
+						<h3>Réseaux sociaux</h3>
+					</div>
+					<div class="card mt-4">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-12 socials-logos d-flex justify-content-around">
+									<p class="mb-0">
+										<i class="fab fa-facebook-f"></i>
+									</p>
+									<p class="mb-0">
+										<i class="fab fa-twitter"></i>
+									</p>
+									<p class="mb-0">
+										<i class="fab fa-instagram"></i>
+									</p>
+									<p class="mb-0">
+										<i class="fab fa-youtube"></i>
+									</p>
+									<p class="mb-0">
+										<i class="fab fa-linkedin"></i>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<h3 class="text-center mt-5">Dans la même catégorie</h3>
+	<div class="d-flex justify-content-around w-100 mt-5">
+
+		{% for companies in companies %}
+				{% if companies.id != company.id %}
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+							<div class="d-flex justify-content-between">
+								<h5 class="card-title">{{ companies.name }}</h5>
+								<img width="50" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}">
+							</div>
+							<p class="card-text">{{ companies.description|nl2br }}</p>
+							<a href="{{ path('company_view', {id: companies.id}) }}" class="card-link">Voir plus</a>
+						</div>
+					</div>
+				{% endif %}
+		{% endfor %}
+
+	</div>
 
 
 {% endblock %}

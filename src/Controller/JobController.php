@@ -89,7 +89,7 @@ class JobController extends AbstractController
     {    
         
         $repository = $this->registryManager->getManager()->getRepository(Job::class);
-        $jobs = $repository->findAll();        
+        $jobs = $repository->findAll();       
         
 
         // tri algorithme
@@ -121,11 +121,20 @@ class JobController extends AbstractController
                         break;
                 }
             }  
-        }               
+        }  
+        
+        // tri par catégorie
+
+        // Si le formulaire est soumis
+        // findBy-> where catégory = $_GET['category'];
+        if(!empty($_GET['category']) && in_array($_GET['category'], $this->categories)) {
+            $jobs = $repository->findBy(['category' => $_GET['category']]);
+        }
         
         return $this->render('job/list.html.twig', [
             'jobs' => $jobs,
-            'logoCategories' => $this->logoCategories,           
+            'logoCategories' => $this->logoCategories,
+            'categories' => $this->categories           
         ]);
         
     }
@@ -139,8 +148,6 @@ class JobController extends AbstractController
         $jobs = $em->getRepository(Job::class)->findAll();
 
         // Suggestions d'annonce
-
-
         
     
         return $this->render('job/view.html.twig', [

@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register
-{% endblock %}
+{% block title %}Outdeed - S'inscrire{% endblock %}
 
 {% block body %}
 	{% for flashError in app.flashes('verify_email_error') %}
@@ -39,7 +38,7 @@
 					{{ form_row(registrationForm.userType) }}
 					{{ form_row(registrationForm.agreeTerms) }}
 					<div class="d-flex justify-content-center">
-						<button type="submit" class="btn btn-outline-success px-3  my-3">Register</button>
+						<button type="submit" class="btn btn-outline-success px-3  my-3">S'inscrire</button>
 					</div>
 
 					{{ form_end(registrationForm) }}
