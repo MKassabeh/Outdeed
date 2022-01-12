@@ -312,7 +312,7 @@ class CompanyController extends AbstractController
     #[Route('/view/{id}', name: 'company_view')]
     public function view(int $id): Response
     {
-        //para acceder a las tablas de categorias y logos de las categorias dentro del JobController
+        //To  access the category and logo tables within the Jobcontroller
         $controller = new JobController($this->registryManager);
 
         $categories = $controller->categories;
@@ -321,20 +321,20 @@ class CompanyController extends AbstractController
 
         $em = $this->registryManager->getManager();
 
-        //creando la variable $company y con la ayuda del Entity manager
-        // accedemos a la clase Company usando getRepository() y recuperamos la empresa deseada con find($id)
+        //By creating a $company variable and using the Entity manager 
+        // we can access the Company class by using the getRepository() function and the find($id) function
         $company = $em->getRepository(Company::class)->find($id);
 
-        //Ahora para recuperar las empresas que tienen las mismas categorias que nuestra empresa existente,
-        //creaos la variable $companyCategory y la relacionamos con $companyy ya que declaramos precedentemente
-        //de esta forma podemos usar la funcion getCategory() 
+        //In order to recover the companies belonging to the same category as the one currently on the view,
+        //we create the $companyCategory variable and we set it equal to the $company varibale previously created
+        //By doing so we are now able to use the getCategory() function on the entity
         $companyCategory = $company ->getCategory();
-
-        //declaramos la variable $companies en plurar y llamammos al $em para poder usar getRepository(Company::class)
-        //para de esta forma poder buscar en la tabla de categorias con ->findBy(['category'=>$companyCategory]); 
+ 
+        //Now we create the $companies variable and use the $em in order to access the Company class, getRepository(Company::class)
+        //this way we are able to find the desired table by using ->findBy(['category'=>$companyCategory]); 
         $companies = $em->getRepository(Company::class)->findBy(['category'=> $companyCategory]);
 
-        //realizamos el render de las diferentes $variables 
+        
         return $this->render('company/view.html.twig', [
             'company'                  =>     $company,
             'companies'                =>     $companies,
