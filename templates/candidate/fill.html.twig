@@ -11,7 +11,7 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
-            <form method="post" id="fillCandidate">
+            <form method="post" id="fillCandidate" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col-5 mb-3">
@@ -62,6 +62,19 @@
                     <div class="col-4 mb-3">
                         <label for="birth_y">Année de naissance * :</label>
                         <input type="number" name="birth_y" min="1900" max="2010" id="birth_y" class="form-control">
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <label for="pdp">Photo de profil * (PNG, JPEG ou JPG): </label>
+                        <input class="form-control" type="file" placeholder="Ajouter ma photo de profil" name="pdp" id="pdp" accept="images/jpeg, images/jpg, images/png">
+                    </div>
+                    <div class="col-5">
+                        <label for="cv">Votre CV * (PDF UNIQUEMENT): </label>
+                        <input class="form-control" type="file" placeholder="Ajouter un CV" name="cv" id="cv" accept="application/pdf, application/x-pdf">
                     </div>
                     <div class="col-1"></div>
                 </div>

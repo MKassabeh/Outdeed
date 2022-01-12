@@ -300,7 +300,8 @@ div .row .login-right img{
 
 .background-img{
 	height: 250px;
-	background-color: rgb(182, 181, 181);
+	background-color: rgb(158, 157, 157);
+	box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
 }
 
 .background-img .container .banner-body .banner-right .row .col-12 a{
@@ -315,12 +316,16 @@ div .row .login-right img{
 .logo-img{
 	height: 200px;
 	width:  200px;
-	background-color: blue;
+	background-color: rgb(198, 198, 204);
+}
+
+.socials-container .card{
+	box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
+	border-radius: 12px;
 }
 
 .socials-container div  h3{
 	letter-spacing: 4px;
-	
 }
 
 

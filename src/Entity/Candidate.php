@@ -42,6 +42,12 @@ class Candidate
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $birthdate;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $CV;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $pdp;
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -193,6 +199,30 @@ class Candidate
     public function setBirthdate(?\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    public function getCV(): ?string
+    {
+        return $this->CV;
+    }
+
+    public function setCV(?string $CV): self
+    {
+        $this->CV = $CV;
+
+        return $this;
+    }
+
+    public function getPdp(): ?string
+    {
+        return $this->pdp;
+    }
+
+    public function setPdp(string $pdp): self
+    {
+        $this->pdp = $pdp;
 
         return $this;
     }
