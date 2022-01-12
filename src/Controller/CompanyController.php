@@ -232,7 +232,7 @@ class CompanyController extends AbstractController
     public function edit(int $id): Response
     {
 
-        // on récupère le tableau des catégories
+        // on récupère le tableau des catégories qui sont stockés dans le JobController
         $jobController = new JobController($this->registryManager);
         $categories = $jobController->categories;
 
@@ -312,11 +312,35 @@ class CompanyController extends AbstractController
     #[Route('/view/{id}', name: 'company_view')]
     public function view(int $id): Response
     {
+        //para acceder a las tablas de categorias y logos de las categorias dentro del JobController
+        $controller = new JobController($this->registryManager);
+
+        $categories = $controller->categories;
+        $logoCategories = $controller ->logoCategories;
+
+
         $em = $this->registryManager->getManager();
+
+        //creando la variable $company y con la ayuda del Entity manager
+        // accedemos a la clase Company usando getRepository() y recuperamos la empresa deseada con find($id)
         $company = $em->getRepository(Company::class)->find($id);
 
+        //Ahora para recuperar las empresas que tienen las mismas categorias que nuestra empresa existente,
+        //creaos la variable $companyCategory y la relacionamos con $companyy ya que declaramos precedentemente
+        //de esta forma podemos usar la funcion getCategory() 
+        $companyCategory = $company ->getCategory();
+
+        //declaramos la variable $companies en plurar y llamammos al $em para poder usar getRepository(Company::class)
+        //para de esta forma poder buscar en la tabla de categorias con ->findBy(['category'=>$companyCategory]); 
+        $companies = $em->getRepository(Company::class)->findBy(['category'=> $companyCategory]);
+
+        //realizamos el render de las diferentes $variables 
         return $this->render('company/view.html.twig', [
-            'company' => $company
+            'company'                  =>     $company,
+            'companies'                =>     $companies,
+            'categories'               =>     $categories,
+            'logoCategories'           =>     $logoCategories,
+            
         ]);
     }
 }
