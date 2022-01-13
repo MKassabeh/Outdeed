@@ -127,7 +127,7 @@ class ApplyController extends AbstractController
                 $post['candidates'][] = $em->getRepository(Candidate::class)->findOneBy(['user' => $app->getUser()]);
             }
             $list[] = $post;
-        }
+        }        
 
         // foreach ($applicants[0] as $app) {
         //     $candidate[] = $em->getRepository(Candidate::class)->findBy(['user' => $app->getUser()]);            
