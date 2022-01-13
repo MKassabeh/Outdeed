@@ -16,8 +16,11 @@
     {% for postulation in postulations %}
     <div class="card m-3">
         <div class="card-header p-4">
-            <h5 class="font_title">{{ postulation['job'].title|capitalize }} | {{ postulation['job'].companyName }}</h5>
-            <a class="my_links_r" href="{{ path('job_view', {id: postulation['job'].id}) }}">Voir l'annonce</a>
+            <h5 class="font_title">{{ postulation['job'].title|capitalize }} | {{ postulation['job'].companyName }}
+                <a title="Modifier" style="color : black !important;" class="ms-2" href="{{ path('job_edit', {id: postulation['job'].id}) }}"><i  class="far fa-edit"></i></a>
+                <a title="Supprimer" style="color : black !important;" href="{{ path('job_delete', {id: postulation['job'].id}) }}"><i class="far fa-trash-alt"></i></a>
+            </h5>
+            <a title="Détails de l'annonce" class="my_links_r" href="{{ path('job_view', {id: postulation['job'].id}) }}">Voir l'annonce</a>
         </div>
         <div class="card-body">
             <div>
@@ -35,7 +38,7 @@
             <div>
                 {% if postulation['applicants'] %}
                 <div class="accordion accordion-flush" id="accordion{{postulation['job'].title}}">
-                    {% set count = 1 %}                    
+                    {% set count = 1 %}
                     {% for candidate in postulation['candidates'] %}
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-heading{{count}}">
