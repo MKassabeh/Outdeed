@@ -44,6 +44,18 @@ class Company
     #[ORM\Column(type: 'string', length: 255)]
     private $pdp;
 
+    #[ORM\Column(type: 'string', length: 100)]
+    private $street;
+
+    #[ORM\Column(type: 'string', length: 10)]
+    private $postal_code;
+
+    #[ORM\Column(type: 'float')]
+    private $lat;
+
+    #[ORM\Column(type: 'float')]
+    private $lng;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +177,54 @@ class Company
     public function setPdp(string $pdp): self
     {
         $this->pdp = $pdp;
+
+        return $this;
+    }
+
+    public function getStreet(): ?string
+    {
+        return $this->street;
+    }
+
+    public function setStreet(string $street): self
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postal_code;
+    }
+
+    public function setPostalCode(string $postal_code): self
+    {
+        $this->postal_code = $postal_code;
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }

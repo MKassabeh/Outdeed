@@ -339,6 +339,11 @@ div .row .login-right img{
 	color: rgb(0, 119, 255) !important;
 }
 
+#map {
+	height: 300px;
+	width: 400px;
+}
+
 
 /* ADMIN PAGE */
 

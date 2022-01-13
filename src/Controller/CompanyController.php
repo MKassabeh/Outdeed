@@ -108,7 +108,15 @@ class CompanyController extends AbstractController
             if (strlen($safe['city']) < 1 || strlen($safe['city']) > 100) {
                 $errors[] = 'Le nom de votre ville doit comporter entre 1 et 100 caractères';
             }
-            // Vérif city
+            // Vérif rue
+            if (strlen($safe['street']) < 5 || strlen($safe['street']) > 300) {
+                $errors[] = 'Veuillez entrer une rue valide';
+            }
+            // Vérif code postal
+            if (!is_numeric($safe['postal_code']) || strlen($safe['postal_code']) != 5) {
+                $errors[] = 'Veuillez entrer un code postal valide';
+            }
+            // Vérif employees
             if (!is_numeric($safe['nb_employees']) || ($safe['nb_employees']) < 1) {
                 $errors[] = 'Veillez entrer le nombre d\'employés de votre entreprise';
             }
@@ -151,6 +159,19 @@ class CompanyController extends AbstractController
                 $em = $this->registryManager->getManager();
                 $company = new Company();
 
+                //concatenation de l'adresse dans la variable $address
+                $address = $safe['street'].' '.$safe['postal_code'].' '.$safe['city'];
+
+                // Clé d'api
+                $key_opencage = "b122ef2a93f1403197607658f1e122ac"; 
+                // Adresse pour la quelle je cherche les coordonnées GPS
+
+                // Décode l'adresse pour obtenir la latitude / longitude
+                $geocoder = new \OpenCage\Geocoder\Geocoder($key_opencage);
+                $data = $geocoder->geocode($address);
+                $latitude = $data['results'][0]['geometry']['lat'];
+                $longitude = $data['results'][0]['geometry']['lng'];
+
                 // PDP :
 
                 // Permet de récupérer automatiquement l'extension du fichier téléchargé
@@ -171,6 +192,8 @@ class CompanyController extends AbstractController
                 $company->setName($safe['name']);
                 $company->setCategory($safe['category']);
                 $company->setDescription($safe['description']);
+                $company->setStreet($safe['street']);
+                $company->setPostalCode($safe['postal_code']);
                 $company->setCity($safe['city']);
                 $company->setPdp($finalFileNamePDP);
                 $company->setPhone($safe['phone']);
@@ -178,6 +201,8 @@ class CompanyController extends AbstractController
                 $company->setContactEmail($safe['contact_email']);
                 $company->setCreatedAt(new \DateTime($safe['birth_d'] . '-' . $safe['birth_m'] . '-' . $safe['birth_y']));
                 $company->setUser($this->getUser());
+                $company->setLng($longitude);
+                $company->setLat($latitude);
 
                 $em->persist($company);
                 $em->flush();
@@ -335,12 +360,15 @@ class CompanyController extends AbstractController
         //this way we are able to find the desired table by using ->findBy(['category'=>$companyCategory]); 
         $companies = $em->getRepository(Company::class)->findBy(['category'=> $companyCategory]);
 
-        
+        $key_google = 'AIzaSyCiV2wpadEQxdTVMW9h5kuZsL3_uHyOsik';
+
+      
         return $this->render('company/view.html.twig', [
             'company'                  =>     $company,
             'companies'                =>     $companies,
             'categories'               =>     $categories,
             'logoCategories'           =>     $logoCategories,
+            'key_google'               =>     $key_google,
             
         ]);
     }
