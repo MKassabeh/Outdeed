@@ -385,3 +385,13 @@ div .row .login-right img{
   
 
 
+/* POSTULER */
+
+a.my_links_r {
+    color : grey !important;
+    transition: color 0.5s !important;    
+}
+
+a.my_links_r:hover {
+    color : #0d6efd !important;    
+}

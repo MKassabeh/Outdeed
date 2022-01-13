@@ -475,4 +475,5 @@ class CandidateController extends AbstractController
             'skill' => $skill
         ]);
     }
+    
 }

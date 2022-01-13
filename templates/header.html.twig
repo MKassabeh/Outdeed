@@ -59,6 +59,7 @@
                         {% if (app.user.userType == 'company') %}
                         <li><a class="dropdown-item" href="{{ path('account_company') }}">Mon compte</a></li>
                         <li><a class="dropdown-item" href="{{ path('favourite_list') }}">Mes offres favorites</a></li>
+                        <li><a class="dropdown-item" href="{{ path('offer_applicant') }}">Mes offres d'emplois</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -71,7 +72,7 @@
                         </li>
                         {% endif %}
                         {% if "ROLE_ADMIN" in app.user.roles %}
-                        <li><a class="dropdown-item" href="{{ path('admin') }}">Admin</a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin') }}">Interface Admin</a></li>
                         {% endif %}
                         <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
                     </ul>

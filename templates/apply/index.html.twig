@@ -1,24 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ApplyController!{% endblock %}
+{% block title %}Outdeed - Postuler{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-<form class="d-flex justify-content-between align-center flex-column" method="post"> 
-  <label for="motivation_letter">Tell us your story:</label>
-
-    <textarea id="motivation_letter" name="motivation_letter"
-            rows="5" cols="33">
-    Rediger une lettre de motivation....
-    </textarea>
-    <input type="submit" name="submit" class="btn btn-success" value="Envoyer">
-</form>
+<div class="blanc container py-2 mt-5">
+    <h1 class="text-center">Postuler</h1>
 </div>
+
+<div class="container">
+    <div class="row justify-content-evenly">
+        <div class="col-5 my-3 blanc">
+            <form method="POST" id="form_apply">
+                <div class="mb-3">
+                    <label for="motivation" class="form-label">Message de motivation (3000 caractères maximum) :</label>
+                    <textarea class="form-control" id="motivation" name="motivation" rows="10"
+                        placeholder="Ma lettre de motivation ..."></textarea>
+                </div>
+
+        </div>
+        <div class="col-5 my-3 blanc">
+            <h5 class="mt-2 font_tilte text-center">Récapitulatif de l'offre :</h5>
+            <p>{{ job.title }}</p>
+            <p>{{ job.contractType }} | {{ job.wages }}</p>
+            <p>{{ job.schedule }}</p>
+            <p>{{ job.city }}</p>
+        </div>
+    </div>
+    <div class="container text-center">
+        <input class="btn btn-success" type="submit" name="submit" value="Postuler">
+        </form>
+    </div>
+</div>
+
+
+
+
 {% endblock %}
