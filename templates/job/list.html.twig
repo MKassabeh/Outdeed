@@ -13,30 +13,33 @@
 
 <div class="container py-3">
     <div class="row justify-content-center ">
-        <div class="col-12 col-md-10 col-lg-8 blanc">
+        <div class="col-8 col-md-8 col-lg-8 blanc">
             <h1 class="text-center">Liste des offres d'emploi</h1>
         </div>
     </div>
 </div>
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-3 ms-3">
+<div class="container" id="tri">
+    <div class="row mb-2">
+        <div class="col-lg-6 col-md-2 col-2"></div>     
+        <div class="col-lg-3 col-6">
             <form method="get" id="category_sort">
                 <select class="form-select" name="category" id="category">
                     <option value="0" selected disabled>-- Recherche par catégories --</option>
                     {% for category in categories %}
-                        <option value="{{ category }}">{{ category }}</option>
+                    <option value="{{ category }}">{{ category }}</option>
                     {% endfor %}
                 </select>
         </div>
-        <div class="col-1">
+        <div class="col-lg-1 col-2">
             <input type="submit" class="btn btn-success" value="Go !">
-        </form>
+            </form>
         </div>
-        <div class="col-3 ms-3">
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-2"></div>
+        <div class="col-lg-3 col-6">
             <form method="get" id="job_sort">
                 <select class="form-select" name="sort" id="sort">
                     <option value="0" selected disabled>-- Trier par --</option>
@@ -48,51 +51,50 @@
                     <option value="categoryDESC">Categories (Ordre alphabetique inversé)</option>
                 </select>
         </div>
-        <div class="col-1">
+        <div class="col-lg-1 col-2">
             <input type="submit" class="btn btn-success" value="Go !">
-        </form>
+            </form>
         </div>
-        <div class="col-2"></div>
     </div>
 </div>
 
-<div class="container mt-3 py-3">
+<div class="container py-3">
     <div class="row justify-content-center">
         {% if jobs is empty %}
         {% include 'empty.html.twig' %}
         {% endif %}
         {% for job in jobs %}
-        <div class="col-md-10 col-lg-8 blanc m-3">
+        <div class="col-10 col-md-8 col-lg-10 blanc m-3">
             <div class="card m-3">
                 <div class="card-header p-4">
                     <h5 class="font_title"> {{ job.title|capitalize }} | {{job.companyName|capitalize}}</h5>
                 </div>
-                <div class="card-body d-flex justify-content-between">
-
-                    <div class="me-4">
-                        <img width="142" class="img-fluid"
-                            src="{{ asset('img/category/' ~ logoCategories[job.category]) }}" alt="{{ job.category }}">
-                    </div>
-                    <div>
-                        <p class="card-title">{{ job.city }}</p>
-                        <p class="card-title">{{ job.wages }} par mois | {{ job.contractType }}</p>
-                        <p class="card-text">{{ job.descriptionJob|slice(0, 50) }}...</p>
-                        <div>
-                            <a href="{{ path('job_view', {id: job.id}) }}" class="btn btn-outline-primary">
-                                Voir plus ...
-                            </a>
-                            <a href="{{ path('favourite_add', {id: job.id}) }}" class="mt-2 btn btn-outline-warning">
-                                <i class="far fa-heart"></i> Ajouter aux favoris
-                            </a>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-12 mb-md-3 mb-lg-0 text-center">
+                            <img width="142" class="img-fluid"
+                                src="{{ asset('img/category/' ~ logoCategories[job.category]) }}" alt="{{ job.category }}">
+                        </div>
+                        <div class="col-lg-7 col-md-6">
+                            <p class="card-title">{{ job.city }}</p>
+                            <p class="card-title">{{ job.wages }} par mois | {{ job.contractType }}</p>
+                            <p class="card-text">{{ job.descriptionJob|slice(0, 50) }}...</p>
+                            <div class="text-lg-start text-md-center text-center">
+                                <a href="{{ path('job_view', {id: job.id}) }}" class="mb-lg-0 mb-md-2 mb-2 btn btn-outline-primary">
+                                    Voir plus ...
+                                </a>
+                                <a href="{{ path('favourite_add', {id: job.id}) }}" class="mb-lg-0 mb-md-0 mb-2 btn btn-outline-warning">
+                                    <i class="far fa-heart"></i> Ajouter aux favoris
+                                </a>
+                            </div>
+                        </div>
+                        <div class="border rounded col-lg-3 col-md-6">
+                            <p class="card-title"><strong>Salaire : </strong>{{ job.wages }} par mois </p>
+                            <p class="card-title"><strong>Horaires : </strong>{{ job.schedule }}</p>
+                            <p class="card_date text-muted"><strong>Publiée le : </strong>{{
+                                job.publishedAt|date('d-m-Y') }}</p>
                         </div>
                     </div>
-                    <div class="border rounded position-relative py-2 px-2 ">
-                        <p class="card-title"><strong>Salaire : </strong>{{ job.wages }} par mois </p>
-                        <p class="card-title"><strong>Horaires : </strong>{{ job.schedule }}</p>
-                        <p class="card_date text-muted position-absolute "><strong>Publiée le : </strong>{{
-                            job.publishedAt|date('d-m-Y') }}</p>
-                    </div>
-
                 </div>
             </div>
         </div>
