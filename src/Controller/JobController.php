@@ -182,7 +182,7 @@ class JobController extends AbstractController
     {
         $em = $this->registryManager->getManager();
         $job = $em->getRepository(Job::class)->find($id);
-        $jobs = $em->getRepository(Job::class)->findAll();
+        $jobs = $em->getRepository(Job::class)->findBy(['category' => $job->getCategory()]);
 
         // Suggestions d'annonce
         

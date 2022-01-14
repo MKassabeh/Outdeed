@@ -4,6 +4,7 @@
 
 {% block body %}
 
+
 <div id="carouselHero" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselHero" data-bs-slide-to="0" class="active" aria-current="true"
@@ -25,7 +26,8 @@
             <img src="{{ asset('img/home/ecran.jpg') }}" class="d-block w-100" alt="...">
             <div class="mb-3 carousel-caption d-none d-md-block">
                 <h1 class="mb-1" id="titre_home">Trouvez l'emploi de vos rêves</h1>
-                <a class="btn btn-outline-light" href=" {{ path('job_list') }} ">Voir les offres d'emplois <i class="fas fa-arrow-right"></i> </a>
+                <a class="btn btn-outline-light" href=" {{ path('job_list') }} ">Voir les offres d'emplois <i
+                        class="fas fa-arrow-right"></i> </a>
             </div>
         </div>
 
@@ -33,7 +35,8 @@
             <img src="{{ asset('img/home/main.jpg') }}" class="d-block w-100" alt="...">
             <div class="mb-3 carousel-caption d-none d-md-block">
                 <h1 class="mb-1" id="titre_home">Dans l'entreprise de vos rêves</h1>
-                <a class="btn btn-outline-light" href=" {{ path('company_list') }} ">Voir les entreprises <i class="fas fa-arrow-right"></i> </a>
+                <a class="btn btn-outline-light" href=" {{ path('company_list') }} ">Voir les entreprises <i
+                        class="fas fa-arrow-right"></i> </a>
             </div>
         </div>
     </div>
@@ -66,23 +69,22 @@
                         <p>{{job.city}}</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-footer">
-                <div class="row d-flex justify-content-around">
-                    <div class="col-8">
-                        <p>Publiée le : {{ job.publishedAt|date('d-m-Y') }}</p>
-                    </div>
-                    <div class="col-4">
-                        <a href="{{ path('job_view', {id: job.id}) }}" class="btn btn-outline-primary btn-card">Voir
-                            plus ...</a>
+                <div class="card-footer">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col-8">
+                            <p>Publiée le : {{ job.publishedAt|date('d-m-Y') }}</p>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{ path('job_view', {id: job.id}) }}" class="btn btn-outline-primary btn-card">Voir
+                                plus ...</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-
-    {% endfor %}
 </div>
 
 {% endblock %}
