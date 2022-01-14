@@ -51,13 +51,13 @@ class ApplyController extends AbstractController
                 $em = $this->registryManager->getManager(); // Connexion à la bdd (équivalent new PDO()) sans oublier le paramètre de la fonction ManagerRegistry $doctrine et le "use"
 
 
-                $job_offer = $em->getRepository(Job::class)->find($id);
+                
                 $job_apply = new Apply();
 
                 $job_apply->setMotivationLetter($safe['motivation_letter']);
 
                 $job_apply->setUser($this->getUser());
-                $job_apply->setJob($job_offer);
+                $job_apply->setJob($job);
 
 
                 // Equivalent à notre execute()
@@ -65,7 +65,7 @@ class ApplyController extends AbstractController
                 $em->flush(); // On libère la base de données (elle arrete d'être en attente de quelque chose);
 
                 // Envoi du mail
-                $company_name = $job_offer->getCompanyName();
+                $company_name = $job->getCompanyName();
                 $company_email = $em->getRepository(Company::class)->findOneBy(['name' => $company_name])->getContactEmail();
                 $email = (new Email())
                     ->from('notifications@outdeed.com')
@@ -89,7 +89,7 @@ class ApplyController extends AbstractController
             }
         }
         return $this->render('apply/index.html.twig', [
-            'controller_name' => 'ApplyController',
+            'job' => $job,
         ]);
     }
 
