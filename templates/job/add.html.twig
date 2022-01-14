@@ -8,35 +8,35 @@
 <div class="container mt-3 py-3">
     <div class="row justify-content-center ">
         <div class="col-8 col-md-8 col-lg-8 blanc">
-            <h1 class="text-center font_title ">Publier une offre d'emploi</h1>
+            <h1 class="text-center font_title fw-bold">Publier une offre d'emploi</h1>
         </div>
     </div>
 </div>
 
-<div class="container my-5">
+<div class="container my-5 ">
     <div class="row justify-content-center ">
-        <div class="col-8 col-md-8 col-lg-8">
-            <form method="post" id="addArticle">
+        <div class="col-8 col-md-8 col-lg-8 blanc">
+            <form method="post" id="addArticle" class="p-5">
                 <div class="mb-3 fw-bold">
-                    <label for="title ">Titre de l'offre : </label>
-                    <input type="text" name="title" id="title" class="form-control">
+                    <label class="label_candidate" for="title ">Titre de l'offre : </label>
+                    <input class="input_candidate"  type="text" name="title" id="title" class="form-control">
                 </div>              
                
                 <div class="mb-3 fw-bold">
-                    <label for="description_job">Description de l'offre : </label>
-                    <textarea name="description_job" id="description_job" rows="6" class="form-control"></textarea>
+                    <label class="label_candidate" for="description_job">Description de l'offre : </label>
+                    <textarea class="input_candidate"  name="description_job" id="description_job" rows="6" class="form-control"></textarea>
                 </div>
                 <div class="mb-3 fw-bold">
-                    <label for="description_applicant">Description du profil recherché</label>
-                    <textarea name="description_applicant" id="description_applicant" rows="6" class="form-control"></textarea>
+                    <label class="label_candidate" for="description_applicant">Description du profil recherché</label>
+                    <textarea class="input_candidate"  name="description_applicant" id="description_applicant" rows="6" class="form-control"></textarea>
                 </div>                
                 <div class="mb-3 fw-bold">
-                    <label for="wages">Estimation du salaire : </label>
-                    <input type="text" name="wages" id="wages" class="form-control">
+                    <label class="label_candidate" for="wages">Estimation du salaire : </label>
+                    <input class="input_candidate"  type="text" name="wages" id="wages" class="form-control">
                 </div>
                 <div class="mb-3 fw-bold">
-                    <label for="contract">Type de contrat : </label>
-                    <select name="contract" id="contract" class="form-select">
+                    <label class="label_candidate" for="contract">Type de contrat : </label>
+                    <select name="contract" id="contract" class="form-select select_edit">
                         <option value="0" selected disabled>-- Choisir --</option>
                         {% for value in contract_type %}
                         <option value="{{ value }}">{{ value }}</option>
@@ -44,20 +44,20 @@
                     </select>
                 </div>
                 <div class="mb-3 fw-bold">
-                    <label for="benefit">Avantages : </label>
-                    <textarea name="benefit" id="benefit" rows="6" class="form-control"></textarea>
+                    <label class="label_candidate" for="benefit">Avantages : </label>
+                    <textarea class="input_candidate"  name="benefit" id="benefit" rows="6" class="form-control"></textarea>
                 </div>
                 <div class="mb-3 fw-bold">
-                    <label for="schedule">Horaires : </label>
-                    <input type="text" name="schedule" id="schedule" class="form-control">
+                    <label class="label_candidate" for="schedule">Horaires : </label>
+                    <input class="input_candidate"  type="text" name="schedule" id="schedule" class="form-control">
                 </div>
                 <div class="mb-3 fw-bold">
-                    <label for="comment">Commentaire : </label>
-                    <textarea name="comment" id="comment" rows="6" class="form-control"></textarea>
+                    <label class="label_candidate" for="comment">Commentaire : </label>
+                    <textarea class="input_candidate"  name="comment" id="comment" rows="6" class="form-control"></textarea>
                 </div>
 
                 <div class="mb-3 text-center">
-                    <input type="submit" name="submit" class="btn btn-success" value="Envoyer">
+                    <input type="submit" name="submit" class="btn button_candidate" value="Envoyer">
 
                 </div>
 
