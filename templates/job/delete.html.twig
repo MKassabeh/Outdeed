@@ -3,13 +3,23 @@
 {% block title %}Outdeed - Supprimer une offre{% endblock %}
 
 {%block body %}
-{# affiche tous les messages flash #}    
-    <form method="post">
-        <h2 class="font_title">Êtes-vous sûr de vouloir supprimer cette offre d'emploi ?</h2>
+{# affiche tous les messages flash #}
 
-        <p class="font_text">{{job.title}}</p>
-        
-        <input type="submit" name="submit" class="btn btn-danger" value="Confimer la suppression">
+<div class="container blanc my-3 py-3">
+    <h1 class="font_title text-center">Êtes-vous sûr de vouloir supprimer cette offre d'emploi ?</h1>
+</div>
+<div class="container blanc my-3 py-3">
+    <form method="post">
+
+
+        <h4 class="font_text text-center mt-3">{{job.title}}</h4>
+
+        <div class="text-center mt-5 mb-3"> 
+                <input type="submit" name="submit" class="btn btn-danger" value="Confimer la suppression">
+                <a href="{{path('job_list')}}" class="btn btn-secondary ms-2">Annuler la suppression</a>
+        </div>
+
     </form>
+</div>
 
 {% endblock %}

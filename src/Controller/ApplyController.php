@@ -41,9 +41,10 @@ class ApplyController extends AbstractController
             $safe = array_map('trim', array_map('strip_tags', $_POST));
 
             // Vérif titre
-            if (strlen($safe['motivation_letter']) < 5 || strlen($safe['motivation_letter']) > 100) {
-                $errors[] = 'Votre titre doit comporter entre 5 et 100 caractères';
+            if (strlen($safe['motivation']) <= 0 || strlen($safe['motivation']) > 3000) {
+                $errors[] = 'Le message de motivation est obligatoire et doit comporter un maximum de 3000 caractères';
             }
+
 
             if (count($errors) === 0) {
                 // ici, je n'ai pas d'erreur, j'enregistre en base de données
@@ -54,7 +55,7 @@ class ApplyController extends AbstractController
                 
                 $job_apply = new Apply();
 
-                $job_apply->setMotivationLetter($safe['motivation_letter']);
+                $job_apply->setMotivationLetter($safe['motivation']);
 
                 $job_apply->setUser($this->getUser());
                 $job_apply->setJob($job);
