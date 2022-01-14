@@ -22,7 +22,7 @@
 
 <div class="container" id="tri">
     <div class="row mb-2">
-        <div class="col-lg-6 col-md-2 col-2"></div>     
+        <div class="col-lg-6 col-md-2 col-2"></div>
         <div class="col-lg-3 col-6">
             <form method="get" id="category_sort">
                 <select class="form-select" name="category" id="category">
@@ -65,25 +65,41 @@
         {% endif %}
         {% for job in jobs %}
         <div class="col-10 col-md-8 col-lg-10 blanc m-3">
-            <div class="card m-3">
+            <div class="card m-3 {% if app.user.id == job.publishedBy.id %} border-primary {% endif %}">
                 <div class="card-header p-4">
-                    <h5 class="font_title"> {{ job.title|capitalize }} | {{job.companyName|capitalize}}</h5>
+                    <h5 class="font_title">
+                        {{ job.title|capitalize }} | {{job.companyName|capitalize}}
+                        {% if app.user.id == job.publishedBy.id %}
+                        <a title="Modifier" style="color : black !important;" class="ms-2"
+                            href="{{ path('job_edit', {id: job.id}) }}"><i class="far fa-edit"></i></a>
+                        <a title="Supprimer" style="color : black !important;"
+                            href="{{ path('job_delete', {id: job.id}) }}"><i
+                                class="far fa-trash-alt"></i></a>
+                    </h5>
+                    <p class="text-muted fst-italic mt-2">J'ai publié cette offre</p>
+                    {% else %}
+                    </h5>
+                    {% endif %}
+
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-2 col-md-12 mb-md-3 mb-lg-0 text-center">
                             <img width="142" class="img-fluid"
-                                src="{{ asset('img/category/' ~ logoCategories[job.category]) }}" alt="{{ job.category }}">
+                                src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
+                                alt="{{ job.category }}">
                         </div>
-                        <div class="col-lg-7 col-md-6">
+                        <div class="col-lg-7 col-md-6 my-lg-0 my-md-2 my-2">
                             <p class="card-title">{{ job.city }}</p>
                             <p class="card-title">{{ job.wages }} par mois | {{ job.contractType }}</p>
                             <p class="card-text">{{ job.descriptionJob|slice(0, 50) }}...</p>
                             <div class="text-lg-start text-md-center text-center">
-                                <a href="{{ path('job_view', {id: job.id}) }}" class="mb-lg-0 mb-md-2 mb-2 btn btn-outline-primary">
+                                <a href="{{ path('job_view', {id: job.id}) }}"
+                                    class="mb-lg-0 mb-md-2 mb-2 btn btn-outline-primary">
                                     Voir plus ...
                                 </a>
-                                <a href="{{ path('favourite_add', {id: job.id}) }}" class="mb-lg-0 mb-md-0 mb-2 btn btn-outline-warning">
+                                <a href="{{ path('favourite_add', {id: job.id}) }}"
+                                    class="mb-lg-0 mb-md-0 mb-2 btn btn-outline-warning">
                                     <i class="far fa-heart"></i> Ajouter aux favoris
                                 </a>
                             </div>
