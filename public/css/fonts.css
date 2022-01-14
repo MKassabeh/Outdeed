@@ -47,6 +47,14 @@ h1, .font_title {
 
 /* FOOTER */
 
+.footer-link{
+	  text-decoration: none;
+      color: black;
+}
+
+.footer-link:hover{
+    color: lightblue;
+}
 /* icons */
 
 .btn-primary{
