@@ -3,34 +3,36 @@
 {% block title %}Outdeed - Détails d'une offre{% endblock %}
 
 {% block body %}
-<div class="my-5 container">
-    <div class="card_container justify-content-around text-center">
-        <div style="max-width: 800px !important;" class="card_body">
-            <div class="head">
-                <h1 class="mb-2 font_title">
-                    {{ job.title|capitalize }}
-                </h1>
-                <h3 class="font_title">
-                    {{ job.companyName }}
-                </h3>
-            </div>
-            <div class="d-flex">
-                <div class="me-4">
-                    <img width="125" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}" alt="{{ job.category }}">
-                </div>
-                <div>
-                    <span style="font-size: 16px !important;"
-                        class="mb-4 badge bg-info text-dark">{{job.category}}</span>
-                    <p class="text_head"><strong>Localisation</strong> <i class="fas fa-map-marker-alt"></i> : {{
-                        job.city
-                        }}</p>
-                    <p class="text_head"><strong>Offre publiée le : </strong>{{ job.publishedAt ?
-                        job.publishedAt|date('d/m/Y') : '' }}</p>
-                </div>
-                
-            </div>
 
+<div class="container blanc text-center py-1 my-3">
+    <h1> Détails </h1>
+</div>
 
+<div class="my-5 container blanc">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="mb-2 font_title">
+                {{ job.title|capitalize }} | {{ job.companyName|capitalize }}
+            </h1>
+            <p style="font-size: 16px !important;" class="mb-4 badge bg-info text-dark">{{job.category}}</p><br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-0 col-md-1 col-lg-1"></div>
+        <div class="card_body col-lg-2 col-md-4 mt-md-4 col-12 text-center text-md-start text-lg-start">
+            <img width="125" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
+                alt="{{ job.category }}">
+            <div class="mt-lg-3 mt-md-5">
+
+                <p class="text_head"><strong>Localisation</strong> <i class="fas fa-map-marker-alt"></i> : <br>{{
+                    job.city
+                    }}</p>
+                <p class="text_head"><strong>Offre publiée le :<br> </strong>{{ job.publishedAt ?
+                    job.publishedAt|date('d/m/Y') : '' }}</p>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-7 col-12 text-center text-md-start text-lg-start">
             <h3 class="font_title mt-4"> Description de l'entreprise : </h3>
             <p>{{ job.descriptionCompany|nl2br }}</p>
             <h3 class="font_title mt-4"> Description de l'offre : </h3>
@@ -42,15 +44,15 @@
             <h5 class="font_title">Avantages : </h5>
             <p>{{ job.benefits }}</p>
             {% endif %}
-
         </div>
-        <div style="max-width: 300px !important;">
-            <div class="p-3 mt-5 border card-header">
+        <div class="col-lg-2 col-md-10 col-10 text-center m-auto text-md-center text-lg-start">
+            <div class="p-3 border card-header">
                 <p class="text_head">{{ job.schedule|capitalize }}</p>
                 <p class="text_head">{{ job.wages|capitalize }} par mois</p>
                 <p class="text_head">{{ job.contractType|upper }}</p>
                 {% if (app.user.userType == 'candidate') %}
-                <a href="{{ path('apply', {id: job.id}) }}" class="btn btn-outline-primary">Postuler <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ path('apply', {id: job.id}) }}" class="btn btn-outline-primary">Postuler <i
+                        class="fas fa-arrow-right"></i></a>
                 {% endif %}
             </div>
             <hr class="text-center mt-3 mb-3 mx-auto" width="200">
@@ -59,34 +61,41 @@
                 <p>{{ job.companyComment|nl2br }}</p>
             </div>
         </div>
+        <div class="col-0 col-md-0 col-lg-1"></div>
+
+
     </div>
+
     <div class="text-center">
-        <a href="{{ path('favourite_add', {id: job.id}) }}" class="mt-2 btn btn-outline-warning">
-            <i class="far fa-heart"></i> Ajouter aux favoris 
+        <a href="{{ path('favourite_add', {id: job.id}) }}" class=" mb-3 mt-2 btn btn-outline-warning">
+            <i class="far fa-heart"></i> Ajouter aux favoris
         </a>
     </div>
-
-    <h3 class="text-center mt-5">Dans la même catégorie</h3>
-    <div class="d-flex justify-content-around w-100 mt-5">
-        {% for jobs in jobs %}
-            {% if jobs.category == job.category %}
-                {% if jobs.id != job.id %}
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="card-title">{{ jobs.title }}</h5>
-                            <img width="50" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}" alt="{{ job.category }}">
-                        </div>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ jobs.companyName}}</h6>
-                    <p class="card-text">{{ jobs.descriptionJob|nl2br }}</p>
-                    <a  href="{{ path('job_view', {id: jobs.id}) }}" class="card-link">Voir plus</a>
-                    </div>
-                </div>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-    </div>
-
 </div>
+
+<div class="container text-center py-1 my-3">
+    <h1> Dans la même catégorie ... </h1>
+</div>
+
+<div class="d-flex flex-column container mb-5">
+    {% for jobs in jobs %}
+    {% if jobs.id != job.id %}
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <h5 class="card-title">{{ jobs.title }}</h5>
+                <img width="50" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
+                    alt="{{ job.category }}">
+            </div>
+            <h6 class="card-subtitle mb-2 text-muted">{{ jobs.companyName}}</h6>
+            <p class="card-text">{{ jobs.descriptionJob|nl2br }}</p>
+            <a href="{{ path('job_view', {id: jobs.id}) }}" class="btn btn-outline-primary">Voir plus ...</a>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+
 
 {% endblock %}
