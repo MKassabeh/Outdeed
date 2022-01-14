@@ -203,7 +203,7 @@ class CompanyController extends AbstractController
                 $company->setUser($this->getUser());
                 $company->setLng($longitude);
                 $company->setLat($latitude);
-
+                
                 $em->persist($company);
                 $em->flush();
 
