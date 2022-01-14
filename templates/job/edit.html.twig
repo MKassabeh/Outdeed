@@ -4,14 +4,13 @@
 
 {% block body %}
 
-<div class="container blanc py-2 mt-3">
-    <h1 class="text-center font_title">Editer une offre d'emploi</h1>
+<div class="container blanc py-2 mt-3 ">
+    <h1 class="font_title text-center">Editer une offre d'emploi</h1>
 </div>
 
-<div class="container my-5">
-    <form method="post" id="addArticle" class="p-5">
+
 <div class="container blanc my-5">
-    <form method="post" id="addArticle">
+    <form method="post" id="addArticle" class="p-5" >
         <div class="mb-3">
             <label class="label_candidate" for="title">Titre de l'offre : </label>
             <input class="input_candidate" type="text" name="title" id="title" value="{{ job.title }}" class="form-control">
