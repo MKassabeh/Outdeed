@@ -41,21 +41,7 @@ div#div_home {
 /* CARDS */
 
 
-.card-short{
-  height: 250px !important;
-  width: 500px !important;
-  border-radius: 12px;
-}
 
-
-.card .card-body .row .profile-img img{
-  height: 125px;
-  width: 125px;  
-}
-
-.btn-card{
-  border-radius: 20px;
-}
 
 
 
