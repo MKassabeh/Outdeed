@@ -159,7 +159,7 @@ class CompanyController extends AbstractController
                 $em = $this->registryManager->getManager();
                 $company = new Company();
 
-                //concatenation de l'adresse dans la variable $address
+                // concatenation de l'adresse dans la variable $address
                 $address = $safe['street'].' '.$safe['postal_code'].' '.$safe['city'];
 
                 // Clé d'api
