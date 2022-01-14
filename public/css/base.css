@@ -44,7 +44,6 @@ div#div_home {
 
 
 
-
 /* AJOUTER UNE OFFRE */
 
 body{
@@ -405,7 +404,7 @@ a.my_links_r:hover {
   }
   
   
-  #fillCandidate,#addArticle {
+  #fillCandidate {
 
 	width: 100vh;
 	margin: 10px auto;
@@ -488,13 +487,6 @@ a.my_links_r:hover {
 	border-radius: 100%;
   }
 
-  .select_edit {
-	padding: 6px;
-	height: 32px;
-	border-radius: 2px;
-  }
-
-
   @media (max-width: 820px) { 
 
 	#fillCandidate {
@@ -514,7 +506,3 @@ a.my_links_r:hover {
 	  }
 
    }
-
-
-
-   

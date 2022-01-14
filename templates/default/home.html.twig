@@ -52,32 +52,35 @@
 
 
 
-<div class="container d-flex flex-wrap justify-content-around">
-    {% for job in jobs %}
-    <div style="width:40% !important;">
-        <div class="card card-short  m-5">
-            <div class="card-body">
-                <div class="row d-flex justify-content-around">
-                    <div class="col-4 profile-img">
-                        <a href="{{ path('job_list',{category:job.category}) }}"><img class="img-fluid"
-                                src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
-                                alt="{{ job.category }}"></a>
-                    </div>
-                    <div class="col-8 profile-content">
-                        <p>{{job.title}}</p>
-                        <p>{{job.category}}</p>
-                        <p>{{job.city}}</p>
-                    </div>
-                </div>
-
-                <div class="card-footer">
+<div class="container">
+    <div class="row justify-content-center">
+        {% for job in jobs %}
+        <div class="col-lg-5 col-md-10 col-12">
+            <div class="card card-short my-5">
+                <div class="card-body p-0">
                     <div class="row d-flex justify-content-around">
-                        <div class="col-8">
-                            <p>Publiée le : {{ job.publishedAt|date('d-m-Y') }}</p>
+                        <div class="col-3 profile-img">
+                            <a href="{{ path('job_list') }}"><img class="my-3 mx-3 img-fluid"
+                                    src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
+                                    alt="{{ job.category }}">
+                            </a>
                         </div>
-                        <div class="col-4">
-                            <a href="{{ path('job_view', {id: job.id}) }}" class="btn btn-outline-primary btn-card">Voir
-                                plus ...</a>
+                        <div class="col-5 mt-3 profile-content">
+                            <p>{{job.title}}</p>
+                            <p>{{job.category}}</p>
+                            <p>{{job.city}}</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row d-flex justify-content-around">
+                            <div class="col-8">
+                                <p>Publiée le : {{ job.publishedAt|date('d-m-Y') }}</p>
+                            </div>
+                            <div class="col-4">
+                                <a href="{{ path('job_view', {id: job.id}) }}"
+                                    class="btn btn-outline-primary btn-card">Voir
+                                    plus ...</a>
+                            </div>
                         </div>
                     </div>
                 </div>
