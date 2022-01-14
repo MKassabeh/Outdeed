@@ -99,10 +99,14 @@ class DefaultController extends AbstractController
         }
 
         $em = $this->registryManager->getManager();
-        $company = $em->getRepository(Company::class)->findBy(['user' => $this->getUser()]);        
+        $company = $em->getRepository(Company::class)->findBy(['user' => $this->getUser()]); 
+        $job = $em->getRepository(Job::class)->findBy(['published_by' => $this->getUser()]); 
+        
+        
 
         return $this->render('company/account.html.twig', [
             'company' => $company[0],
+            'job' => $job,
         ]);
     }
 

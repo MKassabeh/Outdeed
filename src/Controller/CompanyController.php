@@ -359,6 +359,7 @@ class CompanyController extends AbstractController
         //Now we create the $companies variable and use the $em in order to access the Company class, getRepository(Company::class)
         //this way we are able to find the desired table by using ->findBy(['category'=>$companyCategory]); 
         $companies = $em->getRepository(Company::class)->findBy(['category'=> $companyCategory]);
+        $job = $em->getRepository(Job::class)->findBy(['published_by'=> $this ->getUser()]);
 
         $key_google = 'AIzaSyCiV2wpadEQxdTVMW9h5kuZsL3_uHyOsik';
 
@@ -369,7 +370,8 @@ class CompanyController extends AbstractController
             'categories'               =>     $categories,
             'logoCategories'           =>     $logoCategories,
             'key_google'               =>     $key_google,
-            
+            'job'   => $job,
+             
         ]);
     }
 }
