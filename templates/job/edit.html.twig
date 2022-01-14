@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="container blanc py-2 mt-3 ">
-    <h1 class="font_title text-center">Editer une offre d'emploi</h1>
+    <h1 class="font_title text-center fw-bold">Editer une offre d'emploi</h1>
 </div>
 
 
@@ -14,6 +14,7 @@
         <div class="mb-3">
             <label class="label_candidate" for="title">Titre de l'offre : </label>
             <input class="input_candidate" type="text" name="title" id="title" value="{{ job.title }}" class="form-control">
+              <p class="fst-italic">Valeur actuelle : {{ job.title }}</p>
         </div>
 
         <div class="mb-3">
@@ -24,29 +25,32 @@
                 <option value="{{ value }}">{{ value }}</option>
                 {% endfor %}
             </select>
+            <p class="fst-italic">Valeur actuelle : {{ job.category }}</p>
         </div>
         <div class="mb-3">
             <label class="label_candidate" for="description_company">Description de l'entreprise : </label>
             <textarea class="input_candidate" name="description_company" id="description_company" rows="6" class="form-control"></textarea>
-            <p>Valeur actuelle : {{ job.descriptionCompany }}</p>
+            <p class="fst-italic">Valeur actuelle : {{ job.descriptionCompany }}</p>
         </div>
         <div class="mb-3">
             <label class="label_candidate" for="description_job">Description de l'offre : </label>
             <textarea class="input_candidate" name="description_job" id="description_job" rows="6" class="form-control"></textarea>
-            <p>Valeur actuelle : {{ job.descriptionJob }}</p>
+            <p class="fst-italic">Valeur actuelle : {{ job.descriptionJob }}</p>
         </div>
         <div class="mb-3">
             <label class="label_candidate" for="description_applicant">Description du profil recherché</label>
             <textarea class="input_candidate" name="description_applicant" id="description_applicant" rows="6" class="form-control"></textarea>
-            <p>Valeur actuelle : {{ job.descriptionApplicant }}</p>
+            <p class="fst-italic">Valeur actuelle : {{ job.descriptionApplicant }}</p>
         </div>
         <div class="mb-3">
             <label class="label_candidate" for="city">Ville : </label>
             <input class="input_candidate" type="text" name="city" id="city" value="{{ job.city }}" class="form-control">
+            <p class="fst-italic">Valeur actuelle : {{ job.city }}</p>
         </div>
         <div class="mb-3">
             <label class="label_candidate" for="wages">Estimation du salaire : </label>
             <input class="input_candidate" type="text" name="wages" value="{{ job.wages }}" id="wages" class="form-control">
+            <p class="fst-italic">Valeur actuelle : {{ job.wages }}</p>
         </div>
         <div class="mb-3">
             <label class="label_candidate" for="contract">Type de contrat : </label>
@@ -56,20 +60,22 @@
                 <option value="{{ value }}">{{ value }}</option>
                 {% endfor %}
             </select>
+            <p class="fst-italic">Valeur actuelle : {{ job.contractType }}</p>
         </div>
         <div class="mb-3">
             <label class="label_candidate" for="benefit">Avantages : </label>
             <textarea class="input_candidate" name="benefit" id="benefit" rows="6" class="form-control"></textarea>
-            <p>Valeur actuelle : {{ job.benefits }}</p>
+            <p class="fst-italic">Valeur actuelle : {{ job.benefits }}</p>
         </div>
         <div class="mb-3">
             <label class="label_candidate" for="schedule">Horaires : </label>
             <input class="input_candidate" type="text" name="schedule" value="{{ job.schedule }}" id="schedule" class="form-control">
+            <p class="fst-italic">Valeur actuelle : {{ job.schedule }}</p>
         </div>
         <div class="mb-3">
             <label class="label_candidate" for="comment">Commentaire : </label>
             <textarea class="input_candidate" name="comment" id="comment" rows="6" class="form-control"></textarea>
-            <p>Valeur actuelle : {{ job.companyComment }}</p>
+            <p class="fst-italic">Valeur actuelle : {{ job.companyComment }}</p>
         </div>
 
         <div class="text-center">

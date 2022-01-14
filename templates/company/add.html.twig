@@ -16,15 +16,15 @@
 	<div class="container my-5 ">
 		<div class="row justify-content-center ">
 			<div class="col-12 col-md-10 col-lg-8 blanc">
-				<form method="post" id="addArticle" enctype="multipart/form-data">
+				<form method="post" id="addArticle" class="p-5" enctype="multipart/form-data">
 					<div class="mb-3 fw-bold">
-						<label for="name">Nom de votre entreprise :
+						<label class="label_candidate" for="name">Nom de votre entreprise :
 						</label>
-						<input type="text" name="name" id="name" class="form-control">
+						<input type="text" name="name" id="name" class="form-control input_candidate">
 					</div>
 
 					<div class="mb-3 fw-bold">
-						<label for="category">Secteur d'activité :
+						<label class="label_candidate" for="category">Secteur d'activité :
 						</label>
 						<select name="category" id="category" class="form-select">
 							<option value="0" selected disabled>-- Choisir --</option>
@@ -34,61 +34,61 @@
 						</select>
 					</div>
 					<div class="mb-3 fw-bold">
-						<label for="description">Description de votre entreprise :
+						<label class="label_candidate" for="description">Description de votre entreprise :
 						</label>
-						<textarea name="description" id="description" rows="6" class="form-control"></textarea>
+						<textarea name="description" id="description" rows="6" class="form-control input_candidate"></textarea>
 					</div>
 					<div class="mb-3 fw-bold">
-						<label for="nb_employees">Nombre d'employés :
+						<label class="label_candidate" for="nb_employees">Nombre d'employés :
 						</label>
-						<input type="text" name="nb_employees" id="nb_employees" class="form-control">
+						<input type="text" name="nb_employees" id="nb_employees" class="form-control input_candidate">
 					</div>
 					<div class="mb-3 fw-bold">
-						<label for="street">Rue :
+						<label class="label_candidate" for="street">Rue :
 						</label>
-						<input type="text" name="street" id="street" class="form-control">
+						<input type="text" name="street" id="street" class="form-control input_candidate">
 					</div>
 					<div class="mb-3 fw-bold">
-						<label for="city">Ville :
+						<label class="label_candidate" for="city">Ville :
 						</label>
-						<input type="text" name="city" id="city" class="form-control">
+						<input type="text" name="city" id="city" class="form-control input_candidate">
 					</div>
 					<div class="mb-3 fw-bold">
-						<label for="postal_code">Code postal :
+						<label class="label_candidate" for="postal_code">Code postal :
 						</label>
-						<input type="number" name="postal_code" id="postal_code" class="form-control">
+						<input type="number" name="postal_code" id="postal_code" class="form-control input_candidate">
 					</div>
 					<div class="mb-3 fw-bold">
-						<label for="phone">Numéro de téléphone :
+						<label class="label_candidate" for="phone">Numéro de téléphone :
 						</label>
-						<input type="text" name="phone" id="phone" class="form-control">
+						<input type="text" name="phone" id="phone" class="form-control input_candidate">
 					</div>
 					<div class="mb-3 fw-bold">
-						<label for="contact_email">Adresse email :
+						<label class="label_candidate" for="contact_email">Adresse email :
 						</label>
-						<input type="text" name="contact_email" id="contact_email" class="form-control">
+						<input type="text" name="contact_email" id="contact_email" class="form-control input_candidate">
 					</div>
 
 					<div class="row">
 						
 						<div class="col-4 mb-3">
-							<label for="birth_d">Jour de création :</label>
-							<input type="number" name="birth_d" id="birth_d" min="1" max="31" class="form-control">
+							<label class="label_candidate fw-bold" for="birth_d">Jour de création :</label>
+							<input type="number" name="birth_d" id="birth_d" min="1" max="31" class="form-control input_candidate">
 						</div>
 						<div class="col-4 mb-3">
-							<label for="birth_m">Mois de création :</label>
-							<input type="number" name="birth_m" id="birth_m" min="1" max="12" class="form-control">
+							<label class="label_candidate fw-bold" for="birth_m">Mois de création :</label>
+							<input type="number" name="birth_m" id="birth_m" min="1" max="12" class="form-control input_candidate">
 						</div>
 						<div class="col-4 mb-3">
-							<label for="birth_y">Année de création :</label>
-							<input type="number" name="birth_y" min="1900" max="2022" id="birth_y" class="form-control">
+							<label class="label_candidate fw-bold" for="birth_y">Année de création :</label>
+							<input type="number" name="birth_y" min="1900" max="2022" id="birth_y" class="form-control input_candidate">
 						</div>
 						
 					</div>
 
                     <div class="row">                        
                         <div class="col-12">
-                            <label for="pdp">Photo de profil de l'entreprise (Logo , photo de l'entreprise, ...) * (PNG, JPEG ou JPG): </label>
+                            <label class="label_candidate fw-bold" for="pdp">Photo de profil de l'entreprise (Logo , photo de l'entreprise, ...) * (PNG, JPEG ou JPG): </label>
                         <input class="form-control" type="file" placeholder="Ajouter ma photo de profil" name="pdp" id="pdp" accept="images/jpeg, images/jpg, images/png">
                         </div>                        
                     </div>
