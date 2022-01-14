@@ -46,7 +46,18 @@ div#div_home {
   width: 500px !important;
   border-radius: 12px;
 }
-
+.logo:hover{
+	/* L'image est grossie de 25% */
+	-webkit-transform:scale(1.25); /* Safari et Chrome */
+	-moz-transform:scale(1.25); /* Firefox */
+	-ms-transform:scale(1.25); /* Internet Explorer 9 */
+	-o-transform:scale(1.25); /* Opera */
+	transform:scale(1.25);
+}
+.zoom {
+	width: 320px;
+	height: 240px;
+	}
 
 .card .card-body .row .profile-img img{
   height: 125px;

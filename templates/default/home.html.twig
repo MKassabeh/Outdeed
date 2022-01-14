@@ -56,7 +56,7 @@
             <div class="card-body">
                 <div class="row d-flex justify-content-around">
                     <div class="col-4 profile-img">
-                        <a href="{{ path('job_list') }}"><img class="img-fluid"
+                        <a href="{{ path('job_list',{category:job.category}) }}"><img class="img-fluid"
                                 src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
                                 alt="{{ job.category }}"></a>
                     </div>
