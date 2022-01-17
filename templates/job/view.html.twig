@@ -4,19 +4,23 @@
 
 {% block body %}
 <div class="my-5 container blanc">
-    <div class="card_container justify-content-around text-center">
+    <div class=" d-flex flex-column flex-md-row justify-content-around text-center">
         <div style="max-width: 800px !important;" class="card_body">
-            <div class="head">
-                <h1 class="mb-2 font_title">
-                    {{ job.title|capitalize }}
-                </h1>
-                <h3 class="font_title">
-                    {{ job.companyName }}
-                </h3>
+            <div class="row">
+                <div class="head col-12">
+                    <h1 class="mb-2 font_title">
+                        {{ job.title|capitalize }}
+                    </h1>
+                    <h3 class="font_title">
+                        {{ job.companyName }}
+                    </h3>
+                </div>
             </div>
+
             <div class="d-flex">
                 <div class="me-4">
-                    <img width="125" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}" alt="{{ job.category }}">
+                    <img width="125" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
+                        alt="{{ job.category }}">
                 </div>
                 <div>
                     <span style="font-size: 16px !important;"
@@ -27,7 +31,7 @@
                     <p class="text_head"><strong>Offre publiée le : </strong>{{ job.publishedAt ?
                         job.publishedAt|date('d/m/Y') : '' }}</p>
                 </div>
-                
+
             </div>
 
 
@@ -44,19 +48,19 @@
             {% endif %}
 
         </div>
-        <div style="max-width: 300px !important;">
+        <div>
             <div class="p-3 mt-5 border card-header">
                 <p class="text_head">{{ job.schedule|capitalize }}</p>
                 <p class="text_head">{{ job.wages|capitalize }} par mois</p>
                 <p class="text_head">{{ job.contractType|upper }}</p>
                 {% if app.user %}
-                    {% if (app.user.userType == 'candidate')%}
-                        <a href="{{ path('apply', {id: job.id}) }}" class="btn btn-outline-primary">Postuler <i class="fas fa-arrow-right"></i></a>
-                    {% endif %}    
+                {% if (app.user.userType == 'candidate')%}
+                <a href="{{ path('apply', {id: job.id}) }}" class="btn btn-outline-primary">Postuler <i
+                        class="fas fa-arrow-right"></i></a>
+                {% endif %}
                 {% endif %}
 
             </div>
-            <hr class="text-center mt-3 mb-3 mx-auto" width="200">
             <div class="container my-3">
                 <h5 class="text-center font_title">Commentaire de l'entreprise : </h5>
                 <p>{{ job.companyComment|nl2br }}</p>
@@ -65,10 +69,10 @@
     </div>
     <div class="text-center">
         <a href="{{ path('favourite_add', {id: job.id}) }}" class="mt-2 btn btn-outline-warning">
-            <i class="far fa-heart"></i> Ajouter aux favoris 
+            <i class="far fa-heart"></i> Ajouter aux favoris
         </a>
     </div>
-       <div class="text-center">
+    <div class="text-center">
         <a href="{{ path('report')}}" class="mt-2 btn btn-outline-warning">
             Signaler une offre
         </a>
@@ -77,21 +81,22 @@
     <h3 class="text-center mt-5">Dans la même catégorie</h3>
     <div class="d-flex justify-content-around w-100 mt-5">
         {% for jobs in jobs %}
-            {% if jobs.category == job.category  %}
-                {% if jobs.id != job.id %}
-                <div class="card mb-5" style="width: 18rem;">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="card-title">{{ jobs.title }}</h5>
-                            <img width="50" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}" alt="{{ job.category }}">
-                        </div>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ jobs.companyName}}</h6>
-                    <p class="card-text">{{ jobs.descriptionJob|nl2br }}</p>
-                    <a  href="{{ path('job_view', {id: jobs.id}) }}" class="card-link">Voir plus</a>
-                    </div>
+        {% if jobs.category == job.category %}
+        {% if jobs.id != job.id %}
+        <div class="card mb-5" style="width: 18rem;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">{{ jobs.title }}</h5>
+                    <img width="50" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
+                        alt="{{ job.category }}">
                 </div>
-                {% endif %}
-            {% endif %}
+                <h6 class="card-subtitle mb-2 text-muted">{{ jobs.companyName}}</h6>
+                <p class="card-text">{{ jobs.descriptionJob|nl2br }}</p>
+                <a href="{{ path('job_view', {id: jobs.id}) }}" class="card-link">Voir plus</a>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
         {% endfor %}
     </div>
 
