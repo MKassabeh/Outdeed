@@ -136,7 +136,7 @@ class ApplyController extends AbstractController
 
         // dd($applicants, $candidate);
 
-        // PROBLEME :
+        // PROBLEMATIQUE :
 
         // Je récupère les offres postés par l'entreprise connectée (stockées dans $offers) [Ligne 90]
         // Pour chaque offre de $offers, je stocke dans le tableau applicants[] les lignes de Apply (la/les postulations) 
@@ -144,8 +144,7 @@ class ApplyController extends AbstractController
         // Ensuite pour chaque élément de l'array $applicants[]
         // je stock dans un array $candidate[] la fiche candidat associé a lapostulation [Ligne 96/98]
 
-        // problème : c'est le bordel, je me perds, j'ai deux tableaux dégeulasses contenant eux-même des tableaux
-        // au secours (voir le dd en dessous)
+       
 
 
         return $this->render('apply/view.html.twig', [

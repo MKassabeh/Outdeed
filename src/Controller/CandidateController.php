@@ -6,6 +6,8 @@ use App\Entity\Candidate;
 use App\Entity\ProfessionalExperience;
 use App\Entity\Skill;
 use App\Entity\User;
+use App\Entity\Job;
+use App\Entity\Apply;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

@@ -312,8 +312,6 @@ div .row .login-right img{
 }
 
 
-
-
 .socials-container .card{
 	box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
 	border-radius: 12px;
@@ -339,6 +337,11 @@ div .row .login-right img{
 	width: 400px;
 }
 
+/* CANDIDATE PROFILE */
+
+.exp-container{
+	background-color: rgb(214, 214, 214);
+}
 
 /* ADMIN PAGE */
 
@@ -434,7 +437,6 @@ a.my_links_r:hover {
   }
   
 .input_candidate{
-	background: rgba(255,255,255,0.1);
 	border: none;
 	font-size: 16px;
 	height: auto;
@@ -442,8 +444,8 @@ a.my_links_r:hover {
 	outline: 0;
 	padding: 15px;
 	width: 100%;
-	background-color: #e8eeef;
-	color: #8a97a0;
+	background-color: #f5f5f5;
+	color: #252525;
 	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
 	margin-bottom: 30px;
   }

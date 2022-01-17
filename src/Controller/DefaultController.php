@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Candidate;
 use App\Entity\ProfessionalExperience;
 use App\Entity\Skill;
+use App\Entity\Apply;
 use App\Entity\User;
 use App\Entity\Job;
 use App\Entity\Company;
@@ -65,6 +66,7 @@ class DefaultController extends AbstractController
     public function account_candidate(): Response
     {
 
+
         // si je suis une entreprise -> redirection
         if ($this->getUser()->getUserType() == 'company') {
             return $this->redirectToRoute('account_company');
@@ -81,11 +83,19 @@ class DefaultController extends AbstractController
         $exps = $em->getRepository(ProfessionalExperience::class)->findBy(['candidate' => $candidate]);
         $skills = $em->getRepository(Skill::class)->findBy(['candidate' => $candidate]);
 
+        // Pour récuperer les offres auquel j'ai postulé
 
+        //Avec la variable $applications nous récupérons les candidatures dans la classse Apply 
+        //dans la session de l'utilisateur connecté 
+        $applications = $em->getRepository(Apply::class)->findBy(['user'=> $this->getUser()]);
+
+        
+        //Ensuite nous envoyons la variable $applications dans la vue
         return $this->render('candidate/account.html.twig', [
             'candidate' => $candidate[0],
             'experiences' => $exps,
-            'skills' => $skills
+            'skills' => $skills,
+            'applications' => $applications,
         ]);
     }
 
