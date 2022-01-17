@@ -3,204 +3,213 @@
 {% block title %}Outdeed - Fiche entreprise{% endblock %}
 
 {% block body %}
-	<div class="background-img d-flex ">
-		<div class="container banner mt-auto">
-			<div class="row banner-body align-items-end ">
-				<div class="col-3 banner-left ">
-				
-                        <img id="logo-company" class="img-fluid" height="250" src="{{ asset(company.pdp) }}" alt="{{ company.name }}">
-                    
-				</div>
-				<div class="col-9 banner-right">
-					<div class="row ">
+<div class="background-img d-flex ">
+    <div class="container banner mt-auto">
+        <div class="row banner-body align-items-end ">
+            <div class="col-3 banner-left ">
 
-						<div class="col-12 d-flex align-items-center justify-content-around">
-							<h1 class="font_title">{{ company.name }}</h1>
-							<span style="font-size: 16px !important;" class="badge bg-info text-dark">{{company.category}}</span>
-							<p class="text_head mb-0">
-								<strong>Localisation
-								</strong>
-								<i class="fas fa-map-marker-alt"></i>
-								:
-								{{company.city}}</p>
-						</div>
+                <img id="logo-company" class="img-fluid" height="250" src="{{ asset(company.pdp) }}"
+                    alt="{{ company.name }}">
 
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+            <div class="col-9 banner-right">
+                <div class="row ">
 
+                    <div class="col-12 d-flex align-items-center justify-content-around">
+                        <h1 class="font_title">{{ company.name }}</h1>
+                        <span style="font-size: 16px !important;"
+                            class="badge bg-info text-dark">{{company.category}}</span>
+                        <p class="text_head mb-0">
+                            <strong>Localisation
+                            </strong>
+                            <i class="fas fa-map-marker-alt"></i>
+                            :
+                            {{company.city}}
+                        </p>
+                    </div>
 
-	<div class="my-5 container">
-		<div class="card_container justify-content-between text-center">
-			<div style="max-width: 800px !important;" class="card_body">
-				<div class="d-flex">
-					<div>
-						<p class="text_head">
-							<strong>Date de création :
-							</strong>
-							{{ company.createdAt ?
-                        company.createdAt|date('d/m/Y') : '' }}</p>
-					</div>
-				</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-				<h3 class="font_title mt-4">
-					Description de l'entreprise :
-				</h3>
-				<p>{{ company.description|nl2br }}</p>
+<div class="my-5 container">
+    <div class="card_container justify-content-between text-center">
+        <div style="max-width: 800px !important;" class="card_body">
+            <div class="d-flex">
+                <div>
+                    <p class="text_head">
+                        <strong>Date de création :
+                        </strong>
+                        {{ company.createdAt ?
+                        company.createdAt|date('d/m/Y') : '' }}
+                    </p>
+                </div>
+            </div>
 
 
-			</div>
-			<div style="max-width: 300px !important;">
-				<div class="p-3 mt-5 border card-header">
-					<h5>Contactez-nous</h5>
-					<p class="text_head">
-						<strong>Email de contact :
-						</strong>
-						<br>{{ company.contactEmail }}</p>
-					<p class="text_head">
-						<strong>Numéro de téléphone :
-						</strong><br>{{ company.phone }}</p>
+            <h3 class="font_title mt-4">
+                Description de l'entreprise :
+            </h3>
+            <p>{{ company.description|nl2br }}</p>
 
 
-				</div>
-				<hr class="text-center mt-3 mb-3 mx-auto" width="200">
-			</div>
-		</div>
-	</div>
+        </div>
+        <div style="max-width: 300px !important;">
+            <div class="p-3 mt-5 border card-header">
+                <h5>Contactez-nous</h5>
+                <p class="text_head">
+                    <strong>Email de contact :
+                    </strong>
+                    <br>{{ company.contactEmail }}
+                </p>
+                <p class="text_head">
+                    <strong>Numéro de téléphone :
+                    </strong><br>{{ company.phone }}
+                </p>
 
-    
 
-	
-	<div class="container my-4">
-		<div class="row">
-			<div class="col-6">
-				<div id="map" class="map-container"></div>
+            </div>
+            <hr class="text-center mt-3 mb-3 mx-auto" width="200">
+        </div>
+    </div>
+</div>
 
-			</div>
-			<div class="col-6">
-				<div class="socials-container">
-					<div class="text-center">
-						<h3>Réseaux sociaux</h3>
-					</div>
-					<div class="card mt-4">
-						<div class="card-body">
-							<div class="row align-items-center">
-								<div class="col-12 socials-logos d-flex justify-content-around">
-									<p class="mb-0">
-										<i class="fab fa-facebook-f"></i>
-									</p>
-									<p class="mb-0">
-										<i class="fab fa-twitter"></i>
-									</p>
-									<p class="mb-0">
-										<i class="fab fa-instagram"></i>
-									</p>
-									<p class="mb-0">
-										<i class="fab fa-youtube"></i>
-									</p>
-									<p class="mb-0">
-										<i class="fab fa-linkedin"></i>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 
-			</div>
-		</div>
-	</div>
 
-	
-	<div class="container">
-		<div class="col-12">
-			<h2 class="mt-5">Offres d'emploi de cette entreprise</h2>
-		</div>
-	</div>
 
-	<div class="container w-100 mt-5">
-		<div class="row">
-			<div class="col-12 d-flex">
+<div class="container my-4">
+    <div class="row">
+        <div class="col-6">
+            <div id="map" class="map-container"></div>
 
-				{% for job in jobs %}
-				
-					<div class="card col-3 m-2" style="width: 18rem;">
-						<div class="card-body">
-							<div class="d-flex justify-content-between">
-								<h5 class="card-title">{{ job.title }}</h5>
-								<img width="50" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}">
-							</div>
-							<p class="card-text">{{ job.descriptionJob|nl2br }}</p>
-							<a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a>
-						</div>
-					</div>
-				
-				{% endfor %}
-			</div>
-		</div>
-	</div>
+        </div>
+        <div class="col-6">
+            <div class="socials-container">
+                <div class="text-center">
+                    <h3>Réseaux sociaux</h3>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-12 socials-logos d-flex justify-content-around">
+                                <p class="mb-0">
+                                    <i class="fab fa-facebook-f"></i>
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fab fa-twitter"></i>
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fab fa-instagram"></i>
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fab fa-youtube"></i>
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fab fa-linkedin"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-	<div class="container">
-		<div class="col-12">
-			<h2 class=" mt-5">Entreprises du même secteur</h2>
-			
-		</div>	
-	</div>
+        </div>
+    </div>
+</div>
 
-	<div class="container  w-100 mt-5">
-		<div class="row">
-			<div class="col-12 d-flex">
-			{% for companies in companies %}
-			
-				<div class="col-3">
-					<div class="card">
-						<div class="card-body">
-							<div class="d-flex justify-content-between">
-								<h5 class="card-title">{{ companies.name }}</h5>
-								<img width="50" class="img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}">
-							</div>
-							<p class="card-text">{{ companies.description|nl2br|slice(0,150) }} . . .</p>
-							<a href="{{ path('company_view', {id: companies.id}) }}" class="card-link">Voir plus</a>
-						</div>
-					</div>
-				</div>
-				
-			{% endfor %}
-			</div>
-		</div>
-	</div>
+
+<div class="container">
+    <div class="col-12">
+        <h2 class="mt-5">Offres d'emploi de cette entreprise</h2>
+    </div>
+</div>
+
+<div class="container w-100 mt-5">
+    <div class="row">
+
+
+        {% for job in jobs %}
+
+        <div class="card col-3 m-2" style="width: 18rem;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">{{ job.title }}</h5>
+                    <img width="50" class="img-fluid"
+                        src="{{ asset('img/category/' ~ logoCategories[company.category]) }}"
+                        alt="{{ company.category }}">
+                </div>
+                <p class="card-text">{{ job.descriptionJob|nl2br }}</p>
+                <a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-12">
+        <h2 class=" mt-5">Entreprises du même secteur</h2>
+
+    </div>
+</div>
+
+<div class="container w-100 mt-5">
+    <div class="row">
+        <div class="col-12 d-flex">
+            {% for companies in companies %}
+
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title">{{ companies.name }}</h5>
+                            <img width="50" class="img-fluid"
+                                src="{{ asset('img/category/' ~ logoCategories[company.category]) }}"
+                                alt="{{ company.category }}">
+                        </div>
+                        <p class="card-text">{{ companies.description|nl2br|slice(0,150) }} . . .</p>
+                        <a href="{{ path('company_view', {id: companies.id}) }}" class="card-link">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}
 
 {% block javascripts %}
-			<script>
-					var map;
-					function initMap() 
-					{
+<script>
+    var map;
+    function initMap() {
 
-						//the location 
-						const spot = {lat: {{company.lat }}, lng: {{company.lng }}};
-						
-						//the map centered at the location
-						map = new google.maps.Map(document.getElementById('map'), {
-						center: {lat: {{company.lat}}, lng: {{company.lng}}},
-						zoom: 16,
+        //the location 
+        const spot = { lat: {{ company.lat }}, lng: { { company.lng } }};
+
+    //the map centered at the location
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: {{ company.lat }}, lng: {{ company.lng }}},
+        zoom: 16,
 						
 						});
-						// The marker, positioned at the targeted location
-						const marker = new google.maps.Marker({
-						position: spot,
-						map: map,
-						title: "{{company.name}}",
-						});
+    // The marker, positioned at the targeted location
+    const marker = new google.maps.Marker({
+        position: spot,
+        map: map,
+        title: "{{company.name}}",
+    });
 					}
-			</script>
+</script>
 
-			
-			<script src="https://maps.googleapis.com/maps/api/js?key={{key_google}}&callback=initMap"async defer></script>
-		
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{key_google}}&callback=initMap" async defer></script>
+
 {% endblock %}
