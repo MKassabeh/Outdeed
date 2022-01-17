@@ -19,10 +19,10 @@
         <span>Ville de résidence : {{candidate.city}}</span><br>
         <span>Adresse : {{candidate.address}}</span><br>
         <span>Date de naissance : {{candidate.birthdate|date('d-m-Y') }}</span><br>
-        <div class="text-center mt-4">
+        <div class="mt-4">
             <a class="btn btn-outline-secondary"
                 href="{{ path('candidate_edit', {id: candidate.id}) }}">Editer</a>
-        </div>  
+            </div>  
     </div>
     <div>
 
