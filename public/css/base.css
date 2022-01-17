@@ -343,6 +343,13 @@ div .row .login-right img{
 /* ADMIN PAGE */
 
 /* NAVBAR */	
+
+#menu-2{
+	min-width: 13rem;
+}
+#menu-3{
+	min-width: 13rem;
+}
 .nav-admin{
 	background-color: white;
 	width: 20vh;

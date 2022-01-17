@@ -8,7 +8,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="row collapse navbar-collapse " id="navbarNavDropdown">
-            <ul class="col-4 navbar-nav nav-fill w-100">
+            <ul class="col-4 navbar-nav nav-fill w-100" style="position: inherit !important;">
                 <li class="col-4 nav-link">
                     <a class="nav-link active" aria-current="page" href="{{path('home')}}"><i class="fas fa-home"></i>
                         Accueil</a>
@@ -18,7 +18,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Offres d'emploi
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <ul class="dropdown-menu" id="menu-1" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ path('job_list')}}"><i class="fas fa-list-ul"></i> Liste
                                 des jobs</a></li>
                         {% if (app.user) %}
@@ -34,7 +34,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Les entreprises
                     </a>
-                    <ul class="sous-link dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <ul class="sous-link dropdown-menu" id="menu-2" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ path('company_list') }}"><i
                                     class="fas fa-list-ul"></i>Liste des entreprises</a></li>
                     </ul>
@@ -64,19 +64,19 @@
                         {{ app.user.username|capitalize }}
 
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <ul class="dropdown-menu" id="menu-3" aria-labelledby="navbarDropdownMenuLink">
                         {% if (app.user.userType == 'company') %}
                         <li><a class="dropdown-item" href="{{ path('account_company') }}"><i class="fas fa-user"></i>
                                 Mon compte</a></li>
                         <li><a class="dropdown-item" href="{{ path('favourite_list') }}"><i class="fas fa-heart"></i>
                                 Mes offres favorites</a></li>
-                        <li><a class="dropdown-item" href="{{ path('offer_applicant') }}"><i
+                        <li><a class="dropdown-item d-flex flex-wrap" href="{{ path('offer_applicant') }}"><i
                                     class="fas fa-folder-open"></i>
                                 {% if count.getNotification(app.user.id) != 0 %}
                                 <span class="badge bg-primary"><i class="far fa-bell"></i> {{
                                     count.getNotification(app.user.id) }}</span>
                                 {% endif %}
-                                Mes offres d'emplois</a></li>
+                                <span class="ms-2">Mes offres d'emplois</span></a></li>
 
                         <li>
                             <hr class="dropdown-divider">
