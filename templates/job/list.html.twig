@@ -21,26 +21,10 @@
 
 
 <div class="container" id="tri">
-    <div class="row mb-2">
-        <div class="col-lg-6 col-md-2 col-2"></div>
-        <div class="col-lg-3 col-6">
-            <form method="get" id="category_sort">
-                <select class="form-select" name="category" id="category">
-                    <option value="0" selected disabled>-- Recherche par catégories --</option>
-                    {% for category in categories %}
-                    <option value="{{ category }}">{{ category }}</option>
-                    {% endfor %}
-                </select>
-        </div>
-        <div class="col-lg-1 col-2">
-            <input type="submit" class="btn btn-search" value="Go !">
-            </form>
-        </div>
-    </div>
     <div class="row">
-        <div class="col-lg-6 col-2"></div>
-        <div class="col-lg-3 col-6">
-            <form method="get" id="job_sort">
+        <div class="col-lg-3 col-2"></div>
+        <div class="col-lg-7 col-6">
+            <form method="get" class="d-flex" id="job_sort">
                 <select class="form-select" name="sort" id="sort">
                     <option value="0" selected disabled>-- Trier par --</option>
                     <option value="nameASC">Ordre alphabetique</option>
@@ -49,6 +33,12 @@
                     <option value="dateDESC">Date (plus récente à la plus ancienne)</option>
                     <option value="categoryASC">Catégories (Ordre alphabetique)</option>
                     <option value="categoryDESC">Categories (Ordre alphabetique inversé)</option>
+                </select>
+                <select class="form-select" name="category" id="category">
+                    <option value="0" selected disabled>-- Recherche par catégories --</option>
+                    {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
                 </select>
         </div>
         <div class="col-lg-1 col-2">
