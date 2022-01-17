@@ -49,9 +49,12 @@
                 <p class="text_head">{{ job.schedule|capitalize }}</p>
                 <p class="text_head">{{ job.wages|capitalize }} par mois</p>
                 <p class="text_head">{{ job.contractType|upper }}</p>
-                {% if (app.user.userType == 'candidate') %}
-                <a href="{{ path('apply', {id: job.id}) }}" class="btn btn-outline-primary">Postuler <i class="fas fa-arrow-right"></i></a>
+                {% if app.user %}
+                    {% if (app.user.userType == 'candidate')%}
+                        <a href="{{ path('apply', {id: job.id}) }}" class="btn btn-outline-primary">Postuler <i class="fas fa-arrow-right"></i></a>
+                    {% endif %}    
                 {% endif %}
+
             </div>
             <hr class="text-center mt-3 mb-3 mx-auto" width="200">
             <div class="container my-3">

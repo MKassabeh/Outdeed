@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Outdeed - Réclamation{% endblock %}
+
+
+{% block body %}
+
+<div class="container mt-3 py-3">
+    <div class="row justify-content-center ">
+        <div class="col-8 col-md-8 col-lg-8 blanc">
+            <h1 class="text-center font_title fw-bold">Envoyer un ticket au support</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5 ">
+    <div class="row justify-content-center ">
+        <div class="col-8 col-md-8 col-lg-8 blanc">
+            <form method="post" id="addReport" class="p-5">
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="title">Titre du signalement *: </label>
+                    <input class="input_candidate" type="text" name="title" id="title" class="form-control">
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="description">Description du signalement *: </label>
+                    <textarea class="input_candidate" name="description" id="description" rows="6"
+                        class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3 text-center">
+                    <input type="submit" name="submit" class="btn button_candidate" value="Envoyer">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
