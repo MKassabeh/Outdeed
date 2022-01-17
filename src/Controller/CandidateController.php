@@ -77,11 +77,15 @@ class CandidateController extends AbstractController
             if (strlen($safe['address']) > 70 || strlen($safe['address']) <= 0) {
                 $errors[] = 'Veuillez renseigner votre adresse, maximum 70 caractères.';
             }
+            if (!empty($safe['birth_m']) && !empty($safe['birth_d']) && !empty($safe['birth_y'])) {
+                if (!checkdate($safe['birth_m'], $safe['birth_d'], $safe['birth_y'])) {
+                    $errors[] = 'Veuillez renseigner une date de naissance correcte';
+                }
+            } else{
+                $errors[] = 'Veuillez renseigner une date de naissance';
 
-            if (!checkdate($safe['birth_m'], $safe['birth_d'], $safe['birth_y'])) {
-                $errors[] = 'Veuillez renseigner une date de naissance correcte';
             }
-
+        
             if (count($errors) == 0) {
                 $candidate[0]
                     ->setCity($safe['city'])
