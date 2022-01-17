@@ -59,34 +59,34 @@
 </div>
 
 <div class="container py-3">
-    
+
     {% if jobs is empty %}
     {% include 'empty.html.twig' %}
     {% endif %}
     {% for job in jobs %}
     <div class="row justify-content-center">
         <div class="col-10 col-md-8 col-lg-10 blanc m-3">
-                {% if app.user %}
-                        <div class="card m-3 {% if app.user.id == job.publishedBy.id and app.user.userType == 'company' %} border-primary {% endif %}">
-                {% endif %}
+
+            <div
+                class="border card m-3 {% if app.user %}{% if app.user.id == job.publishedBy.id and app.user.userType == 'company' %} border-primary {% endif %} {% endif %}">
+
                 <div class="card-header p-4">
                     <h5 class="font_title">
                         {{ job.title|capitalize }} | {{job.companyName|capitalize}}
-                {% if app.user %}
-                    {% if (app.user.userType == 'candidate')%}
+                        {% if app.user %}
+                        {% if (app.user.userType == 'candidate')%}
                         {% if app.user.id == job.publishedBy.id %}
                         <a title="Modifier" style="color : black !important;" class="ms-2"
                             href="{{ path('job_edit', {id: job.id}) }}"><i class="far fa-edit"></i></a>
                         <a title="Supprimer" style="color : black !important;"
-                            href="{{ path('job_delete', {id: job.id}) }}"><i
-                                class="far fa-trash-alt"></i></a>
+                            href="{{ path('job_delete', {id: job.id}) }}"><i class="far fa-trash-alt"></i></a>
                     </h5>
                     <p class="text-muted fst-italic mt-2">J'ai publié cette offre</p>
                     {% else %}
                     </h5>
-                        {% endif %}
-                    {% endif %}    
-                {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
 
                 </div>
                 <div class="card-body">
@@ -121,7 +121,7 @@
                 </div>
             </div>
         </div>
-    
+
         {% endfor %}
     </div>
 </div>
