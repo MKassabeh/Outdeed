@@ -23,6 +23,9 @@ class Report
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
+    #[ORM\Column(type: 'boolean')]
+    private $admin_checked;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Report
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAdminChecked(): ?bool
+    {
+        return $this->admin_checked;
+    }
+
+    public function setAdminChecked(bool $admin_checked): self
+    {
+        $this->admin_checked = $admin_checked;
 
         return $this;
     }

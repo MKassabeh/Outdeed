@@ -46,6 +46,7 @@ class ReportController extends AbstractController
                 $report
                     ->setTitle($safe['title'])
                     ->setDescription($safe['description'])
+                    ->setAdminChecked(false)
                     ->setUser($this->getUser());
 
                 $em->persist($report);
