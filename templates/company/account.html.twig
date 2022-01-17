@@ -73,12 +73,12 @@
 					<div class="col-12">
 						<h3 class="mt-5">Vos offres d'emploi</h3>
 
-						<div class="d-flex">	
+						<div class="d-md-flex flex-sm-column justify-content-sm-center">	
                         {% for job in job %}
                         
-                            <div class="card mx-1 col-3">
+                            <div class="card mx-1 col-12 text-center col-md-3">
                                 <div class="card-body">
-                                    <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center justify-content-center justify-content-md-between">
                                         <h5 class="card-title">{{ job.title }}</h5>
                                     </div>
                                     <p class="card-text">{{ job.contractType }}</p>
