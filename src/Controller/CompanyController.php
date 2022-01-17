@@ -343,7 +343,7 @@ class CompanyController extends AbstractController
 
         $categories = $controller->categories;
         $logoCategories = $controller ->logoCategories;
-
+        
 
         $em = $this->registryManager->getManager();
 
@@ -355,11 +355,12 @@ class CompanyController extends AbstractController
         //we create the $companyCategory variable and we set it equal to the $company varibale previously created
         //By doing so we are now able to use the getCategory() function on the entity
         $companyCategory = $company ->getCategory();
- 
+        $companyId = $company->getUser()->getId();
         //Now we create the $companies variable and use the $em in order to access the Company class, getRepository(Company::class)
         //this way we are able to find the desired table by using ->findBy(['category'=>$companyCategory]); 
         $companies = $em->getRepository(Company::class)->findBy(['category'=> $companyCategory]);
-        $job = $em->getRepository(Job::class)->findBy(['published_by'=> $this ->getUser()]);
+
+        $job = $em->getRepository(Job::class)->findBy(['published_by'=>$companyId]);
 
         $key_google = 'AIzaSyCiV2wpadEQxdTVMW9h5kuZsL3_uHyOsik';
 
@@ -370,7 +371,7 @@ class CompanyController extends AbstractController
             'categories'               =>     $categories,
             'logoCategories'           =>     $logoCategories,
             'key_google'               =>     $key_google,
-            'job'   => $job,
+            'jobs'                     =>     $job,
              
         ]);
     }

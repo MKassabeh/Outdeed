@@ -121,10 +121,11 @@
 		</div>
 	</div>
 
-	<div class="container  w-100 mt-5">
+	<div class="container w-100 mt-5">
 		<div class="row">
 			<div class="col-12 d-flex">
-				{% for job in job %}
+
+				{% for job in jobs %}
 				
 					<div class="card col-3 m-2" style="width: 18rem;">
 						<div class="card-body">
@@ -149,9 +150,9 @@
 		</div>	
 	</div>
 
-	<div class="container d-flex justify-content-around w-100 mt-5">
+	<div class="container  w-100 mt-5">
 		<div class="row">
-			
+			<div class="col-12 d-flex">
 			{% for companies in companies %}
 			
 				<div class="col-3">
@@ -165,10 +166,10 @@
 							<a href="{{ path('company_view', {id: companies.id}) }}" class="card-link">Voir plus</a>
 						</div>
 					</div>
-					</div>
+				</div>
 				
-		{% endfor %}
-			
+			{% endfor %}
+			</div>
 		</div>
 	</div>
 
