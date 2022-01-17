@@ -1,0 +1,42 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Outdeed - Admin{% endblock %}
+
+{% block body %}
+{# # affiche tous les messages flash #}
+{% for level, messages in app.flashes %}
+{% for message in messages %}
+<div class="alert alert-{{ level }}">{{ message|raw}}
+</div>
+{% endfor %}
+{% endfor %}
+
+<div class="container py-3">
+    <div class="row justify-content-center ">
+        <div class="col-12 col-md-10 col-lg-8 blanc">
+            <h1 class="text-center">Liste des signalements</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3 py-3">
+    <div class="row justify-content-center">
+        {% for report in reports %}
+            {% if report.adminChecked == false %}
+                <div class="col-md-10 col-lg-8 blanc m-3">
+                    <div class="card m-3">
+                        <div class="card-body d-flex justify-content-between">
+                                <div>
+                                    <p class="card-title">{{ report.title }}</p>
+                                    <p class="card-title">{{ report.description }}</p>
+                                </div>
+                            <a class="nav-link" href="{{ path('admin_report_view', {id: report.id}) }}">View Report</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

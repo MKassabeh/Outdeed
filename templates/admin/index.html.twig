@@ -7,4 +7,88 @@
     <h1 class="mt-0 container text-center">
         Vous êtes sur la page administrateur
     </h1>
+
+<!-- 
+    <div class="container mt-3 py-3">
+        <div class="row justify-content-center">
+            {% for report in reports %}
+                    <div class="col-md-10 col-lg-8 blanc m-3">
+                        <div class="card m-3">
+                            <div class="card-body d-flex justify-content-between">
+                                    <div>
+                                        <p class="card-title">{{ report.title }}</p>
+                                        <p class="card-title">{{ report.description }}</p>
+                                    </div>
+                                <a class="nav-link" href="{{ path('admin_report_view', {id: report.id}) }}">View Report</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    
+    <div class="container mt-3 py-3">
+        <div class="row justify-content-center">
+            {% for job in jobs %}
+            <div class="col-md-10 col-lg-8 blanc m-3">
+                <div class="card m-3">
+                    <div class="card-header p-4">
+                        <h5 class="font_title"> {{ job.title|capitalize }} | {{job.companyName|capitalize}}</h5>                    
+                    </div>
+                    <div class="card-body d-flex justify-content-between">
+                            <div>
+                                <p class="card-title">{{ job.city }}</p>
+                                <p class="card-title">{{ job.wages }} par mois | {{ job.contractType }}</p>
+                                <p class="card-text">{{ job.descriptionJob|slice(0, 50) }}...</p>
+                                <a href="{{ path('job_view', {id: job.id}) }}" class="btn btn-outline-primary">Voir plus
+                                    ...</a>
+                                    <a class="btn btn-outline-danger" href="{{ path('job_delete', {id: job.id}) }}">Delete</a>
+                            </div>
+                            <div class="border rounded position-relative py-2 px-2 ">
+                                <p class="card-title"><strong>Salaire : </strong>{{ job.wages }} par mois </p>
+                                <p class="card-title"><strong>Horaires : </strong>{{ job.schedule }}</p>
+                                <p class="card_date text-muted position-absolute "><strong>Publiée le : </strong>{{
+                                    job.publishedAt|date('d-m-Y') }}</p>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="companies-body container mt-3 py-3">
+        <div class="row justify-content-center">
+            {% for company in companies %}
+            <div class="col-md-10 col-lg-8 blanc m-3">
+                <div class="card m-3">
+                    <div class="card-header p-4">
+                        <h5 class="font_title"> {{ company.name}}</h5>
+                    </div>
+                    <div class="card-body d-flex justify-content-between">
+                            <div>
+                                <p class="card-title">{{ company.category }}</p>
+                                <p class="card-text">{{ company.description|slice(0, 50) }}...</p>
+                                <a href="{{ path('company_view', {id: company.id}) }}" class="btn btn-outline-primary">Voir plus
+                                    ...</a>
+    
+                                <a class="btn btn-outline-danger"   href="{{ path('company_delete', {id: company.id}) }}">Delete</a>
+                            </div>
+                            <div class="border rounded py-2 px-2 ">
+                                <p class="card-title"><strong>Email : </strong>{{ company.contactEmail }}</p>
+                                <p class="card-title"><strong>Téléphone : </strong>{{ company.phone }}</p>
+                                <p class="card-title"><strong>Ville : </strong>{{ company.city }}</p>
+                                
+                            </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>   -->
 {% endblock %}
