@@ -59,7 +59,11 @@ h1, .font_title {
 
 .btn-primary{
     border-radius: 50%  !important;
-    border-color: rgb(33, 37, 41);
+    
+}
+
+.fas {
+    padding: 5px;
 }
 
 
