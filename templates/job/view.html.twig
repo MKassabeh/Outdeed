@@ -49,7 +49,7 @@
 
         </div>
         <div>
-            <div class="p-3 mt-5 border card-header">
+            <div class="p-3 mt-5 border card-header" style="border-radius: 20px;">
                 <p class="text_head">{{ job.schedule|capitalize }}</p>
                 <p class="text_head">{{ job.wages|capitalize }} par mois</p>
                 <p class="text_head">{{ job.contractType|upper }}</p>
@@ -83,15 +83,15 @@
         {% for jobs in jobs %}
         {% if jobs.category == job.category %}
         {% if jobs.id != job.id %}
-        <div class="card mb-5">
+        <div class="card mb-5 mx-md-2" style="border-radius: 20px;">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h5 class="col-6 card-title">{{ jobs.title }}</h5>
-                    <img class="img-fluid col-3" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
-                        alt="{{ job.category }}">
+                    <h5 class="col-12 card-title">{{ jobs.title|upper }}</h5>
+                    {# <img class="img-fluid col-3" src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
+                        alt="{{ job.category }}"> #}
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted">{{ jobs.companyName}}</h6>
-                <p class="card-text">{{ jobs.descriptionJob|nl2br|slice(0,150) }}</p>
+                <p class="card-text">{{ jobs.descriptionJob|slice(0,150) }}</p>
                 <a href="{{ path('job_view', {id: jobs.id}) }}" class="card-link">Voir plus</a>
             </div>
         </div>
