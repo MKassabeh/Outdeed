@@ -89,13 +89,13 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div class="container mb-3">
     <div class="row d-flex justify-content-center">
         {% for job in job %}
-        <div class="card mx-1 col-lg-3 col-md-6 col-12 m-auto d-flex">
+        <div class="card col-lg-3 col-md-6 col-12 m-auto d-flex my-2 my-md-0">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-center justify-content-md-between">
-                    <h5 class="card-title">{{ job.title }}</h5>
+                    <h5 class="card-title">{{ job.title|upper}}</h5>
                 </div>
                 <p class="card-text">{{ job.contractType }}</p>
                 <a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a>
