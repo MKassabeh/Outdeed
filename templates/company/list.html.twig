@@ -55,7 +55,7 @@
                         <img width="130" class="img-fluid" src="{{ asset(company.pdp) }}" alt="{{ company.name }}">
                     </div>
                     <div class="col-lg-5 col-md-6 col-12 mb-2 mb-md-0 mb-lg-0">
-                        <p class="card-title">{{ company.category }}</p>
+                        <p class="card-title"><strong>Secteur d'activité :</strong> {{ company.category }}</p>
                         <p class="card-text">{{ company.description|slice(0, 50) }}...</p>
                         <a href="{{ path('company_view', {id: company.id}) }}" class="btn btn-outline-primary">Voir plus
                             ...</a>
