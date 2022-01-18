@@ -22,11 +22,11 @@
 				<div class="col-12 col-md-8 col-lg-8">
 					{% if app.user.userType == "candidate" %}
 						<div class="row">
-							<div class="col-12 col-md-3 col-lg-3 text-center">
-								<img class="img-fluid profile-picture mb-3" src="{{candidate.pdp}}" alt="photo du candidat">
+							<div class="col-12 col-md-3 col-lg-3 text-center" style="border-radius: 20px;">
+								<img class="img-fluid profile-picture mb-3" style="border-radius: 20px;" src="{{candidate.pdp}}" alt="photo du candidat">
 							</div>
 							<div class="col-12 col-md-9 col-lg-9">
-								<div class="card p-1">
+								<div class="card p-1 my-3 my-md-0" style="border-radius: 20px;">
 									<div class="d-flex align-items-center justify-content-between p-2">
 										<p class="mb-0">
 											<strong>Nom complet :
@@ -64,9 +64,9 @@
 				</div>
 				<div class="col-12 col-md-4 col-lg-4">
 
-					<div class="card">
+					<div class="card" style="border-radius: 20px;">
 						<h2 class="text-center p-1">Mes candidatures</h2>
-						{# Grace au for , nous obtenons les applications de l'applicant
+						{# Grâce au for , nous obtenons les applications de l'applicant
 						                applicant = 1 postulation depuis laquelle nou récuperons l'offre d'emploi ,
 						                et ensuite nous récuperons le titre  
 						                #}
@@ -75,9 +75,6 @@
 							<div class="d-flex align-items-center justify-content-between p-3">
 								<span class="text-center p-1">{{applicant.getJob().getTitle()}}</span><br>
 								<span class="text-center p-1">{{applicant.getJob().getContractType()}}</span><br>
-								{# Voir avec l'equipe comment faire le lien #}
-								<a>vois plus</a>
-								{# <a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a> #}
 							</div>
 						{% endfor %}
 					</div>
@@ -90,7 +87,7 @@
 
         <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
-                <div class="exp-container text-center my-3">
+                <div class="exp-container text-center my-3" style="border-radius: 20px;">
                     <h2 class="p-4">Mes expériences professionnelles</h2>
                     {% if experiences %}
                         {% for experience in experiences %}
@@ -123,7 +120,7 @@
             </div>
 
             <div class="col-12 col-md-6 col-lg-6">
-                <div class="exp-container  text-center my-3">
+                <div class="exp-container  text-center my-3" style="border-radius: 20px;">
                     <h2 class="mb-2">Mes compétences techniques</h2>
 
                     {% if skills %}
