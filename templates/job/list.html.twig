@@ -49,70 +49,70 @@
 </div>
 
 <div class="container py-3">
+    <div class="row text-center text-md-start text-lg-start justify-content-center">
+        {% if jobs is empty %}
+        {% include 'empty.html.twig' %}
+        {% endif %}
+        {% for job in jobs %}
+        
+            <div class="col-10 col-md-10 col-lg-10 blanc m-3">
+                <div
+                    class="border card m-3 {% if app.user %}{% if app.user.id == job.publishedBy.id and app.user.userType == 'company' %} border-primary {% endif %} {% endif %}">
+                    <div class="card-header p-4">
+                        <h5 class="font_title">
+                            {{ job.title|capitalize }} | {{job.companyName|capitalize}}
+                            {% if app.user %}
+                            {% if (app.user.userType == 'candidate')%}
+                            {% if app.user.id == job.publishedBy.id %}
+                            <a title="Modifier" style="color : black !important;" class="ms-2"
+                                href="{{ path('job_edit', {id: job.id}) }}"><i class="far fa-edit"></i></a>
+                            <a title="Supprimer" style="color : black !important;"
+                                href="{{ path('job_delete', {id: job.id}) }}"><i class="far fa-trash-alt"></i></a>
+                        </h5>
+                        <p class="text-muted fst-italic mt-2">J'ai publié cette offre</p>
+                        {% else %}
+                        </h5>
+                        {% endif %}
+                        {% endif %}
+                        {% endif %}
 
-    {% if jobs is empty %}
-    {% include 'empty.html.twig' %}
-    {% endif %}
-    {% for job in jobs %}
-    <div class="row justify-content-center">
-        <div class="col-10 col-md-8 col-lg-10 blanc m-3">
-
-            <div
-                class="border card m-3 {% if app.user %}{% if app.user.id == job.publishedBy.id and app.user.userType == 'company' %} border-primary {% endif %} {% endif %}">
-
-                <div class="card-header p-4">
-                    <h5 class="font_title">
-                        {{ job.title|capitalize }} | {{job.companyName|capitalize}}
-                        {% if app.user %}
-                        {% if (app.user.userType == 'candidate')%}
-                        {% if app.user.id == job.publishedBy.id %}
-                        <a title="Modifier" style="color : black !important;" class="ms-2"
-                            href="{{ path('job_edit', {id: job.id}) }}"><i class="far fa-edit"></i></a>
-                        <a title="Supprimer" style="color : black !important;"
-                            href="{{ path('job_delete', {id: job.id}) }}"><i class="far fa-trash-alt"></i></a>
-                    </h5>
-                    <p class="text-muted fst-italic mt-2">J'ai publié cette offre</p>
-                    {% else %}
-                    </h5>
-                    {% endif %}
-                    {% endif %}
-                    {% endif %}
-
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-2 col-md-12 mb-md-3 mb-lg-0 text-center">
-                            <img width="142" class="img-fluid"
-                                src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
-                                alt="{{ job.category }}">
-                        </div>
-                        <div class="col-lg-7 col-md-6 my-lg-0 my-md-2 my-2">
-                            <p class="card-title">{{ job.city }}</p>
-                            <p class="card-title">{{ job.wages }} par mois | {{ job.contractType }}</p>
-                            <p class="card-text">{{ job.descriptionJob|slice(0, 50) }}...</p>
-                            <div class="text-lg-start text-md-center text-center">
-                                <a href="{{ path('job_view', {id: job.id}) }}"
-                                    class="mb-lg-0 mb-md-2 mb-2 btn btn-outline-primary">
-                                    Voir plus ...
-                                </a>
-                                <a href="{{ path('favourite_add', {id: job.id}) }}"
-                                    class="mb-lg-0 mb-md-0 mb-2 btn btn-outline-warning">
-                                    <i class="far fa-heart"></i> Ajouter aux favoris
-                                </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-12 mb-md-3 mb-lg-0 text-center">
+                                <img width="142" class="img-fluid"
+                                    src="{{ asset('img/category/' ~ logoCategories[job.category]) }}"
+                                    alt="{{ job.category }}">
                             </div>
-                        </div>
-                        <div class="border rounded col-lg-3 col-md-6 pt-3">
-                            <p class="card-title"><strong>Salaire : </strong>{{ job.wages }} par mois </p>
-                            <p class="card-title"><strong>Horaires : </strong>{{ job.schedule }}</p>
-                            <p class="card_date text-muted"><strong>Publiée le : </strong>{{
-                                job.publishedAt|date('d-m-Y') }}</p>
+                            <div class="col-lg-7 col-md-6 my-lg-0 my-md-2 my-2">
+                                <p class="card-title">{{ job.city }}</p>
+                                <p class="card-title">{{ job.wages }} par mois | {{ job.contractType }}</p>
+                                <p class="card-text">{{ job.descriptionJob|slice(0, 50) }}...</p>
+                                <div class="text-lg-start text-md-center text-center">
+                                    <a href="{{ path('job_view', {id: job.id}) }}"
+                                        class="mb-lg-0 mb-md-2 mb-2 btn btn-outline-primary">
+                                        Voir plus ...
+                                    </a>
+                                    <a href="{{ path('favourite_add', {id: job.id}) }}"
+                                        class="mb-lg-0 mb-md-0 mb-2 btn btn-outline-warning">
+                                        <i class="far fa-heart"></i> Ajouter aux favoris
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="border rounded col-lg-3 col-md-6 pt-3">
+                                <p class="card-title"><strong>Salaire : </strong>{{ job.wages }} par mois </p>
+                                <p class="card-title"><strong>Horaires : </strong>{{ job.schedule }}</p>
+                                <p class="card_date text-muted"><strong>Publiée le : </strong>{{
+                                    job.publishedAt|date('d-m-Y') }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        {% endfor %}
+            {% endfor %}
+        
     </div>
+
 </div>
 {% endblock %}
