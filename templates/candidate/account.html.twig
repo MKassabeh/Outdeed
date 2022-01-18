@@ -91,18 +91,14 @@
                     <h2 class="p-4">Mes expériences professionnelles</h2>
                     {% if experiences %}
                         {% for experience in experiences %}
-                            <div class="d-flex align-items-center justify-content-between p-3">
-                                <div class="d-flex align-items-center justify-content-around">
-                                    <h3 class="p-2 mt-0 mb-0">{{ experience.companyName }}</h3>
-                                    <p class="p-2 mt-0 mb-0">{{ experience.jobName }}
-                                        pendant{{ experience.duration }}{% if experience.duration == 1 %}
-                                            an
-                                        {% else %}
-                                            ans
-                                        {% endif %}
-                                    </p>
+                            <div class="row d-flex align-items-center justify-content-between p-3">
+                                <div class="col-4">
+                                    <h4 class="p-1 mt-0 mb-0">{{ experience.companyName }}</h4>
                                 </div>
-                                <div>
+								<div class="col-4">
+									<p class="p-1 mt-0 mb-0">{{ experience.jobName }} pendant {{ experience.duration }}{% if experience.duration == 1 %} an{% else %} ans {% endif %}</p>
+								</div>
+                                <div class="col-4">
                                     <a class="btn btn-outline-secondary" href="{{ path('experience_edit', {id: experience.id}) }}">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -125,17 +121,19 @@
 
                     {% if skills %}
                         {% for skill in skills %}
-                            <div class="d-flex align-items-center justify-content-between p-3">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <h3 class="p-2 mt-0 mb-0">{{ skill.skillName }}</h3>
-                                    <p class="p-2 mt-0 mb-0">{{ skill.yearsOfExperience }}
+                            <div class="row d-flex align-items-center justify-content-between p-3">
+                                <div class="col-4 ">
+                                    <h4 class="p-1 mt-0 mb-0">{{ skill.skillName }}</h4>
+                                </div>
+								<div class="col-4">
+									<p class="p-1 mt-0 mb-0">{{ skill.yearsOfExperience }}
                                         {% if skill.yearsOfExperience == 1 %}
                                             an
                                         {% else %}
                                             ans
                                         {% endif %}d'experience</p>
-                                </div>
-                                <div>
+								</div>
+                                <div class="col-4">
                                     <a class="btn btn-outline-secondary" href="{{ path('skill_edit', {id: skill.id}) }}">
                                         <i class="fas fa-edit"></i>
                                     </a>
