@@ -5,11 +5,11 @@
 {% block body %}
 
 	<div class="container background-img">
-		<div class="row banner-body my-4 d-flex align-items-end">
-			<div class="col-4 banner-left">
-					<img id="logo-company" class="img-fluid p-3" src="{{ asset(company.pdp) }}" alt="{{ company.name }}">
+		<div class="row banner-body my-4 d-flex flex-column flex-md-row align-items-md-end">
+			<div class="col-lg-3 col-md-12 banner-left text-center text-lg-start">
+					<img id="logo-company" class="img-fluid" src="{{ asset(company.pdp) }}" alt="{{ company.name }}">
 			</div>
-			<div class="col-8  banner-right ">
+			<div class="col-lg-9  col-md-12 banner-right ">
 					<div class="flex-md-row flex-column d-flex align-items-center justify-content-start justify-content-md-between text-center mx-3 mb-3 mb-md-0">
 						<h1 class="col-12 col-md-3 font_title">{{ company.name }}</h1>
 						<span style="font-size: 16px !important;" class="badge bg-info text-dark">{{company.category}}</span>
@@ -56,7 +56,12 @@
 
 		</div>
 	</div>
+	
+	<div class="container">	
 
+			<div id="map" class="map-container"></div>
+
+	</div>
 	{# START EMPLOIS #}
 	<div class="container">
 		<div class="row">
@@ -67,19 +72,17 @@
 	</div>
 
 	<div class="container mt-5">
-		<div class="row">
-			<div class="col-12 d-flex align-items-center justify-content-between">
-				{% for job in jobs|slice(0,5) %}
-					<div class="col-sm-12 col-md-6 col-lg-2">
-						<div class="card card-body p-3" style="border-radius: 20px;">
-							<h5 class="card-title my-2">{{ job.title|upper }}</h5>
-							{# <img  class="col-4  img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}"> #}
-							<p class="card-text">{{ job.descriptionJob|slice(0,130) }}. . .</p>
-							<a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a>
-						</div>
+		<div class="row d-flex flex-column flex-md-row align-items-md-center flew-wrap  justify-content-start">
+			{% for job in jobs|slice(0,5) %}
+				<div class="mt-2 col-12 col-md-6">
+					<div class="card card-body p-3" style="border-radius: 20px;">
+						<h5 class="card-title my-2">{{ job.title|upper }}</h5>
+						{# <img  class="col-4  img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}"> #}
+						<p class="card-text">{{ job.descriptionJob|slice(0,130) }}. . .</p>
+						<a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a>
 					</div>
-				{% endfor %}
-			</div>
+				</div>
+			{% endfor %}
 		</div>
 	</div>
 
