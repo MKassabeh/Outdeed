@@ -5,73 +5,68 @@
 {% block body %}
 
 <div class="container mt-3">
-    <h1 class="text-center font_title fw-bold">Editer une offre d'emploi</h1>
+    <h1 class="text-center font_title fw-bold">Editer ma fiche entreprise</h1>
 </div>
 
-<div class="container my-5">
-    <form method="post" id="addArticle">
-        <div class="mb-3">
-            <label for="name">Nom de l'entreprise : </label>
-            <input type="text" name="name" id="name" class="form-control">
-            <p>Valeur actuelle : {{ company.name }}</p>
-        </div>
-        <div class="mb-3">
-            <label for="description">Description de l'entreprise : </label>
-            <textarea name="description" id="description" rows="6" class="form-control"></textarea>
-            <p>Valeur actuelle : {{ company.description }}</p>
-        </div>
-        <div class="mb-3">
-            <label for="category">Secteur d'activité : </label>
-            <select name="category" id="category" class="form-select">
-                <option value="{{ company.category }}" selected>{{ company.category }}</option>
-                {% for value in categories_availables %}
-                <option value="{{ value }}">{{ value }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="contact_email">Email de contact : </label>
-            <textarea name="contact_email" id="contact_email" rows="6" class="form-control"></textarea>
-            <p>Valeur actuelle : {{ company.contactEmail }}</p>
-        </div>
-        <div class="mb-3">
-            <label for="city">Ville : </label>
-            <textarea name="city" id="city" rows="6" class="form-control"></textarea>
-            <p>Valeur actuelle : {{ company.city }}</p>
-        </div>
-        <div class="mb-3">
-            <label for="phone">Téléphone : </label>
-            <input type="text" name="phone" id="phone" class="form-control">
-            <p>Valeur actuelle : {{ company.phone }}</p>
-        </div>
-        <div class="mb-3">
-            <label for="nb_employees">Nombre d'employé : </label>
-            <input type="text" name="nb_employees" id="nb_employees" class="form-control">
-            <p>Valeur actuelle : {{ company.nbEmployees }}</p>
-        </div>
+<form method="post" id="editCandidate" enctype="multipart/form-data">
+
+    <fieldset>
+
+        <legend><span class="number">1</span>Profil entreprise</legend>
+        <p class="text-muted fst-italic">Les données en grises sont vos informations personnelles actuelles. Si vous ne
+            souhaitez pas les modifier vous devez quand même rentrer les mêmes valeurs qu'affichées.</p>
+
+        <label for="name">Nom de l'entreprise : </label>
+        <input type="text" name="name" id="name" class="form-control">
+        <p class="text-muted">Valeur actuelle : {{ company.name }}</p>
+
+        <label for="description">Description de l'entreprise : </label>
+        <textarea name="description" id="description" rows="6" class="form-control"></textarea>
+        <p class="text-muted">Valeur actuelle : {{ company.description }}</p>
+
+        <label for="category">Secteur d'activité : </label>
+        <select name="category" id="category" class="form-select">
+            <option value="{{ company.category }}" selected>{{ company.category }}</option>
+            {% for value in categories_availables %}
+            <option value="{{ value }}">{{ value }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="contact_email">Email de contact : </label>
+        <textarea name="contact_email" id="contact_email" rows="6" class="form-control"></textarea>
+        <p class="text-muted">Valeur actuelle : {{ company.contactEmail }}</p>
 
 
-        <div class="row">
-            <div class="col-4 mb-3">
-                <label for="birth_d">Jour de naissance :</label>
-                <input type="number" name="birth_d" id="birth_d" min="1" max="31" class="form-control">
-            </div>
-            <div class="col-4 mb-3">
-                <label for="birth_m">Mois de naissance :</label>
-                <input type="number" name="birth_m" id="birth_m" min="1" max="12" class="form-control">
-            </div>
-            <div class="col-4 mb-3">
-                <label for="birth_y">Année de naissance :</label>
-                <input type="number" name="birth_y" min="1900" max="2010" id="birth_y" class="form-control">
-            </div>
+        <label for="city">Ville : </label>
+        <textarea name="city" id="city" rows="6" class="form-control"></textarea>
+        <p class="text-muted">Valeur actuelle : {{ company.city }}</p>
 
-        </div>
 
-        <div class="mb-3 text-center">
-            <input type="submit" name="submit" class="btn btn-success" value="Envoyer">
+        <label for="phone">Téléphone : </label>
+        <input type="text" name="phone" id="phone" class="form-control">
+        <p class="text-muted">Valeur actuelle : {{ company.phone }}</p>
 
-        </div>
-    </form>
-</div>
 
+        <label for="nb_employees">Nombre d'employé : </label>
+        <input type="text" name="nb_employees" id="nb_employees" class="form-control">
+        <p class="text-muted">Valeur actuelle : {{ company.nbEmployees }}</p>
+
+        
+
+    </fieldset>
+
+    <fieldset>
+
+        <legend class="mb-5"><span class="number">2</span> Fichier téléchargés</legend>
+
+        <div class="col-12 my-5">
+            <label for="pdp">Photo de profil * (PNG, JPEG ou JPG): </label>
+            <input class="form-control" type="file" placeholder="Ajouter ma photo de profil" name="pdp" id="pdp"
+                accept="images/jpeg, images/jpg, images/png">
+        </div>        
+
+        <button type="submit" value="Sauvegarder" class="btn button_candidate">Modification</button>
+    </fieldset>
+
+</form>
 {% endblock %}

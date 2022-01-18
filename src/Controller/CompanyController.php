@@ -289,10 +289,7 @@ class CompanyController extends AbstractController
             if (!filter_var($safe['contact_email'], FILTER_VALIDATE_EMAIL)) {
                 $errors[] = 'Votre Email n\'est pas valide';
             }
-
-            if (!checkdate($safe['birth_m'], $safe['birth_d'], $safe['birth_y'])) {
-                $errors[] = 'Veuillez renseigner une date de naissance correcte';
-            }
+            
             // Vérif city
             if (strlen($safe['city']) < 5 || strlen($safe['city']) > 100) {
                 $errors[] = 'Veuillez entrer une ville valide';
@@ -306,6 +303,22 @@ class CompanyController extends AbstractController
                 $errors[] = 'Votre salaire doit comporter entre 1 et 100 caractères';
             }
 
+            if (!empty($_FILES) && isset($_FILES['pdp'])) {
+
+                $pdp = $_FILES['pdp'];
+                $fileAllowedMimes = ['image/jpg', 'image/jpeg', 'image/png']; // Les types mimes attendus -> Images
+                $fileMaxSize = 1024 * 1024 * 10; // Taille maximale de l'image en octet        
+
+                if ($pdp['error'] === UPLOAD_ERR_NO_FILE) {
+                    $pdp_filled = false;
+                } elseif ($pdp['error'] === UPLOAD_ERR_OK && !in_array($pdp['type'], $fileAllowedMimes)) {
+                    $errors[] = 'Le type de fichier n\'est pas autorisé (images uniquement)';
+                } elseif ($pdp['error'] === UPLOAD_ERR_OK && $pdp['size'] > $fileMaxSize) {
+                    $errors[] = 'Le fichier est trop volumineux, taille maximale autorisée : 10 Mo';
+                }
+                
+            } 
+
 
 
             if (count($errors) == 0) {
@@ -316,14 +329,34 @@ class CompanyController extends AbstractController
                     ->setContactEmail($safe['contact_email'])
                     ->setCity($safe['city'])
                     ->setPhone($safe['phone'])
-                    ->setnbEmployees($safe['nb_employees'])
-                    ->setCreatedAt(new \DateTime($safe['birth_d'] . '-' . $safe['birth_m'] . '-' . $safe['birth_y']));
+                    ->setnbEmployees($safe['nb_employees']);
+
+                // PDP :
+
+                // Permet de récupérer automatiquement l'extension du fichier téléchargé
+                $extPDP = pathinfo($pdp['name'], PATHINFO_EXTENSION);
+                $fileDirUploadPDP = 'uploads/PDP/'; // Chemin de sauvegarde d'image, à partir de là ou je me trouve
+
+
+                // Créer un nom de fichier unique
+                $fileNamePDP = uniqid() . '.' . $extPDP;  // Donnera quelque de similaire à 4b3403665fea6.pdf
+
+                // Sauvegarde mon image
+                if (move_uploaded_file($pdp['tmp_name'], $fileDirUploadPDP . $fileNamePDP)) { // $fileDirUpload.$fileName = "../../../public/uploads/CV/4b3403665fea6.jpg"
+                    $finalFileNamePDP = $fileDirUploadPDP . $fileNamePDP;
+                    $pdp_filled = true;
+                } else {
+                    $finalFileNamePDP = null;
+                    
+                }
+
+                $pdp_filled ? $company->setPdp($finalFileNamePDP) : '';                   
 
                 $em->persist($company);
                 $em->flush();
 
-                $this->addFlash('success', 'Votre offre d\'emploi a bien été modifiée');
-                return $this->redirectToRoute('company_list');
+                $this->addFlash('success', 'Votre fiche entreprise a bien été modifiée');
+                return $this->redirectToRoute('account_company');
             } else {
                 $this->addFlash('danger', implode('<br>', $errors));
             }
