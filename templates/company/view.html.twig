@@ -119,21 +119,21 @@
     function initMap() {
 
         //the location 
-        const spot = { lat: {{ company.lat }}, lng: { { company.lng } }};
+        const spot = { lat: {{ company.lat }}, lng: {{ company.lng }} };
 
-    //the map centered at the location
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: {{ company.lat }}, lng: {{ company.lng }}},
-        zoom: 16,
-						
-						});
-    // The marker, positioned at the targeted location
-    const marker = new google.maps.Marker({
-        position: spot,
-        map: map,
-        title: "{{company.name}}",
-    });
-					}
+        //the map centered at the location
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: {{ company.lat }}, lng: {{ company.lng }} },
+            zoom: 16,						
+            });
+
+        // The marker, positioned at the targeted location
+        const marker = new google.maps.Marker({
+            position: spot,
+            map: map,
+            title: "{{company.name}}",
+        });
+	}
 </script>
 
 
