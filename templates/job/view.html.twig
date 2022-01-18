@@ -79,11 +79,11 @@
     </div>
 
     <h3 class="text-center mt-5">Dans la même catégorie</h3>
-    <div class="d-flex flex-column flex-md-row justify-content-around mt-5">
+    <div class="d-flex flex-column flex-md-row justify-content-around flex-wrap mt-5">
         {% for jobs in jobs %}
         {% if jobs.category == job.category %}
         {% if jobs.id != job.id %}
-        <div class="card mb-5 mx-md-2" style="border-radius: 20px;">
+        <div class="card col-md-3 col-12 mb-5 mx-md-1" style="border-radius: 20px;">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5 class="col-12 card-title">{{ jobs.title|upper }}</h5>
@@ -92,7 +92,7 @@
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted">{{ jobs.companyName}}</h6>
                 <p class="card-text">{{ jobs.descriptionJob|slice(0,150) }}</p>
-                <a href="{{ path('job_view', {id: jobs.id}) }}" class="card-link">Voir plus</a>
+                <a href="{{ path('job_view', {id: jobs.id}) }}" class="btn btn-outline-primary card-link">Voir plus...</a>
             </div>
         </div>
         {% endif %}
@@ -100,6 +100,6 @@
         {% endfor %}
     </div>
 
-</div>
+</div>  
 
 {% endblock %}
