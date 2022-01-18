@@ -5,149 +5,274 @@
 
 {% block body %}
 
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h1 class="text-center font_title">Mon compte</h1>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 text-center ">
-				<h2 class="my-4">Informations personnelles</h2>
-			</div>
-		</div>
+<div class="container">
+    <div class="row my-3 d-flex justify-content-center">
+        <div class="col-lg-10 col-md-10 col-8 blanc">
+            <h1 class="text-center font_title">Mon compte candidat</h1>
+        </div>
+    </div>
+</div>
 
-		{% if app.user.userType == "candidate" %}
-			<div class="row">
-				<div class="col-12 col-md-8 col-lg-8">
-					{% if app.user.userType == "candidate" %}
-						<div class="row">
-							<div class="col-12 col-md-3 col-lg-3 text-center" style="border-radius: 20px;">
-								<img class="img-fluid profile-picture mb-3" style="border-radius: 20px;" src="{{candidate.pdp}}" alt="photo du candidat">
-							</div>
-							<div class="col-12 col-md-9 col-lg-9">
-								<div class="card p-1 my-3 my-md-0" style="border-radius: 20px;">
-									<div class="d-flex align-items-center justify-content-between p-2">
-										<p class="mb-0">
-											<strong>Nom complet :
-											</strong>
-											{{candidate.firstName}}
-											{{candidate.lastName}}</p><br>
-										<a class="btn btn-outline-secondary" href="{{ path('candidate_edit', {id: candidate.id}) }}">
-											<i class="fas fa-edit"></i>
-										</a>
-									</div>
-									<div class="p-2">
-										<p class="mb-0">
-											<strong>Numéro de téléphone portable :
-											</strong>
-											{{candidate.phoneNumber}}</p><br>
-										<p class="mb-0">
-											<strong>Ville de résidence :
-											</strong>
-											{{candidate.city}}</p><br>
-										<p class="mb-0">
-											<strong>Adresse :
-											</strong>
-											{{candidate.address}}</p><br>
-										<p class="mb-0">
-											<strong>Date de naissance :
-											</strong>
-											{{candidate.birthdate|date('d-m-Y') }}</p><br>
-									</div>
-								</div>
-							</div>
-						</div>
-					{% endif %}
-					{# End Candidate profile #}
-
-				</div>
-				<div class="col-12 col-md-4 col-lg-4">
-
-					<div class="card" style="border-radius: 20px;">
-						<h2 class="text-center p-1">Mes candidatures</h2>
-						{# Grâce au for , nous obtenons les applications de l'applicant
-						                applicant = 1 postulation depuis laquelle nou récuperons l'offre d'emploi ,
-						                et ensuite nous récuperons le titre  
-						                #}
-
-						{% for applicant in applications  %}
-							<div class="d-flex align-items-center justify-content-between p-3">
-								<span class="text-center p-1">{{applicant.getJob().getTitle()}}</span><br>
-								<span class="text-center p-1">{{applicant.getJob().getContractType()}}</span><br>
-							</div>
-						{% endfor %}
-					</div>
-
-				</div>
-
-
-			</div>
-		{% endif %}
-
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-6">
-                <div class="exp-container text-center my-3" style="border-radius: 20px;">
-                    <h2 class="p-4">Mes expériences professionnelles</h2>
-                    {% if experiences %}
-                        {% for experience in experiences %}
-                            <div class="row d-flex align-items-center justify-content-between p-3">
-                                <div class="col-4">
-                                    <h4 class="p-1 mt-0 mb-0">{{ experience.companyName }}</h4>
-                                </div>
-								<div class="col-4">
-									<p class="p-1 mt-0 mb-0">{{ experience.jobName }} pendant {{ experience.duration }}{% if experience.duration == 1 %} an{% else %} ans {% endif %}</p>
-								</div>
-                                <div class="col-4">
-                                    <a class="btn btn-outline-secondary" href="{{ path('experience_edit', {id: experience.id}) }}">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a class="btn btn-outline-danger" href="{{ path('experience_delete', {id: experience.id}) }}">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    <a href="{{ path('experience_add') }}" class="btn btn-outline-success my-3">Ajouter une expérience</a>
+<div class="container border-radius p-3">
+    <div class="row d-flex justify-content-lg-around justify-content-md-center justify-content-center">
+        <div class="col-lg-5 my-lg-0 my-3 my-md-3 col-md-10 col-8 blanc">
+            <div class="p-3 row d-flex justify-content-center">
+                <div class="col-lg-3 col-md-10 col-12 text-center text-md-start text-lg-start">
+                    <img class="img-fluid border-radius shadow" src="{{candidate.pdp}}" alt="photo du candidat">
                 </div>
-
-                {# End expériences professionelles #}
+            </div>
+            <div class="row d-flex justify-content-around">
+                <div class="col-lg-5 col-md-11 col-11 text-md-center text-center text-lg-start">
+                    <h5 class="fw-bold"> Mon profil Outdeed </h5>
+                </div>
+                <div class="col-lg-5 col-md-6 col-11 text-md-center text-lg-end text-center">
+                    <span>
+                        {{candidate.firstName}}
+                        {{candidate.lastName}} <i class="far fa-address-card"></i>
+                    </span>
+                    <br>
+                    <span>
+                        {{candidate.city}} <i class="fas fa-map-pin"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+            <div class="row mb-2 mb-md-0 mb-lg-0 justify-content-around">
+                <div class="col-lg-5 col-11 col-md-5 text-lg-start text-md-start text-center">
+                    <p class="font_title">
+                        Adresse du domicile
+                    </p>
+                </div>
+                <div class="col-lg-5 col-11 col-md-5 text-lg-end text-md-end text-center">
+                    <p>
+                        {{ candidate.address }}
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-2 mb-md-0 mb-lg-0 justify-content-around">
+                <div class="col-lg-5 col-11 col-md-5 text-center text-md-start text-lg-start">
+                    <p class="font_title">
+                        Date de naissance
+                    </p>
+                </div>
+                <div class="col-lg-5 col-11 col-md-5 text-md-end text-lg-end text-center">
+                    <p>
+                        {{ candidate.birthdate|date("d-m-Y") }}
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-2 mb-md-0 mb-lg-0 justify-content-around">
+                <div class="col-lg-5 col-11 col-md-5 text-center text-md-start text-lg-start">
+                    <p class="font_title">
+                        Numéro de téléphone portable
+                    </p>
+                </div>
+                <div class="col-lg-5 col-11 col-md-5 text-md-end text-lg-end text-center">
+                    {# {% set bar = "aabbcc"|split('', 2) %}
+                    bar contains ['aa', 'bb', 'cc'] #}
+                    <p>
+                        {% set phone = candidate.phoneNumber|split('', 2) %}
+                        {{phone[0]}}.{{phone[1]}}.{{phone[2]}}.{{phone[3]}}.{{phone[4]}}
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-2 mb-md-0 mb-lg-0 d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+            <div class="row mb-2 mb-md-0 mb-lg-0 justify-content-around">
+                <div class="col-lg-5 col-11 col-md-5 text-center text-md-start text-lg-start">
+                    <p class="font_title">
+                        Adresse email
+                    </p>
+                </div>
+                <div class="col-lg-5 col-11 col-md-5 text-md-end text-lg-end text-center">
+                    <p>
+                        {{ candidate.user.email }}
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-2 mb-md-0 mb-lg-0 justify-content-around">
+                <div class="col-lg-5 col-11 col-md-5 text-center text-md-start text-lg-start">
+                    <p class="font_title">
+                        Etat du compte
+                    </p>
+                </div>
+                <div class="col-lg-5 col-11 col-md-5 text-md-end text-lg-end text-center">
+                    {% if candidate.user.completed == true %}
+                    {% set status = 'Vérifié' %}
+                    {% set color = 'success' %}
+                    {% set i = '<i class="fas fa-check"></i>' %}
+                    {% else %}
+                    {% set status = 'Non vérifié' %}
+                    {% set color = 'danger' %}
+                    {% set i = '<i class="fas fa-times"></i>' %}
+                    {% endif %}
+                    <p class="fw-bold text-{{ color }}">
+                        {{ status }} {{ i|raw }}
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-2 mb-md-0 mb-lg-0 d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+            <div class="mb-3 row d-flex text-center justify-content-around">
+                <div class="mb-lg-0 mb-md-0 mb-3 col-lg-5 col-11 col-md-5 text-md-end text-lg-end text-center">
+                    <a class="btn btn-outline-primary" href="{{ asset(candidate.cv) }}"
+                        download="{{candidate.firstName}}_{{candidate.lastName}}_CV.pdf">
+                        Télécharger mon CV
+                    </a>
+                </div>
+                <div class="col-lg-5 col-11 col-md-5 text-center text-md-start text-lg-start">
+                    <a class="btn btn-outline-warning" href="{{ path('candidate_edit', {id: candidate.id}) }}">
+                        Modifier mon profil
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 my-lg-0 my-md-3 my-3 col-md-10 col-8 blanc">
+            <div class="row mt-3 d-flex justify-content-center">
+                <div class="col-lg-12 col-11 col-md-11 text-center">
+                    <h5 class="fw-bold"> Mes candidatures </h5>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-md-11 col-11 text-end">
+                    <span class="text-muted">Triée(s) par date</span>
+                </div>
             </div>
 
-            <div class="col-12 col-md-6 col-lg-6">
-                <div class="exp-container  text-center my-3" style="border-radius: 20px;">
-                    <h2 class="mb-2">Mes compétences techniques</h2>
-
-                    {% if skills %}
-                        {% for skill in skills %}
-                            <div class="row d-flex align-items-center justify-content-between p-3">
-                                <div class="col-4 ">
-                                    <h4 class="p-1 mt-0 mb-0">{{ skill.skillName }}</h4>
-                                </div>
-								<div class="col-4">
-									<p class="p-1 mt-0 mb-0">{{ skill.yearsOfExperience }}
-                                        {% if skill.yearsOfExperience == 1 %}
-                                            an
-                                        {% else %}
-                                            ans
-                                        {% endif %}d'experience</p>
-								</div>
-                                <div class="col-4">
-                                    <a class="btn btn-outline-secondary" href="{{ path('skill_edit', {id: skill.id}) }}">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a class="btn btn-outline-danger" href="{{ path('skill_delete', {id: skill.id}) }}">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    <a href="{{ path('skill_add')}}" class="btn btn-outline-success my-3">Ajouter une compétence</a>
+            {% if applications is empty %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-md-11 col-11">
+                    <hr>
                 </div>
-                {# End compétences techniques #}
             </div>
-			</div>
-	</div>
+            {% include 'empty.html.twig' %}
+            {% endif %}
+
+            {% for applicant in applications %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+            <div class="row mb-md-3 mb-lg-0 d-flex justify-content-center">
+                <div class="col-lg-4 col-md-4 col-11 fw-bold text-md-start text-lg-start text-center">
+                    <span>{{applicant.getJob().getTitle()}}</span>
+                </div>
+                <div class="col-lg-4 col-md-4 col-11 text-md-start text-lg-start text-center">
+                    <span>{{applicant.getJob().getContractType()}}</span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-11 text-md-end text-lg-end text-center">
+                    <a class="" href="{{ path('job_view', {id: applicant.getJob().getId()}) }}"><i
+                            class="fas fa-eye"></i>Voir l'offre</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="container border-radius p-3">
+    <div class="row d-flex justify-content-around">
+        <div class="col-lg-5 my-lg-0 my-md-3 my-3 col-md-10 col-8 blanc">
+            <div class="row mt-3 d-flex justify-content-center">
+                <div class="col-lg-12 col-11 col-md-11 text-center">
+                    <h5 class="fw-bold"> Mes expériences professionnelles </h5>
+                </div>
+            </div>
+            {% if experiences is empty %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+            {% include 'empty.html.twig' %}
+            {% else %}
+            {% for experience in experiences %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-around">
+                <div class="col-lg-10 col-11 col-md-10 text-center text-md-end text-lg-end">
+                    <span class="fw-bold"> {{ experience.jobName }}</span> chez {{ experience.companyName }} pendant {{
+                    experience.duration }} {% if experience.duration == 1 %}an{% else %}ans{% endif %}
+                </div>
+                <div class="col-lg-2 col-11 col-md-2 text-md-start text-lg-start text-center">
+                    <a title="Supprimer" href="{{ path('experience_delete', {id: experience.id}) }}"><i
+                            class="far fa-trash-alt"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+
+            <div class="row mb-3 d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11 text-center">
+                    <a class="btn btn-outline-success" href="{{ path('experience_add') }}">Ajouter une nouvelle
+                        expérience professionnelle</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-5 my-lg-0 my-md-3 my-3 col-md-10 col-8 blanc">
+            <div class="row mt-3 d-flex justify-content-center">
+                <div class="col-lg-12 col-11 col-md-11 text-center">
+                    <h5 class="fw-bold"> Mes compétences techniques </h5>
+                </div>
+            </div>
+            {% if skills is empty %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+            {% include 'empty.html.twig' %}
+            {% else %}
+            {% for skill in skills %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-around">
+                <div class="col-lg-6 col-11 col-md-6 text-md-start text-lg-start text-center">
+                    <span class="fw-bold"> {{ skill.skillName }}</span> pendant {{ skill.yearsOfExperience }} {% if
+                    skill.yearsOfExperience == 1 %}an{% else %}ans{% endif %}
+                </div>
+                <div class="col-lg-1 col-11 col-md-1 text-md-start text-lg-start text-center">
+                    <a title="Supprimer" href="{{ path('skill_delete', {id: skill.id}) }}"><i
+                            class="far fa-trash-alt"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11">
+                    <hr>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <div class="col-lg-11 col-11 col-md-11 text-center">
+                    <a class="btn btn-outline-success" href="{{ path('skill_add') }}">Ajouter une nouvelle compétence
+                        technique</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
