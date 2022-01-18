@@ -5,93 +5,103 @@
 
 {% block body %}
 
-	<div class="container">
-		<!-- // Début head -->
-		<div class="row my-3">
-			<div class="col-12">
-				<h1 class="text-center font_title">Mon compte entreprise</h1>
-			</div>
-		</div>
+<div class="container blanc my-3">
+    <!-- // Début head -->
+    <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-10 col-8">
+            <h1 class="text-center font_title ">Mon compte entreprise</h1>
+        </div>
+    </div>
+</div>
 
-
-		<div class="background-account mt-auto">
-			<div class="row banner-body align-items-end ">
-				<div class="col-4 banner-left ">
-					<img class="img-fluid " style="border-radius: 20px; border-top-right-radius: 0;border-bottom-right-radius: 0;" src="{{ asset(company.pdp) }}" alt="{{ company.name }}">
-				</div>
-				<div class="col-8 banner-right d-flex">
-					<div class="row align-items-center">
-						<div class="col-12">
-							<h1 class="font_title text-center">{{ company.name }}</h1>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- // Fin head -->
-
-
-		<div class="row my-4">
-			<div class="col-9">
-				<!-- // Info entreprise -->
-                <div class="row">
-                    <div class="col-6">
-                        <p style="font-size: 16px !important;" class="badge bg-info text-dark">{{company.category}}</p>
-                        <p class="mb-0">Email :
-                            {{ company.contactEmail }}</p>
-                        <br>
-                        <p class="mb-0">Numéro de téléphone :
-                            {{ company.phone }}</p>
-                    </div>
-                    <div class="col-6">
-                        <p class="text_head mb-0">
-                            <strong>Localisation
-                            </strong>
-                            <i class="fas fa-map-marker-alt"></i>
-                            :
-                            {{company.city}}
-                        </p>
-                        <p class="text_head">
-									<strong>Date de création :
-									</strong>
-									{{ company.createdAt ?
-                                    company.createdAt|date('d/m/Y') : '' }}</p>
+<div class="container">
+    <div class="background-account mt-auto">
+        <div class="row banner-body align-items-end ">
+            <div class="col-4 banner-left ">
+                <img class="img-fluid "
+                    style="border-radius: 20px; border-top-right-radius: 0;border-bottom-right-radius: 0;"
+                    src="{{ asset(company.pdp) }}" alt="{{ company.name }}">
+            </div>
+            <div class="col-8 banner-right d-flex">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <h1 class="font_title text-center">{{ company.name }}</h1>
                     </div>
                 </div>
-				
-                <h3 class="font_title mt-4">Description de l'entreprise :</h3>
-                <p>{{ company.description|nl2br }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // Fin head -->
 
-				<div class="row">
-					<div class="col-12">
-						<h3 class="my-4">Publier une offre d'emploi</h3>
-						<a class="btn btn-outline-primary" href="{{ path('job_add') }}">Poster un job</a>
-					</div>
-				</div>
-
-                <div class="row">
-					<div class="col-12">
-						<h3 class="mt-5">Vos offres d'emploi</h3>
-
-						<div class="d-md-flex flex-sm-column justify-content-sm-center">	
-                        {% for job in job %}
-                        
-                            <div class="card mx-1 col-12 text-center col-md-3">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center justify-content-center justify-content-md-between">
-                                        <h5 class="card-title">{{ job.title }}</h5>
-                                    </div>
-                                    <p class="card-text">{{ job.contractType }}</p>
-                                    <a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a>
-                                </div>
-                            </div>
-                        
-                        {% endfor %}
-						</div>
-					</div>
+<div class="container">
+    <div class="row my-4">
+        <div class="col-12">
+            <!-- // Info entreprise -->
+            <div class="row">
+                <div class="col-6">
+                    <p style="font-size: 16px !important;" class="badge bg-info text-dark">{{company.category}}</p>
+                    <p class="mb-0">Email :
+                        {{ company.contactEmail }}</p>
+                    <br>
+                    <p class="mb-0">Numéro de téléphone :
+                        {{ company.phone }}</p>
                 </div>
+                <div class="col-6">
+                    <p class="text_head mb-0">
+                        <strong>Localisation
+                        </strong>
+                        <i class="fas fa-map-marker-alt"></i>
+                        :
+                        {{company.city}}
+                    </p>
+                    <p class="text_head">
+                        <strong>Date de création :
+                        </strong>
+                        {{ company.createdAt ?
+                        company.createdAt|date('d/m/Y') : '' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-			</div>
-		</div>
-	</div>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h3 class="font_title mt-4">Description de l'entreprise :</h3>
+            <p>{{ company.description|nl2br }}</p>
+        </div>
+        <div class="col-6">
+            <h3 class="my-4">Publier une offre d'emploi</h3>
+            <a class="btn btn-outline-primary" href="{{ path('job_add') }}">Poster un job</a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="mt-5 container text-center">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="mt-5">Vos offres d'emploi</h3>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="d-md-flex flex-sm-column justify-content-sm-center">
+            {% for job in job %}
+            <div class="card col-lg-3 col-md-6 col-12 m-auto justify-content-center d-flex flex-column">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-between">
+                        <h5 class="card-title">{{ job.title }}</h5>
+                    </div>
+                    <p class="card-text">{{ job.contractType }}</p>
+                    <a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
