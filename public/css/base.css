@@ -42,7 +42,10 @@ div#div_home {
 /* CARDS */
 
 
-
+.background_gris{
+	background-color: grey;
+	border-radius: 10px;
+}
 
 
 /* AJOUTER UNE OFFRE */
@@ -235,9 +238,9 @@ div#form_sort_job {
 /* REGISTER FORM */
 
 .main-form{
-  
-  margin: 30px 0;
-  box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
+	
+  margin: 30px 0;	
+  box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);	
   border-radius: 20px;
   
 }
