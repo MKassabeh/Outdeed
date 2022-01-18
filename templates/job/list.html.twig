@@ -62,7 +62,7 @@
                         <h5 class="font_title">
                             {{ job.title|capitalize }} | {{job.companyName|capitalize}}
                             {% if app.user %}
-                            {% if (app.user.userType == 'candidate')%}
+                            {% if app.user.userType == 'company' %}
                             {% if app.user.id == job.publishedBy.id %}
                             <a title="Modifier" style="color : black !important;" class="ms-2"
                                 href="{{ path('job_edit', {id: job.id}) }}"><i class="far fa-edit"></i></a>

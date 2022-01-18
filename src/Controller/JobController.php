@@ -336,20 +336,8 @@ class JobController extends AbstractController
                 // Vérif titre
                 if(strlen($safe['title']) < 5 || strlen($safe['title']) > 100){
                     $errors[] = 'Votre titre doit comporter entre 5 et 100 caractères';
-                }
-
-                // Vérif catégorie
-                if(!isset($safe['category'])){
-                    $errors[] = 'Veuillez sélectionner une catégorie';
-                }
-                elseif(!in_array($safe['category'], $this->categories)){
-                    $errors[] = 'Votre catégorie sélectionnée n\'existe pas';
-                }
-
-                // Vérif description entreprise
-                if(strlen($safe['description_company']) < 1){
-                    $errors[] = 'Veuillez entrer la description de l\'entreprise';
-                }
+                }                
+                
                 // Vérif description emploi
                 if(strlen($safe['description_job']) < 1){
                     $errors[] = 'Veuillez entrer la description de l\'emploi';
@@ -357,11 +345,7 @@ class JobController extends AbstractController
                 // Vérif description recherche
                 if(strlen($safe['description_applicant']) < 1){
                     $errors[] = 'Veuillez entrer la description du profil recherché';
-                }
-                // Vérif city
-                if(strlen($safe['city']) < 1 || strlen($safe['city']) > 100){
-                    $errors[] = 'Votre salaire doit comporter entre 1 et 100 caractères';
-                }
+                }                
 
                 // Vérif salaires
                 if(strlen($safe['wages']) < 1 || strlen($safe['wages']) > 50){

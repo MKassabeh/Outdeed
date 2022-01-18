@@ -458,8 +458,7 @@ a.my_links_r:hover {
 	width: 100%;
 	background-color: #f5f5f5;
 	color: #252525;
-	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-	margin-bottom: 30px;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;	
   }
   
   .button_candidate {
