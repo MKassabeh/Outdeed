@@ -56,7 +56,7 @@
     <div class="row justify-content-center">
         {% for job in jobs %}
         <div class="col-lg-5 col-md-10 col-12">
-            <div class="card card-short my-5">
+            <div class="card card-short my-4">
                 <div class="card-body p-0">
                     <div class="row d-flex justify-content-around">
                         <div class="col-3 profile-img">
@@ -65,10 +65,10 @@
                                     alt="{{ job.category }}">
                             </a>
                         </div>
-                        <div class="col-5 mt-3 profile-content">
-                            <p>{{job.title}}</p>
-                            <p>{{job.category}}</p>
-                            <p>{{job.city}}</p>
+                        <div class="col-9 mt-3 profile-content text-center ">
+                            <p><strong>{{job.title|upper}}</strong></p>
+                            <p><strong>Secteur d'activité : </strong>{{job.category}}</p>
+                            <p><strong>Ville : </strong> {{job.city}}</p>
                         </div>
                     </div>
                     <div class="card-footer">

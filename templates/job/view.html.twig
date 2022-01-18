@@ -51,7 +51,7 @@
         <div>
             <div class="p-3 mt-5 border card-header" style="border-radius: 20px;">
                 <p class="text_head">{{ job.schedule|capitalize }}</p>
-                <p class="text_head">{{ job.wages|capitalize }} par mois</p>
+                <p class="text_head">{{ job.wages|capitalize }}€ par mois</p>
                 <p class="text_head">{{ job.contractType|upper }}</p>
                 {% if app.user %}
                 {% if (app.user.userType == 'candidate')%}
