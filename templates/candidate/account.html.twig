@@ -27,14 +27,14 @@
                     <div class="col-12 col-md-9 col-lg-9">
                         <div class="card p-1">
                             <div class="d-flex align-items-center justify-content-between p-2">
-                                <p class="mb-0">Nom complet : {{candidate.firstName}} {{candidate.lastName}}</p><br>
+                                <p class="mb-0"><strong>Nom complet : </strong>{{candidate.firstName}} {{candidate.lastName}}</p><br>
                                 <a class="btn btn-outline-secondary" href="{{ path('candidate_edit', {id: candidate.id}) }}"><i class="fas fa-edit"></i></a>
                             </div>
                             <div class="p-2">
-                                <p class="mb-0">Numéro de téléphone portable : {{candidate.phoneNumber}}</p><br>
-                                <p class="mb-0">Ville de résidence : {{candidate.city}}</p><br>
-                                <p class="mb-0">Adresse : {{candidate.address}}</p><br>
-                                <p class="mb-0">Date de naissance : {{candidate.birthdate|date('d-m-Y') }}</p><br>
+                                <p class="mb-0"><strong>Numéro de téléphone portable : </strong>{{candidate.phoneNumber}}</p><br>
+                                <p class="mb-0"><strong>Ville de résidence : </strong>{{candidate.city}}</p><br>
+                                <p class="mb-0"><strong>Adresse : </strong>{{candidate.address}}</p><br>
+                                <p class="mb-0"><strong>Date de naissance : </strong>{{candidate.birthdate|date('d-m-Y') }}</p><br>
                             </div>
                         </div>
                     </div>
