@@ -41,10 +41,8 @@
 					Description de l'entreprise :
 				</h3>
 				<p>{{ company.description|nl2br }}</p>
-
-
 			</div>
-			<div >
+			<div>
 				<div class="p-3 mt-5 border card-header">
 					<h5>Contactez-nous</h5>
 					<p class="text_head">
@@ -125,7 +123,7 @@
 								<h5 class="col-4 card-title">{{ job.title }}</h5>
 								<img  class="col-4  img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}">
 							</div>
-							<p class="card-text">{{ job.descriptionJob|nl2br }}</p>
+							<p class="card-text">{{ job.descriptionJob|nl2br|slice(0,150) }}. . .</p>
 							<a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a>
 						</div>
 					</div>
@@ -138,7 +136,6 @@
 	<div class="container">
 		<div class="col-12">
 			<h2 class=" mt-5">Entreprises du même secteur</h2>
-			
 		</div>	
 	</div>
 
@@ -156,8 +153,6 @@
 							<a href="{{ path('company_view', {id: companies.id}) }}" class="card-link">Voir plus</a>
 						</div>
 					</div>
-				
-				
 			{% endfor %}
 			</div>
 		</div>

@@ -337,7 +337,11 @@ div .row .login-right img{
 /* CANDIDATE PROFILE */
 
 .exp-container{
-	background-color: rgb(214, 214, 214);
+	background-color: rgb(255, 255, 255);
+	
+}
+.profile-picture{
+	box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
 }
 
 /* ADMIN PAGE */
