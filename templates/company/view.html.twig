@@ -113,21 +113,18 @@
 
 	<div class="container mt-5">
 		<div class="row">
-			<div class="col-12 d-flex flex-wrap">
+			<div class="col-12 d-flex align-items-center justify-content-between">
 
-				{% for job in jobs %}
+				{% for job in jobs|slice(0,5) %}
 				
-					<div class="card col-sm-12 col-md-6 col-lg-4 mx-1 ">
-						<div class="card-body">
-							<div class="row d-flex justify-content-between">
-								<h5 class="col-4 card-title">{{ job.title }}</h5>
-								<img  class="col-4  img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}">
-							</div>
-							<p class="card-text">{{ job.descriptionJob|nl2br|slice(0,150) }}. . .</p>
+					<div class="col-sm-12 col-md-6 col-lg-2">
+						<div class="card card-body p-3">
+							<h5 class="card-title my-2">{{ job.title }}</h5>
+							{# <img  class="col-4  img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}"> #}
+							<p class="card-text">{{ job.descriptionJob|slice(0,130) }}. . .</p>
 							<a href="{{ path('job_view', {id: job.id}) }}" class="card-link">Voir plus</a>
 						</div>
 					</div>
-				
 				{% endfor %}
 			</div>
 		</div>
@@ -140,21 +137,17 @@
 	</div>
 
 	<div class="container mt-5">
-		<div class="row">
-			<div class="col-12 d-flex flex-wrap">
-			{% for companies in companies %}
-					<div class="card col-sm-12 col-md-6 col-lg-4 mx-2">
-						<div class="card-body">
-							<div class="row d-flex justify-content-between">
-								<h5 class="col-4 card-title">{{ companies.name }}</h5>
-								<img class="col-4  img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}">
-							</div>
-							<p class="card-text">{{ companies.description|nl2br|slice(0,150) }} . . .</p>
+		<div class="row d-flex flex-wrap">
+			{% for companies in companies|slice(0,5) %}
+					<div class="card col-sm-12 col-md-4 col-lg-3 mx-2">
+						<div class="card-body p-3">
+							<h5 class="card-title">{{ companies.name }}</h5>
+							{# <img class="col-4  img-fluid" src="{{ asset('img/category/' ~ logoCategories[company.category]) }}" alt="{{ company.category }}"> #}
+							<p class="card-text">{{ companies.description|slice(0,150) }} . . .</p>
 							<a href="{{ path('company_view', {id: companies.id}) }}" class="card-link">Voir plus</a>
 						</div>
 					</div>
 			{% endfor %}
-			</div>
 		</div>
 	</div>
 
