@@ -332,15 +332,16 @@ div .row .login-right img{
 	color: rgb(0, 119, 255) !important;
 }
 
-#map {
-	height: 300px;
-	width: 400px;
-}
+
 
 /* CANDIDATE PROFILE */
 
 .exp-container{
-	background-color: rgb(214, 214, 214);
+	background-color: rgb(255, 255, 255);
+	
+}
+.profile-picture{
+	box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
 }
 
 /* ADMIN PAGE */
@@ -362,6 +363,10 @@ div .row .login-right img{
 	position: fixed;
 	z-index: 1;
 
+}
+
+.sous-link{
+	width: max-content;
 }
 
 /* CARROUSEL */

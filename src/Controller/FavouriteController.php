@@ -30,6 +30,12 @@ class FavouriteController extends AbstractController
         // l'offre d'emploi en question
         $jobOffer = $em->getRepository(Job::class)->find($id);
 
+        // je check si il est pas déja aux favoris
+        if (in_array($jobOffer, $this->getUser()->getFavourite())) {
+            $this->addFlash('warning', 'Cette offre est déjà dans vos favoris');
+            return $this->redirectToRoute('job_list');
+        }
+
         // je l'ajoute a ses favoris (fonction fournie par sf, cf. User.php)
         $this->getUser()->addFavourite($jobOffer);
 

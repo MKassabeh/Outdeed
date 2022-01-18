@@ -89,7 +89,6 @@ class DefaultController extends AbstractController
         //dans la session de l'utilisateur connecté 
         $applications = $em->getRepository(Apply::class)->findBy(['user'=> $this->getUser()]);
 
-        
         //Ensuite nous envoyons la variable $applications dans la vue
         return $this->render('candidate/account.html.twig', [
             'candidate' => $candidate[0],
