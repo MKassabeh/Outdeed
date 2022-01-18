@@ -288,9 +288,9 @@ div .row .login-right img{
 }
 
 .background-img{
-	height: 250px;
-	background-color: rgb(158, 157, 157);
+	background-color: rgb(238, 238, 238);
 	box-shadow: -2px 1px 23px 5px rgba(151, 151, 151, 0.32);
+	border-radius: 20px;
 }
 .background-account{
 	background-color: rgb(238, 238, 238);
@@ -331,6 +331,11 @@ div .row .login-right img{
 	transition: .3s;
 	color: rgb(0, 119, 255) !important;
 }
+
+
+/* COMPANY VIEW */
+
+
 
 
 
