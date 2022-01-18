@@ -4,84 +4,87 @@
 
 {% block body %}
 
-<div class="container blanc py-2 mt-3 ">
-    <h1 class="font_title text-center fw-bold">Editer une offre d'emploi</h1>
+<div class="container mt-3 py-3">
+    <div class="row justify-content-center ">
+        <div class="col-8 col-md-8 col-lg-8 blanc">
+            <h1 class="text-center font_title fw-bold">Editer une offre d'emploi</h1>
+        </div>
+    </div>
 </div>
 
 
-<div class="container blanc my-5">
-    <form method="post" id="addArticle" class="p-5" >
-        <div class="mb-3">
-            <label class="label_candidate" for="title">Titre de l'offre : </label>
-            <input class="input_candidate" type="text" name="title" id="title" value="{{ job.title }}" class="form-control">
-              <p class="fst-italic">Valeur actuelle : {{ job.title }}</p>
-        </div>
+<div class="container my-5">
+    <div class="row justify-content-center ">
+        <div class="col-8 col-md-8 col-lg-8 blanc">
+            <form method="post" id="addArticle" class="p-5">
 
-        <div class="mb-3">
-            <label class="label_candidate" for="category">Catégorie de l'offre : </label>
-            <select name="category" id="category" class="form-select select_edit">
-                <option value="{{ job.category }}" selected>{{ job.category }}</option>
-                {% for value in categories_availables %}
-                <option value="{{ value }}">{{ value }}</option>
-                {% endfor %}
-            </select>
-            <p class="fst-italic">Valeur actuelle : {{ job.category }}</p>
-        </div>
-        <div class="mb-3">
-            <label class="label_candidate" for="description_company">Description de l'entreprise : </label>
-            <textarea class="input_candidate" name="description_company" id="description_company" rows="6" class="form-control"></textarea>
-            <p class="fst-italic">Valeur actuelle : {{ job.descriptionCompany }}</p>
-        </div>
-        <div class="mb-3">
-            <label class="label_candidate" for="description_job">Description de l'offre : </label>
-            <textarea class="input_candidate" name="description_job" id="description_job" rows="6" class="form-control"></textarea>
-            <p class="fst-italic">Valeur actuelle : {{ job.descriptionJob }}</p>
-        </div>
-        <div class="mb-3">
-            <label class="label_candidate" for="description_applicant">Description du profil recherché</label>
-            <textarea class="input_candidate" name="description_applicant" id="description_applicant" rows="6" class="form-control"></textarea>
-            <p class="fst-italic">Valeur actuelle : {{ job.descriptionApplicant }}</p>
-        </div>
-        <div class="mb-3">
-            <label class="label_candidate" for="city">Ville : </label>
-            <input class="input_candidate" type="text" name="city" id="city" value="{{ job.city }}" class="form-control">
-            <p class="fst-italic">Valeur actuelle : {{ job.city }}</p>
-        </div>
-        <div class="mb-3">
-            <label class="label_candidate" for="wages">Estimation du salaire : </label>
-            <input class="input_candidate" type="text" name="wages" value="{{ job.wages }}" id="wages" class="form-control">
-            <p class="fst-italic">Valeur actuelle : {{ job.wages }}</p>
-        </div>
-        <div class="mb-3">
-            <label class="label_candidate" for="contract">Type de contrat : </label>
-            <select name="contract" id="contract" class="form-select select_edit">
-                <option value="{{ job.contractType }}" selected>{{ job.contractType }}</option>
-                {% for value in contract_type %}
-                <option value="{{ value }}">{{ value }}</option>
-                {% endfor %}
-            </select>
-            <p class="fst-italic">Valeur actuelle : {{ job.contractType }}</p>
-        </div>
-        <div class="mb-3">
-            <label class="label_candidate" for="benefit">Avantages : </label>
-            <textarea class="input_candidate" name="benefit" id="benefit" rows="6" class="form-control"></textarea>
-            <p class="fst-italic">Valeur actuelle : {{ job.benefits }}</p>
-        </div>
-        <div class="mb-3">
-            <label class="label_candidate" for="schedule">Horaires : </label>
-            <input class="input_candidate" type="text" name="schedule" value="{{ job.schedule }}" id="schedule" class="form-control">
-            <p class="fst-italic">Valeur actuelle : {{ job.schedule }}</p>
-        </div>
-        <div class="mb-3">
-            <label class="label_candidate" for="comment">Commentaire : </label>
-            <textarea class="input_candidate" name="comment" id="comment" rows="6" class="form-control"></textarea>
-            <p class="fst-italic">Valeur actuelle : {{ job.companyComment }}</p>
-        </div>
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="title ">Titre de l'offre (1 à 100 caractères) : <span
+                            id="len_input_title" class="badge bg-danger">0 caractères</span></label>
+                    <input class="input_candidate" onkeyup="getInputLen('len_input_title', 'title', 1, 100)" type="text"
+                        name="title" id="title" value="{{ job.title }}" class="form-control">
+                    <p class="fst-italic fw-light">Valeur actuelle : {{ job.title }}</p>
+                </div>                
+                
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="description_job">Description de l'offre (1 caractère minimum) : <span id="len_input_desc" class="badge bg-danger">0 caractères</span></label>
+                    <textarea class="input_candidate" name="description_job" id="description_job" rows="6"
+                        class="form-control" onkeyup="getInputLen('len_input_desc', 'description_job', 1, 99999)"></textarea>
+                    <p class="fst-italic fw-light">Valeur actuelle : {{ job.descriptionJob }}</p>
+                </div>
 
-        <div class="text-center">
-            <input type="submit" name="submit" class="mb-3 btn button_candidate" value="Envoyer">
-        </div>
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="description_applicant">Description du profil recherché (1 caractère minimum) : <span id="len_input_desc_a" class="badge bg-danger">0 caractères</span></label>
+                    <textarea class="input_candidate" onkeyup="getInputLen('len_input_desc_a', 'description_applicant', 1, 99999)"  name="description_applicant" id="description_applicant" rows="6"
+                        class="form-control"></textarea>
+                    <p class="fst-italic fw-light">Valeur actuelle : {{ job.descriptionApplicant }}</p>
+                </div>
 
-    </form>
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="wages">Estimation du salaire (1 à 50 caractères) : <span id="len_input_wages" class="badge bg-danger">0 caractères</span></label>
+                    <input class="input_candidate" type="text" name="wages" value="{{ job.wages }}" id="wages"
+                        class="form-control" onkeyup="getInputLen('len_input_wages', 'wages', 1, 50)">
+                    <p class="fst-italic fw-light">Valeur actuelle : {{ job.wages }}</p>
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="contract">Type de contrat : </label>
+                    <select name="contract" id="contract" class="form-select select_edit">
+                        <option value="{{ job.contractType }}" selected>{{ job.contractType }}</option>
+                        {% for value in contract_type %}
+                        <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                    <p class="fst-italic fw-light">Valeur actuelle : {{ job.contractType }}</p>
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="benefit">Avantages (optionnel) : <span id="len_input_benefit" class="badge bg-success">0 caractères</span></label>
+                    <textarea class="input_candidate" onkeyup="getInputLen('len_input_benefit', 'benefit', 0, 99999)" name="benefit" id="benefit" rows="6"
+                        class="form-control"></textarea>
+                    <p class="fst-italic fw-light">Valeur actuelle : {{ job.benefits }}</p>
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="schedule">Horaires (optionnel, 255 caractères maximum) : <span id="len_input_schedule" class="badge bg-success">0 caractères</span></label>
+                    <input class="input_candidate" onkeyup="getInputLen('len_input_schedule', 'schedule', 0, 255)" type="text" name="schedule" value="{{ job.schedule }}" id="schedule"
+                        class="form-control">
+                    <p class="fst-italic fw-light">Valeur actuelle : {{ job.schedule }}</p>
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="comment">Commentaire (optionnel) : <span id="len_input_comment" class="badge bg-success">0 caractères</span></label>
+                    <textarea class="input_candidate" name="comment" id="comment" rows="6"
+                        class="form-control" onkeyup="getInputLen('len_input_comment', 'comment', 0, 99999)"></textarea>
+                    <p class="fst-italic fw-light">Valeur actuelle : {{ job.companyComment }}</p>
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" name="submit" class="mb-3 btn button_candidate" value="Envoyer">
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

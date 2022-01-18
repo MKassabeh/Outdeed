@@ -18,21 +18,21 @@
         <div class="col-8 col-md-8 col-lg-8 blanc">
             <form method="post" id="addArticle" class="p-5">
                 <div class="mb-3 fw-bold">
-                    <label class="label_candidate" for="title ">Titre de l'offre : </label>
-                    <input class="input_candidate"  type="text" name="title" id="title" class="form-control">
+                    <label class="label_candidate" for="title ">Titre de l'offre (1 à 100 caractères) : <span id="len_input_title" class="badge bg-danger">0 caractères</span></label>
+                    <input class="input_candidate" onkeyup="getInputLen('len_input_title', 'title', 1, 100)" type="text" name="title" id="title" class="form-control">
                 </div>              
                
                 <div class="mb-3 fw-bold">
-                    <label class="label_candidate" for="description_job">Description de l'offre : </label>
-                    <textarea class="input_candidate"  name="description_job" id="description_job" rows="6" class="form-control"></textarea>
+                    <label class="label_candidate" for="description_job">Description de l'offre (1 caractère minimum) : <span id="len_input_desc" class="badge bg-danger">0 caractères</span></label>
+                    <textarea class="input_candidate" onkeyup="getInputLen('len_input_desc', 'description_job', 1, 99999)" name="description_job" id="description_job" rows="6" class="form-control"></textarea>
                 </div>
                 <div class="mb-3 fw-bold">
-                    <label class="label_candidate" for="description_applicant">Description du profil recherché</label>
-                    <textarea class="input_candidate"  name="description_applicant" id="description_applicant" rows="6" class="form-control"></textarea>
+                    <label class="label_candidate" for="description_applicant">Description du profil recherché (1 caractère minimum) : <span id="len_input_desc_a" class="badge bg-danger">0 caractères</span></label>
+                    <textarea class="input_candidate" onkeyup="getInputLen('len_input_desc_a', 'description_applicant', 1, 99999)" name="description_applicant" id="description_applicant" rows="6" class="form-control"></textarea>
                 </div>                
                 <div class="mb-3 fw-bold">
-                    <label class="label_candidate" for="wages">Estimation du salaire : </label>
-                    <input class="input_candidate"  type="text" name="wages" id="wages" class="form-control">
+                    <label class="label_candidate" for="wages">Estimation du salaire (1 à 50 caractères) : <span id="len_input_wages" class="badge bg-danger">0 caractères</span></label>
+                    <input class="input_candidate" onkeyup="getInputLen('len_input_wages', 'wages', 1, 50)" type="text" name="wages" id="wages" class="form-control">
                 </div>
                 <div class="mb-3 fw-bold">
                     <label class="label_candidate" for="contract">Type de contrat : </label>
@@ -44,16 +44,16 @@
                     </select>
                 </div>
                 <div class="mb-3 fw-bold">
-                    <label class="label_candidate" for="benefit">Avantages : </label>
-                    <textarea class="input_candidate"  name="benefit" id="benefit" rows="6" class="form-control"></textarea>
+                    <label class="label_candidate" for="benefit">Avantages (optionnel) : <span id="len_input_benefit" class="badge bg-success">0 caractères</span></label>
+                    <textarea class="input_candidate" onkeyup="getInputLen('len_input_benefit', 'benefit', 0, 99999)" name="benefit" id="benefit" rows="6" class="form-control"></textarea>
                 </div>
                 <div class="mb-3 fw-bold">
-                    <label class="label_candidate" for="schedule">Horaires : </label>
-                    <input class="input_candidate"  type="text" name="schedule" id="schedule" class="form-control">
+                    <label class="label_candidate" for="schedule">Horaires (optionnel, 255 caractères maximum) : <span id="len_input_schedule" class="badge bg-success">0 caractères</span></label>
+                    <input class="input_candidate" onkeyup="getInputLen('len_input_schedule', 'schedule', 0, 255)" type="text" name="schedule" id="schedule" class="form-control">
                 </div>
                 <div class="mb-3 fw-bold">
-                    <label class="label_candidate" for="comment">Commentaire : </label>
-                    <textarea class="input_candidate"  name="comment" id="comment" rows="6" class="form-control"></textarea>
+                    <label class="label_candidate" for="comment">Commentaire (optionnel) : <span id="len_input_comment" class="badge bg-success">0 caractères</span></label>
+                    <textarea class="input_candidate" onkeyup="getInputLen('len_input_comment', 'comment', 0, 99999)" name="comment" id="comment" rows="6" class="form-control"></textarea>
                 </div>
 
                 <div class="mb-3 text-center">
