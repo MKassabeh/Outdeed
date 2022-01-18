@@ -9,71 +9,75 @@
 </div>
 
 <form method="post" id="editCandidate" enctype="multipart/form-data">
-    
-  
-    
+
     <fieldset>
-        
+
         <legend><span class="number">1</span> Profil personnel</legend>
-        
+        <p class="text-muted fst-italic">Les données en grises sont vos informations personnelles actuelles. Si vous ne souhaitez pas les modifier vous devez quand même rentrer les mêmes valeurs qu'affichées.</p>
+
         <label class="label_candidate" for="first_name">Prénom :</label>
-        <input class="form-control input_candidate" type="text" id="first_name" name="first_name" placeholder="{{ candidate.firstName }}">
-        
+        <input class="form-control input_candidate" type="text" id="first_name" name="first_name"
+            placeholder="{{ candidate.firstName }}">
+
         <label class="label_candidate" for="last_name">Nom de famille :</label>
-        <input class="input_candidate" type="text" name="last_name" id="last_name" placeholder="{{ candidate.lastName }}">
+        <input class="input_candidate" type="text" name="last_name" id="last_name"
+            placeholder="{{ candidate.lastName }}">
 
         <label class="label_candidate" for="city">Ville :</label>
-        <input type="text" name="city" id="city" class="form-control input_candidate"  placeholder="{{ candidate.city }}">
+        <input type="text" name="city" id="city" class="form-control input_candidate"
+            placeholder="{{ candidate.city }}">
 
         <label class="label_candidate" for="address">Adresse du domicile * :</label>
-        <input type="text" name="address" id="address" class="form-control input_candidate" placeholder="{{ candidate.address }}">
-        
-        <label class="label_candidate" for="phone">Numéro de téléphone : * (au format '0601020304')</label>
-        <input type="text" name="phone" id="phone" class="form-control input_candidate" placeholder="{{ candidate.phoneNumber }}">
+        <input type="text" name="address" id="address" class="form-control input_candidate"
+            placeholder="{{ candidate.address }}">
 
-      
-       
-  
-      
+        <label class="label_candidate" for="phone">Numéro de téléphone : * (au format '0601020304')</label>
+        <input type="text" name="phone" id="phone" class="form-control input_candidate"
+            placeholder="{{ candidate.phoneNumber }}">
 
         <div class="row ">
-            <label for="birth_d" >Date de naissance :
+            <label for="birth_d">Date de naissance :
                 <div class="d-flex justify-content-between mt-3">
                     <div class="col-3  mb-3">
-                        <label class="label_candidate" for="birth_d">Jour  </label>
-                        <input type="number" name="birth_d" id="birth_d" min="1" max="31" class="form-control input_candidate" placeholder="{{ candidate.birthdate|date('d') }}">
+                        <label class="label_candidate" for="birth_d">Jour </label>
+                        <input type="number" name="birth_d" id="birth_d" min="1" max="31"
+                            class="form-control input_candidate" placeholder="{{ candidate.birthdate|date('d') }}">
                     </div>
                     <div class="col-3  mb-3">
                         <label class="label_candidate" for="birth_m">Mois </label>
-                        <input type="number" name="birth_m" id="birth_m" min="1" max="12" class="form-control input_candidate" placeholder="{{ candidate.birthdate|date('m') }}">
+                        <input type="number" name="birth_m" id="birth_m" min="1" max="12"
+                            class="form-control input_candidate" placeholder="{{ candidate.birthdate|date('m') }}">
                     </div>
                     <div class="col-3  mb-3">
                         <label class="label_candidate" for="birth_y">Année </label>
-                        <input type="number" name="birth_y" min="1900" max="2010" id="birth_y" class="form-control input_candidate" placeholder="{{ candidate.birthdate|date('Y') }}">
+                        <input type="number" name="birth_y" min="1900" max="2010" id="birth_y"
+                            class="form-control input_candidate" placeholder="{{ candidate.birthdate|date('Y') }}">
                     </div>
                 </div>
             </label>
         </div>
-    
+
     </fieldset>
-    
+
     <fieldset>
-      
-      <legend class="mb-5"><span class="number">2</span> Fichier télécharger</legend>
-      
+
+        <legend class="mb-5"><span class="number">2</span> Fichier télécharger</legend>
+
         <div class="col-12 my-5">
             <label for="pdp">Photo de profil * (PNG, JPEG ou JPG): </label>
-            <input class="form-control" type="file" placeholder="Ajouter ma photo de profil" name="pdp" id="pdp" accept="images/jpeg, images/jpg, images/png">
+            <input class="form-control" type="file" placeholder="Ajouter ma photo de profil" name="pdp" id="pdp"
+                accept="images/jpeg, images/jpg, images/png">
         </div>
         <div class="col-12">
             <label for="cv">Votre CV * (PDF UNIQUEMENT): </label>
-            <input class="form-control" type="file" placeholder="Ajouter un CV" name="cv" id="cv" accept="application/pdf, application/x-pdf">
+            <input class="form-control" type="file" placeholder="Ajouter un CV" name="cv" id="cv"
+                accept="application/pdf, application/x-pdf">
         </div>
-      
+
     </fieldset>
-      
+
     <button type="submit" value="Sauvegarder" class="btn button_candidate">Modification</button>
-    
-</form>   
+
+</form>
 
 {% endblock %}

@@ -41,12 +41,12 @@ class CandidateController extends AbstractController
         ]);
     } */
 
-    #[Route('/edit', name: 'candidate_edit')]
-    public function edit(): Response
+    #[Route('/edit/{id}', name: 'candidate_edit')]
+    public function edit(int $id): Response
     {
         $em = $this->registryManager->getManager();
         // recupère la fiche candidat de la personne connectée
-        $candidate = $em->getRepository(Candidate::class)->findBy(['user' => $this->getUser()]);
+        $candidate = $em->getRepository(Candidate::class)->find($id);
 
         $errors = [];
 
@@ -87,9 +87,81 @@ class CandidateController extends AbstractController
                 $errors[] = 'Veuillez renseigner une date de naissance';
 
             }
+
+            // Je vérifie le fichier uploadé, seulement s'il le champ est présent dans le formulaire            
+            if (!empty($_FILES) && isset($_FILES['cv'])) {
+
+                $cv = $_FILES['cv'];
+                $fileAllowedMimes = ['application/pdf', 'application/x-pdf']; // Les types mimes attendus -> PDF
+                $fileMaxSize = 1024 * 1024 * 10; // Taille maximale de l'image en octet        
+
+                if ($cv['error'] === UPLOAD_ERR_NO_FILE) {
+                    $cv_filled = false;     
+                } elseif ($cv['error'] === UPLOAD_ERR_OK && !in_array($cv['type'], $fileAllowedMimes)) {
+                    $errors[] = 'Le type de fichier n\'est pas autorisé (pdf uniquement)';                    
+                } elseif ($cv['error'] === UPLOAD_ERR_OK && $cv['size'] > $fileMaxSize) {
+                    $errors[] = 'Le fichier est trop volumineux, taille maximale autorisée : 10 Mo';
+                }
+                
+            } 
+
+            if (!empty($_FILES) && isset($_FILES['pdp'])) {
+
+                $pdp = $_FILES['pdp'];
+                $fileAllowedMimes = ['image/jpg', 'image/jpeg', 'image/png']; // Les types mimes attendus -> Images
+                $fileMaxSize = 1024 * 1024 * 10; // Taille maximale de l'image en octet        
+
+                if ($pdp['error'] === UPLOAD_ERR_NO_FILE) {
+                    $pdp_filled = false;
+                } elseif ($pdp['error'] === UPLOAD_ERR_OK && !in_array($pdp['type'], $fileAllowedMimes)) {
+                    $errors[] = 'Le type de fichier n\'est pas autorisé (images uniquement)';
+                } elseif ($pdp['error'] === UPLOAD_ERR_OK && $pdp['size'] > $fileMaxSize) {
+                    $errors[] = 'Le fichier est trop volumineux, taille maximale autorisée : 10 Mo';
+                }
+                
+            } 
         
             if (count($errors) == 0) {
-                $candidate[0]
+
+                $fileDirUploadCV = 'uploads/CV/'; // Chemin de sauvegarde d'image, à partir de là ou je me trouve
+
+                // CV :                          
+
+                // Permet de récupérer automatiquement l'extension du fichier téléchargé
+                $extCV = pathinfo($cv['name'], PATHINFO_EXTENSION);
+
+                // Créer un nom de fichier unique
+                $fileNameCV = uniqid() . '.' . $extCV;  // Donnera quelque de similaire à 4b3403665fea6.pdf
+
+                // Sauvegarde mon image
+                if (move_uploaded_file($cv['tmp_name'], $fileDirUploadCV . $fileNameCV)) { // $fileDirUpload.$fileName = "../../../public/uploads/CV/4b3403665fea6.jpg"
+                    $finalFileNameCV = $fileDirUploadCV . $fileNameCV;
+                    $cv_filled = true;                    
+                } else {
+                    $finalFileNameCV = null;
+                    
+                }
+
+                // PDP :
+
+                // Permet de récupérer automatiquement l'extension du fichier téléchargé
+                $extPDP = pathinfo($pdp['name'], PATHINFO_EXTENSION);
+                $fileDirUploadPDP = 'uploads/PDP/'; // Chemin de sauvegarde d'image, à partir de là ou je me trouve
+
+
+                // Créer un nom de fichier unique
+                $fileNamePDP = uniqid() . '.' . $extPDP;  // Donnera quelque de similaire à 4b3403665fea6.pdf
+
+                // Sauvegarde mon image
+                if (move_uploaded_file($pdp['tmp_name'], $fileDirUploadPDP . $fileNamePDP)) { // $fileDirUpload.$fileName = "../../../public/uploads/CV/4b3403665fea6.jpg"
+                    $finalFileNamePDP = $fileDirUploadPDP . $fileNamePDP;
+                    $pdp_filled = true;
+                } else {
+                    $finalFileNamePDP = null;
+                    
+                }
+
+                $candidate
                     ->setCity($safe['city'])
                     ->setPhoneNumber($safe['phone'])
                     ->setFirstName($safe['first_name'])
@@ -97,8 +169,12 @@ class CandidateController extends AbstractController
                     ->setUser($this->getUser())
                     ->setAddress($safe['address'])
                     ->setBirthdate(new \DateTime($safe['birth_d'] . '-' . $safe['birth_m'] . '-' . $safe['birth_y']));
+                
+                
+                $pdp_filled ? $candidate->setPdp($finalFileNamePDP) : '';
+                $cv_filled ? $candidate->setCV($finalFileNameCV) : '';
 
-                $em->persist($candidate[0]);
+                $em->persist($candidate);
                 $em->flush();
 
                 $this->addFlash('success', 'Vos informations ont bien été enregistrées.');
@@ -109,7 +185,7 @@ class CandidateController extends AbstractController
         }
 
         return $this->render('candidate/edit.html.twig', [
-            'candidate' => $candidate[0]
+            'candidate' => $candidate
         ]);
     }
 
