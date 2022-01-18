@@ -5,103 +5,127 @@
 
 {% block body %}
 
-	<div class="container mt-3 py-3">
-		<div class="row justify-content-center ">
-			<div class="col-12 col-md-10 col-lg-8 blanc">
-				<h1 class="text-center font_title fw-bold">Création de la fiche entreprise</h1>
-			</div>
-		</div>
-	</div>
+<div class="container mt-3 py-3">
+    <div class="row justify-content-center ">
+        <div class="col-12 col-md-10 col-lg-8 blanc">
+            <h1 class="text-center font_title fw-bold">Création de la fiche entreprise</h1>
+        </div>
+    </div>
+</div>
 
-	<div class="container my-5 ">
-		<div class="row justify-content-center ">
-			<div class="col-12 col-md-10 col-lg-8 blanc">
-				<form method="post" id="addArticle" class="p-5" enctype="multipart/form-data">
-					<div class="mb-3 fw-bold">
-						<label class="label_candidate" for="name">Nom de votre entreprise :
-						</label>
-						<input type="text" name="name" id="name" class="form-control input_candidate">
-					</div>
+<div class="container my-5 ">
+    <div class="row justify-content-center ">
+        <div class="col-12 col-md-10 col-lg-8 blanc">
+            <form method="post" id="addArticle" class="p-5" enctype="multipart/form-data">
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="name">Nom de votre entreprise (1 à 100 caractères) : <span
+                            class="badge bg-danger" id="len_input_name">0 caractères</span>
+                    </label>
+                    <input onkeyup="getInputLen('len_input_name', 'name', 1, 100)" type="text" name="name" id="name"
+                        class="form-control input_candidate">
+                </div>
 
-					<div class="mb-3 fw-bold">
-						<label class="label_candidate" for="category">Secteur d'activité :
-						</label>
-						<select name="category" id="category" class="form-select">
-							<option value="0" selected disabled>-- Choisir --</option>
-							{% for value in categories %}
-								<option value="{{ value }}">{{ value }}</option>
-							{% endfor %}
-						</select>
-					</div>
-					<div class="mb-3 fw-bold">
-						<label class="label_candidate" for="description">Description de votre entreprise :
-						</label>
-						<textarea name="description" id="description" rows="6" class="form-control input_candidate"></textarea>
-					</div>
-					<div class="mb-3 fw-bold">
-						<label class="label_candidate" for="nb_employees">Nombre d'employés :
-						</label>
-						<input type="text" name="nb_employees" id="nb_employees" class="form-control input_candidate">
-					</div>
-					<div class="mb-3 fw-bold">
-						<label class="label_candidate" for="street">Rue :
-						</label>
-						<input type="text" name="street" id="street" class="form-control input_candidate">
-					</div>
-					<div class="mb-3 fw-bold">
-						<label class="label_candidate" for="city">Ville :
-						</label>
-						<input type="text" name="city" id="city" class="form-control input_candidate">
-					</div>
-					<div class="mb-3 fw-bold">
-						<label class="label_candidate" for="postal_code">Code postal :
-						</label>
-						<input type="number" name="postal_code" id="postal_code" class="form-control input_candidate">
-					</div>
-					<div class="mb-3 fw-bold">
-						<label class="label_candidate" for="phone">Numéro de téléphone :
-						</label>
-						<input type="text" name="phone" id="phone" class="form-control input_candidate">
-					</div>
-					<div class="mb-3 fw-bold">
-						<label class="label_candidate" for="contact_email">Adresse email :
-						</label>
-						<input type="text" name="contact_email" id="contact_email" class="form-control input_candidate">
-					</div>
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="category">Secteur d'activité :
+                    </label>
+                    <select name="category" id="category" class="form-select">
+                        <option value="0" selected disabled>-- Choisir --</option>
+                        {% for value in categories %}
+                        <option value="{{ value }}">{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-					<div class="row">
-						
-						<div class="col-4 mb-3">
-							<label class="label_candidate fw-bold" for="birth_d">Jour de création :</label>
-							<input type="number" name="birth_d" id="birth_d" min="1" max="31" class="form-control input_candidate">
-						</div>
-						<div class="col-4 mb-3">
-							<label class="label_candidate fw-bold" for="birth_m">Mois de création :</label>
-							<input type="number" name="birth_m" id="birth_m" min="1" max="12" class="form-control input_candidate">
-						</div>
-						<div class="col-4 mb-3">
-							<label class="label_candidate fw-bold" for="birth_y">Année de création :</label>
-							<input type="number" name="birth_y" min="1900" max="2022" id="birth_y" class="form-control input_candidate">
-						</div>
-						
-					</div>
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="description">Description de votre entreprise (1 caractère
+                        minimum) : <span class="badge bg-danger" id="len_input_desc">0 caractères</span>
+                    </label>
+                    <textarea onkeyup="getInputLen('len_input_desc', 'description', 1, 99999)" name="description"
+                        id="description" rows="6" class="form-control input_candidate"></textarea>
+                </div>
 
-                    <div class="row">                        
-                        <div class="col-12">
-                            <label class="label_candidate fw-bold" for="pdp">Photo de profil de l'entreprise (Logo , photo de l'entreprise, ...) * (PNG, JPEG ou JPG): </label>
-                        <input class="form-control" type="file" placeholder="Ajouter ma photo de profil" name="pdp" id="pdp" accept="images/jpeg, images/jpg, images/png">
-                        </div>                        
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="nb_employees">Nombre d'employés (optionnel) : <span
+                            class="badge bg-success" id="len_input_nb_employees">0 caractères</span>
+                    </label>
+                    <input type="text" onkeyup="getInputLen('len_input_nb_employees', 'nb_employees', 0, 99999)"
+                        name="nb_employees" id="nb_employees" class="form-control input_candidate">
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="street">Rue (1 à 100 caractères) : <span class="badge bg-danger"
+                            id="len_input_street">0 caractères</span>
+                    </label>
+                    <input type="text" onkeyup="getInputLen('len_input_street', 'street', 1, 100)" name="street"
+                        id="street" class="form-control input_candidate">
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="city">Ville (1 à 100 caractères) : <span class="badge bg-danger"
+                            id="len_input_city">0 caractères</span>
+                    </label>
+                    <input type="text" onkeyup="getInputLen('len_input_city', 'city', 1, 100)" name="city" id="city"
+                        class="form-control input_candidate">
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="postal_code">Code postal (5 caractères numériques) : <span
+                            class="badge bg-danger" id="len_input_pc">0 caractères</span>
+                    </label>
+                    <input type="number" onkeyup="getInputLen('len_input_pc', 'postal_code', 5, 5)" name="postal_code"
+                        id="postal_code" class="form-control input_candidate">
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="phone">Numéro de téléphone (10 caractères numériques, sans
+                        séparateurs) : <span class="badge bg-danger" id="len_input_phone">0 caractères</span>
+                    </label>
+                    <input type="text" onkeyup="getInputLen('len_input_phone', 'phone', 10, 10)" name="phone" id="phone" class="form-control input_candidate">
+                </div>
+
+                <div class="mb-3 fw-bold">
+                    <label class="label_candidate" for="contact_email">Adresse email (1 à 100 caractères) : <span class="badge bg-danger"
+                        id="len_input_email">0 caractères</span>
+                    </label>
+                    <input type="text" onkeyup="getInputLen('len_input_email', 'contact_email', 1, 100)" name="contact_email" id="contact_email" class="form-control input_candidate">
+                </div>
+
+                <div class="row">
+                    <div class="col-4 mb-3">
+                        <label class="label_candidate fw-bold" for="birth_d">Jour de création :</label>
+                        <input type="number" name="birth_d" id="birth_d" min="1" max="31"
+                            class="form-control input_candidate">
                     </div>
+                    <div class="col-4 mb-3">
+                        <label class="label_candidate fw-bold" for="birth_m">Mois de création :</label>
+                        <input type="number" name="birth_m" id="birth_m" min="1" max="12"
+                            class="form-control input_candidate">
+                    </div>
+                    <div class="col-4 mb-3">
+                        <label class="label_candidate fw-bold" for="birth_y">Année de création :</label>
+                        <input type="number" name="birth_y" min="1900" max="2022" id="birth_y"
+                            class="form-control input_candidate">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <label class="label_candidate fw-bold" for="pdp">Photo de profil de l'entreprise (Logo , photo
+                            de l'entreprise, ...) * (PNG, JPEG ou JPG): </label>
+                        <input class="form-control" type="file" placeholder="Ajouter ma photo de profil" name="pdp"
+                            id="pdp" accept="images/jpeg, images/jpg, images/png">
+                    </div>
+                </div>
 
 
-					<div class="my-3 text-center">
-						<input type="submit" name="submit" class="btn btn-success" value="Envoyer">
+                <div class="my-3 text-center">
+                    <input type="submit" name="submit" class="btn btn-success" value="Envoyer">
 
-					</div>
+                </div>
 
-				</form>
-			</div>
-		</div>
-	</div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

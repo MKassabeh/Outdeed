@@ -122,7 +122,7 @@ class CompanyController extends AbstractController
             }
 
             //Verif numéro de téléphone
-            $pattern = "#^[0][6-7][0-9]{8}$#";
+            $pattern = "#^[0][5-7][0-9]{8}$#";
 
             if (!preg_match($pattern, $safe['phone'])) {
                 $errors[] = 'Veuillez entrer un numéro de téléphone portable correct (format : 0601020304)';
