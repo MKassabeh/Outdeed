@@ -10,10 +10,21 @@
                 <div class="head col-12">
                     <h1 class="mb-2 font_title">
                         {{ job.title|capitalize }}
+                        {% if app.user %}
+                            {% if app.user.userType == 'company' %}
+                                {% if app.user.id == job.publishedBy.id %}
+                                    <a title="Modifier" style="color : black !important;" class="ms-2"
+                                        href="{{ path('job_edit', {id: job.id}) }}"><i class="far fa-edit"></i></a>
+                                    <a title="Supprimer" style="color : black !important;"
+                                        href="{{ path('job_delete', {id: job.id}) }}"><i class="far fa-trash-alt"></i></a>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
                     </h1>
                     <h3 class="font_title">
                         {{ job.companyName }}
-                    </h3>
+                    </h3>   
+                    
                 </div>
             </div>
 
