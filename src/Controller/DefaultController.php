@@ -13,6 +13,7 @@ use App\Entity\Apply;
 use App\Entity\User;
 use App\Entity\Job;
 use App\Entity\Company;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class DefaultController extends AbstractController
 {
@@ -63,6 +64,7 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/account-candidate', name: 'account_candidate')]
+    #[IsGranted("ROLE_USER")]
     public function account_candidate(): Response
     {
 
@@ -99,6 +101,7 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/account-company', name: 'account_company')]
+    #[IsGranted("ROLE_USER")]
     public function account_company(): Response
     {
 
