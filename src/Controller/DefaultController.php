@@ -56,7 +56,7 @@ class DefaultController extends AbstractController
         }
         
         $repository = $this->registryManager->getManager()->getRepository(Job::class);
-        $jobs = $repository->findAll();
+        $jobs = $repository->findBy([], ['published_at' => 'DESC'], 10);
         return $this->render('default/home.html.twig', [
             'jobs' => $jobs,
             'logoCategories' => $logoCategories
