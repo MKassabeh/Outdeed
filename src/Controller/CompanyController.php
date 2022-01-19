@@ -90,8 +90,8 @@ class CompanyController extends AbstractController
             $safe = array_map('trim', array_map('strip_tags', $_POST));
 
             // Vérif titre
-            if (strlen($safe['name']) < 5 || strlen($safe['name']) > 100) {
-                $errors[] = 'Votre titre doit comporter entre 5 et 100 caractères';
+            if (strlen($safe['name']) < 1 || strlen($safe['name']) > 100) {
+                $errors[] = 'Votre titre doit comporter entre 1 et 100 caractères';
             }
             // Vérif catégorie
             if (!isset($safe['category'])) {
