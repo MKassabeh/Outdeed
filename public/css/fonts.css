@@ -47,6 +47,13 @@ h1, .font_title {
 
 /* FOOTER */
 
+
+
+.foot{
+    background-color: #82bed6
+    !important;
+}
+
 .footer-link{
 	  text-decoration: none;
       color: black;
